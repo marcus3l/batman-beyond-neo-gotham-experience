@@ -81,7 +81,7 @@ const casts = {
   ],
 };
 
-function WingTransition({ tone }: { tone: "light-dark" | "dark-red" | "red-dark" | "dark-light" | "light-red" }) {
+function WingTransition({ tone }: { tone: "light-dark" | "dark-red" | "red-dark" | "dark-light" | "light-red" | "red-city" | "city-light" }) {
   return (
     <div className={`wing-transition wing-${tone}`} data-reveal aria-hidden="true">
       <span className="wing-transition-left" />
@@ -756,7 +756,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WingTransition tone="red-dark" />
+      <WingTransition tone="red-city" />
 
       <figure className="city-panorama-break">
         <img src="/assets/neo-gotham-panorama.jpg" alt="Vista panorâmica noturna de Neo-Gotham" />
@@ -782,7 +782,7 @@ export default function Home() {
         <figcaption className="sr-only">Panorama da cidade de Neo-Gotham observado pelo sistema de vigilância.</figcaption>
       </figure>
 
-      <WingTransition tone="dark-light" />
+      <WingTransition tone="city-light" />
 
       <section className="section legacy" id="legado">
         <div className="legacy-quote reveal-mask" data-reveal>

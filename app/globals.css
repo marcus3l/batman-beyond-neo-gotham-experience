@@ -192,6 +192,10 @@ img { display: block; max-width: 100%; }
 .wing-red-dark { --wing-from: #d91a28; --wing-next: #0b0b0e; }
 .wing-dark-light { --wing-from: #0b0b0e; --wing-next: #f2eee8; }
 .wing-light-red { --wing-from: #f2eee8; --wing-next: #b81522; }
+.wing-red-city { --wing-from: #d91a28; --wing-next: transparent; background: transparent; }
+.wing-city-light { --wing-from: #0b0b0e; --wing-next: #f2eee8; }
+.wing-city-light .wing-transition-left { background: linear-gradient(rgba(5,5,7,.2), rgba(5,5,7,.48)), url("/assets/neo-gotham-panorama.jpg") left bottom / 100vw auto no-repeat; }
+.wing-city-light .wing-transition-right { background: linear-gradient(rgba(5,5,7,.2), rgba(5,5,7,.48)), url("/assets/neo-gotham-panorama.jpg") right bottom / 100vw auto no-repeat; }
 .wing-transition > span { position: absolute; z-index: 2; top: 0; width: 59%; height: 100%; background: var(--wing-from); will-change: transform; transition: transform 1.05s cubic-bezier(.18,.78,.18,1); }
 .wing-transition-left { left: 0; transform-origin: left top; clip-path: polygon(0 0, 100% 0, 91% 28%, 76% 52%, 57% 100%, 0 58%); }
 .wing-transition-right { right: 0; transform-origin: right top; clip-path: polygon(0 0, 100% 0, 100% 58%, 43% 100%, 24% 52%, 9% 28%); }
@@ -422,8 +426,8 @@ h2 em { color: var(--red); font-style: normal; }
 .city-route-code { align-self: start; color: rgba(255,255,255,.42); font-size: .48rem; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
 .city-panels-footer { position: relative; z-index: 2; padding-top: 1rem; display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.46); font-size: .5rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 
-.city-panorama-break { position: relative; z-index: 4; height: clamp(360px, 44vw, 620px); margin: -1px 0; overflow: hidden; background: var(--ink); clip-path: polygon(0 8%, 100% 0, 100% 92%, 0 100%); isolation: isolate; }
-.city-panorama-break::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(5,5,7,.72), rgba(5,5,7,.12) 42%, rgba(5,5,7,.28)), linear-gradient(0deg, rgba(5,5,7,.76), transparent 46%, rgba(8,15,42,.16)), linear-gradient(120deg, rgba(225,28,43,.2), transparent 45%); pointer-events: none; }
+.city-panorama-break { position: relative; z-index: 4; height: clamp(360px, 44vw, 620px); margin: -1px 0; overflow: hidden; background: var(--ink); isolation: isolate; }
+.city-panorama-break::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(5,5,7,.6), rgba(5,5,7,.08) 42%, rgba(5,5,7,.2)), linear-gradient(0deg, rgba(5,5,7,.38), transparent 28%, rgba(8,15,42,.12)), linear-gradient(120deg, rgba(225,28,43,.16), transparent 45%); pointer-events: none; }
 .city-panorama-break::after { content: ""; position: absolute; z-index: 2; inset: 0; opacity: .13; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.14) 3px 4px); mix-blend-mode: overlay; pointer-events: none; }
 .city-panorama-break > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 48%; filter: saturate(.82) contrast(1.13) brightness(.78); transform: scale(1.045); animation: city-panorama-drift 18s ease-in-out infinite alternate; }
 .city-panorama-target { position: absolute; z-index: 3; top: 43%; left: 54%; display: flex; align-items: center; gap: .75rem; color: var(--white); pointer-events: none; }
@@ -971,7 +975,7 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .city-route-code { position: absolute; top: .8rem; right: 1rem; }
   .city-route-copy p { font-size: .82rem; }
   .city-panels-footer { flex-wrap: wrap; justify-content: flex-start; gap: .8rem 1.5rem; }
-  .city-panorama-break { height: 420px; clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%); }
+  .city-panorama-break { height: 420px; }
   .city-panorama-break > img { object-position: 48% 50%; }
   .city-panorama-hud { inset: 3rem var(--space); grid-template-columns: 1fr; }
   .city-panorama-topline span:last-child, .city-panorama-coordinates { display: none; }
