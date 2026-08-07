@@ -336,7 +336,7 @@ export default function Home() {
           <div className="section-intro-content reveal-mask" data-reveal>
             <p className="eyebrow"><span>01</span> De rebelde a símbolo</p>
             <h2><span className="impact-line">Nasce um</span><br /><em>novo Batman.</em></h2>
-            <p>
+            <p className="origin-lead">
               Terry McGinnis não escolheu o símbolo. O símbolo o encontrou. Agora, entre o peso do legado e as ameaças de uma nova era, ele precisa provar que Neo-Gotham ainda pode acreditar no Batman.
             </p>
             <aside className="origin-dossier" aria-label="Arquivo do sucessor">
