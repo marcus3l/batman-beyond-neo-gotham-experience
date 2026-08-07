@@ -78,7 +78,6 @@ const videoClips = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeVideo, setActiveVideo] = useState<(typeof videoClips)[number] | null>(null);
   const [cast, setCast] = useState<"allies" | "villains">("allies");
   const [sent, setSent] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -91,21 +90,6 @@ export default function Home() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = activeVideo ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [activeVideo]);
-
-  useEffect(() => {
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActiveVideo(null);
-    };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
   }, []);
 
   useEffect(() => {
@@ -171,10 +155,10 @@ export default function Home() {
         const progress = reveals[index];
         const reverse = index % 2 === 1;
 
-        const topLeft = reverse ? 46 * (1 - progress) : 54 * (1 - progress);
-        const topRight = reverse ? 54 * (1 - progress) : 46 * (1 - progress);
-        const bottomRight = reverse ? 54 + 46 * progress : 46 + 54 * progress;
-        const bottomLeft = reverse ? 46 + 54 * progress : 54 + 46 * progress;
+        const topLeft = reverse ? 38 * (1 - progress) : 62 * (1 - progress);
+        const topRight = reverse ? 62 * (1 - progress) : 38 * (1 - progress);
+        const bottomRight = reverse ? 62 + 38 * progress : 38 + 62 * progress;
+        const bottomLeft = reverse ? 38 + 62 * progress : 62 + 38 * progress;
         frame.style.clipPath = `polygon(0 ${topLeft}%, 100% ${topRight}%, 100% ${bottomRight}%, 0 ${bottomLeft}%)`;
 
         const videoShift = 5 - progress * 10;
@@ -189,8 +173,6 @@ export default function Home() {
         const isTopLayer = index === topLayer;
         const isLayerUnderTransition = index === topLayer - 1 && reveals[topLayer] < 0.999;
         panel.style.visibility = isTopLayer || isLayerUnderTransition ? "visible" : "hidden";
-        panel.style.pointerEvents = index === topLayer ? "auto" : "none";
-
         const shouldPlay = isTopLayer || isLayerUnderTransition;
         if (shouldPlay) {
           void video.play().catch(() => undefined);
@@ -256,9 +238,9 @@ export default function Home() {
           <a href="#personagens" onClick={closeMenu}>Personagens</a>
         </nav>
 
-        <button className="button button-small header-cta" type="button" onClick={() => setActiveVideo(videoClips[1])}>
-          Ver cenas <span aria-hidden="true">▶</span>
-        </button>
+        <a className="button button-small header-cta" href="#midia">
+          Ver cenas <span aria-hidden="true">↓</span>
+        </a>
       </header>
 
       <section className="hero" id="inicio">
@@ -272,9 +254,7 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a className="button" href="#origem">Conheça o novo Batman <span aria-hidden="true">↘</span></a>
-            <button className="text-button" type="button" onClick={() => setActiveVideo(videoClips[1])}>
-              <span className="play-dot" aria-hidden="true">▶</span> Assistir às cenas
-            </button>
+            <a className="text-button" href="#midia">Explorar cenas <span aria-hidden="true">↓</span></a>
           </div>
           <div className="hero-status" aria-label="Status da transmissão">
             <span className="status-dot" />
@@ -337,12 +317,7 @@ export default function Home() {
           <div className="cinematic-stage">
             {videoClips.map((video, index) => (
               <article className={`cinematic-panel cinematic-panel-${index + 1}`} key={video.basename}>
-                <button
-                  className="cinematic-frame"
-                  type="button"
-                  onClick={() => setActiveVideo(video)}
-                  aria-label={`Ampliar cena: ${video.title}`}
-                >
+                <div className="cinematic-frame">
                   <video
                     data-stack-video
                     muted
@@ -356,8 +331,7 @@ export default function Home() {
                     <source src={`/videos/${video.basename}.mp4`} type="video/mp4" />
                   </video>
                   <span className="cinematic-scan" aria-hidden="true" />
-                  <span className="cinematic-play" aria-hidden="true">▶</span>
-                </button>
+                </div>
                 <div className="cinematic-copy">
                   <p>{video.code}<span>{video.duration}</span></p>
                   <h3>{video.title}</h3>
@@ -426,20 +400,14 @@ export default function Home() {
           <h2>Muito mais<br />do que <em>uma armadura.</em></h2>
           <p>Criado para uma nova era, o traje combina proteção, mobilidade e poder em um único sistema.</p>
         </div>
-        <button
-          className="suit-core suit-video"
-          type="button"
-          onClick={() => setActiveVideo(videoClips[1])}
-          aria-label="Assistir à cena: Batman em ação"
-        >
+        <div className="suit-core suit-video" aria-hidden="true">
           <video data-scroll-video muted loop playsInline preload="metadata" poster="/videos/02-batman-arrival-poster.jpg" aria-hidden="true">
             <source src="/videos/02-batman-arrival.webm" type="video/webm" />
             <source src="/videos/02-batman-arrival.mp4" type="video/mp4" />
           </video>
           <span className="core-ring" />
-          <span className="suit-play" aria-hidden="true">▶</span>
           <span className="core-label">PROTOCOLO<br />BEYOND</span>
-        </button>
+        </div>
         <div className="suit-list">
           {suitFeatures.map(([number, title, text]) => (
             <article key={number}>
@@ -504,29 +472,6 @@ export default function Home() {
         </small>
       </footer>
 
-      {activeVideo && (
-        <div className="modal" role="dialog" aria-modal="true" aria-labelledby="video-title" onMouseDown={() => setActiveVideo(null)}>
-          <div className="modal-card" onMouseDown={(event) => event.stopPropagation()}>
-            <button className="modal-close" type="button" onClick={() => setActiveVideo(null)} aria-label="Fechar vídeo">×</button>
-            <video
-              className="modal-video"
-              controls
-              autoPlay
-              playsInline
-              poster={`/videos/${activeVideo.basename}-poster.jpg`}
-            >
-              <source src={`/videos/${activeVideo.basename}.webm`} type="video/webm" />
-              <source src={`/videos/${activeVideo.basename}.mp4`} type="video/mp4" />
-              Seu navegador não oferece suporte à reprodução de vídeo.
-            </video>
-            <div className="modal-caption">
-              <p>{activeVideo.code}</p>
-              <h2 id="video-title">{activeVideo.title}</h2>
-              <span>{activeVideo.description}</span>
-            </div>
-          </div>
-        </div>
-      )}
     </main>
   );
 }

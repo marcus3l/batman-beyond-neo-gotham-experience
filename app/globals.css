@@ -68,8 +68,6 @@ img { display: block; max-width: 100%; }
 .button:hover, .button:focus-visible { transform: translate(-2px,-2px); background: var(--red-hot); box-shadow: 12px 12px 0 rgba(225,28,43,.22); }
 .button-small { min-height: 42px; padding: 0 1rem; gap: .8rem; font-size: .65rem; }
 .text-button { background: none; border: 0; display: inline-flex; align-items: center; gap: .75rem; padding: .75rem; cursor: pointer; text-transform: uppercase; letter-spacing: .1em; font-size: .72rem; font-weight: 700; }
-.play-dot { width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; display: grid; place-items: center; font-size: .65rem; transition: background .2s ease, color .2s ease; }
-.text-button:hover .play-dot { background: var(--white); color: var(--ink); }
 
 .hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 48%) minmax(0, 52%); overflow: hidden; background: var(--ink); }
 .hero::before { content: ""; position: absolute; left: 0; top: 0; width: 7px; height: 100%; background: var(--red); z-index: 3; }
@@ -123,15 +121,12 @@ h2 em { color: var(--red); font-style: normal; }
 .cinematic-panel-2 { z-index: 2; }
 .cinematic-panel-3 { z-index: 3; }
 .cinematic-panel-4 { z-index: 4; }
-.cinematic-frame { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; overflow: hidden; background: #08090c; color: var(--white); cursor: pointer; clip-path: polygon(0 54%, 100% 46%, 100% 46%, 0 54%); isolation: isolate; will-change: clip-path; }
+.cinematic-frame { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; background: #08090c; color: var(--white); clip-path: polygon(0 62%, 100% 38%, 100% 38%, 0 62%); isolation: isolate; will-change: clip-path; }
 .cinematic-panel:first-child .cinematic-frame { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-.cinematic-panel:nth-child(even) .cinematic-frame { clip-path: polygon(0 46%, 100% 54%, 100% 54%, 0 46%); }
+.cinematic-panel:nth-child(even) .cinematic-frame { clip-path: polygon(0 38%, 100% 62%, 100% 62%, 0 38%); }
 .cinematic-frame::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(5,5,7,.78), transparent 42%, rgba(5,5,7,.2)), linear-gradient(180deg, rgba(5,5,7,.35), transparent 45%, rgba(5,5,7,.56)); }
 .cinematic-frame video { position: absolute; z-index: 0; top: -10%; left: 0; width: 100%; height: 120%; object-fit: cover; pointer-events: none; filter: saturate(.88) contrast(1.08); transition: filter .5s ease; will-change: transform; }
-.cinematic-frame:hover video, .cinematic-frame:focus-visible video { filter: saturate(1.18) contrast(1.12); }
 .cinematic-scan { position: absolute; z-index: 2; inset: 0; opacity: .18; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.08) 3px 4px); mix-blend-mode: overlay; pointer-events: none; }
-.cinematic-play { position: absolute; z-index: 4; top: 50%; left: 50%; width: 86px; height: 86px; display: grid; place-items: center; padding-left: .2rem; transform: translate(-50%, -50%); border: 1px solid rgba(255,255,255,.75); border-radius: 50%; background: rgba(5,5,7,.24); backdrop-filter: blur(7px); font-size: .9rem; box-shadow: 0 0 0 0 rgba(225,28,43,.4); transition: transform .3s ease, background .3s ease, box-shadow .3s ease; }
-.cinematic-frame:hover .cinematic-play, .cinematic-frame:focus-visible .cinematic-play { transform: translate(-50%, -50%) scale(1.12); background: var(--red); box-shadow: 0 0 0 16px rgba(225,28,43,.14); }
 .cinematic-copy { position: absolute; z-index: 5; top: 11%; left: var(--space); width: min(780px, 70vw); opacity: 0; pointer-events: none; text-shadow: 0 4px 25px rgba(0,0,0,.8); will-change: opacity, transform; }
 .cinematic-panel:first-child .cinematic-copy { opacity: 1; }
 .cinematic-panel:nth-child(even) .cinematic-copy { top: auto; right: var(--space); bottom: 10%; left: auto; text-align: right; }
@@ -174,16 +169,13 @@ h2 em { color: var(--red); font-style: normal; }
 .suit-title, .suit-core, .suit-list { position: relative; z-index: 2; }
 .suit-title > p:last-child { max-width: 33rem; margin: 2rem 0 0; color: #909098; line-height: 1.7; }
 .suit-core { aspect-ratio: 1; display: grid; place-items: center; }
-.suit-video { width: 100%; padding: 0; border: 0; border-radius: 50%; background: #050507; color: var(--white); overflow: hidden; cursor: pointer; box-shadow: 0 0 80px rgba(225,28,43,.17); isolation: isolate; }
+.suit-video { width: 100%; padding: 0; border: 0; border-radius: 50%; background: #050507; color: var(--white); overflow: hidden; box-shadow: 0 0 80px rgba(225,28,43,.17); isolation: isolate; }
 .suit-video::after { content: ""; position: absolute; z-index: -1; inset: 0; border-radius: inherit; background: radial-gradient(circle, transparent 10%, rgba(5,5,7,.06) 45%, rgba(5,5,7,.82) 100%); }
 .suit-video video { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .35s ease; }
-.suit-video:hover video, .suit-video:focus-visible video { transform: scale(1.07); filter: saturate(1.18); }
 .core-ring { position: absolute; inset: 3%; border: 1px solid rgba(255,255,255,.17); border-radius: 50%; box-shadow: inset 0 0 60px rgba(225,28,43,.12); animation: spin 20s linear infinite; }
 .core-ring::before, .core-ring::after { content: ""; position: absolute; width: 13px; height: 13px; background: var(--red); border-radius: 50%; box-shadow: 0 0 17px var(--red); }
 .core-ring::before { top: 8%; left: 18%; }
 .core-ring::after { right: 5%; bottom: 24%; }
-.suit-play { width: 72px; height: 72px; display: grid; place-items: center; padding-left: .2rem; border: 1px solid rgba(255,255,255,.72); border-radius: 50%; background: rgba(5,5,7,.35); backdrop-filter: blur(6px); box-shadow: 0 0 35px rgba(225,28,43,.35); font-size: .85rem; transition: transform .25s ease, background .25s ease; }
-.suit-video:hover .suit-play, .suit-video:focus-visible .suit-play { transform: scale(1.1); background: var(--red); }
 .core-label { position: absolute; bottom: 4%; right: 0; padding: .7rem; border-left: 2px solid var(--red); color: #777980; font: 600 .56rem/1.4 ui-monospace, monospace; letter-spacing: .15em; }
 .suit-list { border-top: 1px solid var(--line); }
 .suit-list article { display: grid; grid-template-columns: 38px 155px 1fr; gap: 1rem; align-items: start; padding: 1.35rem 0; border-bottom: 1px solid var(--line); }
@@ -225,15 +217,6 @@ footer img { width: 170px; }
 footer > p { color: #8a8b91; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; }
 .footer-links { display: flex; gap: 1.5rem; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; }
 footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var(--line); color: #595a61; font-size: .62rem; line-height: 1.5; }
-
-.modal { position: fixed; z-index: 90; inset: 0; display: grid; place-items: center; padding: 1rem; background: rgba(0,0,0,.86); backdrop-filter: blur(10px); }
-.modal-card { width: min(1000px, 96vw); max-height: 92vh; position: relative; overflow: auto; background: #0b0b0e; border: 1px solid #3a3b42; box-shadow: 0 40px 100px rgba(0,0,0,.55); }
-.modal-close { position: absolute; z-index: 2; top: -1px; right: -1px; width: 54px; height: 54px; border: 0; background: var(--red); color: white; cursor: pointer; font-size: 2rem; }
-.modal-video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; object-fit: contain; }
-.modal-caption { padding: 1.5rem 1.75rem 1.8rem; border-top: 1px solid var(--line); }
-.modal-caption p { margin: 0 0 .55rem; color: var(--red); font-size: .6rem; letter-spacing: .18em; font-weight: 800; }
-.modal-caption h2 { font-size: clamp(2.2rem, 5vw, 4.5rem); }
-.modal-caption span { display: block; margin-top: .8rem; color: #8a8b91; line-height: 1.55; }
 
 @keyframes ticker { to { transform: translateX(-50%); } }
 @keyframes pulse { 50% { opacity: .35; transform: scale(.8); } }
@@ -308,7 +291,6 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .cinematic-panel:nth-child(even) .cinematic-copy > span { margin-left: 0; }
   .cinematic-copy h3 { font-size: clamp(2.8rem, 14vw, 4.6rem); }
   .cinematic-copy > span { display: none; }
-  .cinematic-play { width: 66px; height: 66px; }
   .cinematic-progress { right: .65rem; gap: .55rem; }
   .cinematic-progress span { width: 28px; height: 28px; font-size: .5rem; }
   .city-panels article { grid-template-columns: 36px 1fr; }
