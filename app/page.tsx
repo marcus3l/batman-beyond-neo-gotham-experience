@@ -173,6 +173,7 @@ export default function Home() {
   const [signalAuto, setSignalAuto] = useState(true);
   const [activeSuitFeature, setActiveSuitFeature] = useState(0);
   const [suitAuto, setSuitAuto] = useState(true);
+  const [identityOpen, setIdentityOpen] = useState(false);
   const currentSignal = interceptedSignals[activeSignal];
   const currentSuitFeature = suitFeatures[activeSuitFeature];
 
@@ -447,11 +448,52 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-visual">
+        <div className={identityOpen ? "hero-visual identity-open" : "hero-visual"}>
           <div className="hero-moon" aria-hidden="true" />
           <div className="hero-number" aria-hidden="true">2099</div>
+          <div className="hero-telemetry" aria-hidden="true">
+            <span>NG–ID / VARREDURA 01</span>
+            <span>CANAL 20.99 / SEGURO</span>
+          </div>
           <img src="/assets/neo-gotham-hero.png" alt="Silhueta estilizada do Batman do Futuro diante de Neo-Gotham" />
-          <div className="visual-caption"><span>IDENTIDADE</span> Terry McGinnis</div>
+          <div className="hero-target" aria-hidden="true"><span /><i /></div>
+
+          <aside id="terry-identity" className="identity-dossier" aria-hidden={!identityOpen}>
+            <div className="identity-dossier-head">
+              <span><i /> Identidade confirmada</span>
+              <small>NG–ID / 01</small>
+            </div>
+            <div className="identity-profile">
+              <div className="identity-mark" aria-hidden="true">
+                <img src="/assets/batman-beyond-bat.png" alt="" />
+              </div>
+              <div>
+                <span>O sucessor</span>
+                <strong>Terry<br />McGinnis</strong>
+              </div>
+            </div>
+            <p>Um jovem guiado por instinto, treinado pela lenda e escolhido para carregar o símbolo em uma nova era.</p>
+            <dl>
+              <div><dt>Designação</dt><dd>Batman</dd></div>
+              <div><dt>Mentor</dt><dd>Bruce Wayne</dd></div>
+              <div><dt>Jurisdição</dt><dd>Neo-Gotham</dd></div>
+            </dl>
+            <div className="identity-clearance"><span /><strong>Acesso autorizado</strong><small>100%</small></div>
+          </aside>
+
+          <button
+            className="identity-trigger"
+            type="button"
+            aria-expanded={identityOpen}
+            aria-controls="terry-identity"
+            onClick={() => setIdentityOpen((current) => !current)}
+          >
+            <span className="identity-trigger-label">
+              <small><i /> Identidade</small>
+              <strong aria-live="polite">{identityOpen ? "Terry McGinnis" : "Dados criptografados"}</strong>
+            </span>
+            <span className="identity-trigger-action">{identityOpen ? "Ocultar" : "Revelar"}<i aria-hidden="true">↗</i></span>
+          </button>
         </div>
 
         <a className="scroll-cue" href="#origem"><span>Role para explorar</span><i aria-hidden="true">↓</i></a>
