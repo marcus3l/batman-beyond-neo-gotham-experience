@@ -636,7 +636,10 @@ export default function Home() {
 
       <figure className="city-panorama-break">
         <img src="/assets/neo-gotham-panorama.jpg" alt="Vista panorâmica noturna de Neo-Gotham" />
-        <span className="city-panorama-scan" aria-hidden="true" />
+        <div className="city-panorama-target" aria-hidden="true">
+          <span />
+          <div><b>Torre central</b><small>RASTREIO / 07</small></div>
+        </div>
         <div className="city-panorama-hud reveal-rise" data-reveal aria-hidden="true">
           <div className="city-panorama-topline">
             <span><i /> Localização confirmada</span>
