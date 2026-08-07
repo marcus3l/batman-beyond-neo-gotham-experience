@@ -634,6 +634,27 @@ export default function Home() {
         </div>
       </section>
 
+      <figure className="city-panorama-break">
+        <img src="/assets/neo-gotham-panorama.jpg" alt="Vista panorâmica noturna de Neo-Gotham" />
+        <span className="city-panorama-scan" aria-hidden="true" />
+        <div className="city-panorama-hud reveal-rise" data-reveal aria-hidden="true">
+          <div className="city-panorama-topline">
+            <span><i /> Localização confirmada</span>
+            <span>VISÃO AÉREA / SETOR CENTRAL</span>
+          </div>
+          <div className="city-panorama-caption">
+            <span>Distrito 07 · 23:48</span>
+            <strong>Neo-Gotham</strong>
+            <small>PERÍMETRO SOB VIGILÂNCIA / NG–2099</small>
+          </div>
+          <div className="city-panorama-coordinates">
+            <span>ALT. 418 M</span>
+            <b>FREQ. 88.7</b>
+          </div>
+        </div>
+        <figcaption className="sr-only">Panorama da cidade de Neo-Gotham observado pelo sistema de vigilância.</figcaption>
+      </figure>
+
       <section className="section legacy">
         <div className="legacy-quote reveal-mask" data-reveal>
           <p className="eyebrow"><span>04</span> Carregue o símbolo</p>

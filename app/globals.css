@@ -328,6 +328,22 @@ h2 em { color: var(--red); font-style: normal; }
 .city-route-code { align-self: start; color: rgba(255,255,255,.42); font-size: .48rem; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
 .city-panels-footer { position: relative; z-index: 2; padding-top: 1rem; display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.46); font-size: .5rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 
+.city-panorama-break { position: relative; z-index: 4; height: clamp(360px, 44vw, 620px); margin: -1px 0; overflow: hidden; background: var(--ink); clip-path: polygon(0 8%, 100% 0, 100% 92%, 0 100%); isolation: isolate; }
+.city-panorama-break::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(5,5,7,.72), rgba(5,5,7,.12) 42%, rgba(5,5,7,.28)), linear-gradient(0deg, rgba(5,5,7,.76), transparent 46%, rgba(8,15,42,.16)), linear-gradient(120deg, rgba(225,28,43,.2), transparent 45%); pointer-events: none; }
+.city-panorama-break::after { content: ""; position: absolute; z-index: 2; inset: 0; opacity: .13; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.14) 3px 4px); mix-blend-mode: overlay; pointer-events: none; }
+.city-panorama-break > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 48%; filter: saturate(.82) contrast(1.13) brightness(.78); transform: scale(1.045); animation: city-panorama-drift 18s ease-in-out infinite alternate; }
+.city-panorama-scan { position: absolute; z-index: 3; top: 12%; bottom: 10%; left: -18%; width: 16%; opacity: 0; background: linear-gradient(90deg, transparent, rgba(255,43,55,.22), rgba(255,255,255,.14), transparent); filter: blur(2px); transform: skewX(-13deg); animation: city-panorama-scan 8.5s ease-in-out infinite; pointer-events: none; }
+.city-panorama-hud { position: absolute; z-index: 4; inset: clamp(3.5rem, 7vw, 6.5rem) var(--space); display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; color: var(--white); pointer-events: none; }
+.city-panorama-topline { grid-column: 1 / -1; align-self: start; padding-bottom: .9rem; display: flex; justify-content: space-between; gap: 2rem; border-bottom: 1px solid rgba(255,255,255,.24); color: rgba(255,255,255,.58); font-size: .5rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.city-panorama-topline span:first-child { display: flex; align-items: center; gap: .55rem; color: rgba(255,255,255,.82); }
+.city-panorama-topline i { width: 6px; height: 6px; border-radius: 50%; background: var(--red-hot); box-shadow: 0 0 12px rgba(255,43,55,.8); animation: pulse 1.6s ease-in-out infinite; }
+.city-panorama-caption { align-self: end; display: grid; justify-items: start; text-transform: uppercase; text-shadow: 0 6px 24px rgba(0,0,0,.7); }
+.city-panorama-caption > span { margin-bottom: .55rem; padding: .45rem .65rem; border-left: 2px solid var(--red-hot); background: rgba(5,5,7,.42); color: rgba(255,255,255,.66); font-size: .5rem; font-weight: 800; letter-spacing: .16em; }
+.city-panorama-caption strong { font: 650 clamp(3.8rem, 7.5vw, 8.5rem)/.72 var(--display-impact); letter-spacing: -.025em; }
+.city-panorama-caption small { margin-top: .8rem; color: rgba(255,255,255,.58); font-size: .5rem; font-weight: 800; letter-spacing: .14em; }
+.city-panorama-coordinates { align-self: end; padding: 1rem 0 1rem 1.4rem; display: grid; justify-items: end; gap: .5rem; border-left: 1px solid rgba(255,255,255,.24); color: rgba(255,255,255,.52); font: 700 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; }
+.city-panorama-coordinates b { color: var(--red-hot); font-weight: 700; }
+
 .legacy { position: relative; background: var(--paper); color: var(--ink); display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 7rem); align-items: center; overflow: hidden; isolation: isolate; }
 .legacy::before { content: "04"; position: absolute; z-index: -1; left: -1vw; bottom: -3rem; color: rgba(225,28,43,.035); font: 700 clamp(18rem, 31vw, 34rem)/.7 var(--display-impact); letter-spacing: -.06em; pointer-events: none; }
 .legacy::after { content: ""; position: absolute; z-index: -1; inset: 0 48% 0 0; opacity: .4; background-image: linear-gradient(rgba(5,5,7,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(5,5,7,.025) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(90deg, #000, transparent 94%); pointer-events: none; }
@@ -577,6 +593,16 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   72% { opacity: .28; }
   88%, 100% { top: 100%; opacity: 0; }
 }
+@keyframes city-panorama-drift {
+  0% { transform: translate3d(-.8%, 0, 0) scale(1.045); }
+  100% { transform: translate3d(.8%, -1%, 0) scale(1.07); }
+}
+@keyframes city-panorama-scan {
+  0%, 12% { left: -18%; opacity: 0; }
+  28% { opacity: .6; }
+  74% { opacity: .22; }
+  90%, 100% { left: 110%; opacity: 0; }
+}
 @keyframes bob { 50% { transform: translateY(7px); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -717,6 +743,12 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .city-route-code { position: absolute; top: .8rem; right: 1rem; }
   .city-route-copy p { font-size: .82rem; }
   .city-panels-footer { flex-wrap: wrap; justify-content: flex-start; gap: .8rem 1.5rem; }
+  .city-panorama-break { height: 420px; clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%); }
+  .city-panorama-break > img { object-position: 48% 50%; }
+  .city-panorama-hud { inset: 3rem var(--space); grid-template-columns: 1fr; }
+  .city-panorama-topline span:last-child, .city-panorama-coordinates { display: none; }
+  .city-panorama-caption strong { font-size: clamp(3.5rem, 18vw, 5rem); }
+  .city-panorama-caption small { max-width: 18rem; line-height: 1.5; }
   .legacy-record, .legacy-status { width: 100%; }
   .legacy-record { padding: 1.2rem 1.25rem 1.35rem; }
   .legacy-author { align-items: flex-start; flex-direction: column; }
