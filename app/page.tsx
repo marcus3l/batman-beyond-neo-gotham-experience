@@ -812,6 +812,10 @@ export default function Home() {
         </div>
 
         <div className="duo">
+          <div className="duo-system" aria-hidden="true">
+            <span><i /> Linhagem confirmada</span>
+            <small>PROTOCOLO DE SUCESSÃO / TM–01 ↔ BW–01</small>
+          </div>
           <article className="duo-card terry reveal-duo-left" data-reveal>
             <video
               className="duo-media"
@@ -830,6 +834,10 @@ export default function Home() {
             <div className="duo-monogram">T</div>
             <h3>Terry<br />McGinnis</h3>
             <p>Instinto, velocidade e uma nova forma de lutar pelo futuro.</p>
+            <div className="duo-profile-meta" aria-hidden="true">
+              <span><small>Status</small><strong>Ativo</strong></span>
+              <span><small>Função</small><strong>Sucessor</strong></span>
+            </div>
           </article>
           <article className="duo-card bruce reveal-duo-right motion-delay-1" data-reveal>
             <video
@@ -849,7 +857,12 @@ export default function Home() {
             <div className="duo-monogram">B</div>
             <h3>Bruce<br />Wayne</h3>
             <p>Experiência, estratégia e uma missão que nunca terminou.</p>
+            <div className="duo-profile-meta" aria-hidden="true">
+              <span><small>Status</small><strong>Mentor</strong></span>
+              <span><small>Função</small><strong>Fundador</strong></span>
+            </div>
           </article>
+          <div className="duo-bridge" aria-hidden="true"><span>Transferência autorizada</span></div>
         </div>
       </section>
 
