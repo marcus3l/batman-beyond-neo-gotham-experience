@@ -350,18 +350,46 @@ export default function Home() {
 
       <section className="transmissions" id="midia" aria-labelledby="transmissions-title">
         <div className="section-heading row-heading">
+          <div className="transmission-atmosphere" aria-hidden="true">
+            <span className="transmission-grid" />
+            <span className="transmission-sweep" />
+            <span className="transmission-crosshair" />
+          </div>
           <div className="transmissions-mark reveal-mark" data-reveal aria-hidden="true">
             <img src="/assets/batman-beyond-bat.png" alt="" />
+            <span>IDENTIDADE / BB-01</span>
           </div>
-          <div>
+          <div className="transmissions-title-block reveal-mask" data-reveal>
             <p className="eyebrow"><span>02</span> Arquivo de transmissão</p>
             <h2 id="transmissions-title">Veja o futuro<br /><em>entrar em ação.</em></h2>
+            <div className="transmission-link" aria-hidden="true"><span />CANAL SEGURO / CONEXÃO ESTABELECIDA</div>
           </div>
           <aside className="transmissions-brief reveal-rise motion-delay-2" data-reveal aria-label="Status da transmissão">
             <div className="brief-status"><span aria-hidden="true" />Sinal ativo <b>REC 02</b></div>
             <p>Registros interceptados revelam a cidade, o novo Batman e ameaças que transformaram o futuro em um campo de batalha.</p>
+            <div className="signal-meter" aria-hidden="true">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((bar) => <i key={bar} />)}
+            </div>
             <div className="brief-meta"><span>FREQ. 88.7</span><span>NEO-GOTHAM / 2099</span></div>
           </aside>
+
+          <div className="transmission-channel-rail" aria-label="Canais interceptados">
+            <article className="reveal-rise motion-delay-1" data-reveal>
+              <span className="channel-number">01</span>
+              <div><b>Patrulha aérea</b><small>Neo-Gotham / setor norte</small></div>
+              <i className="channel-state is-live">Ao vivo</i>
+            </article>
+            <article className="reveal-rise motion-delay-2" data-reveal>
+              <span className="channel-number">02</span>
+              <div><b>Protocolo do traje</b><small>Telemetria sincronizada</small></div>
+              <i className="channel-state">Rastreando</i>
+            </article>
+            <article className="reveal-rise motion-delay-3" data-reveal>
+              <span className="channel-number">03</span>
+              <div><b>Assinatura desconhecida</b><small>Origem não identificada</small></div>
+              <i className="channel-state is-locked">Bloqueado</i>
+            </article>
+          </div>
         </div>
 
         <div className="cinematic-reel">
