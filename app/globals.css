@@ -115,6 +115,20 @@ h2 em { color: var(--red); font-style: normal; }
 .impact-font { font-family: var(--display-impact); font-weight: 700; letter-spacing: -.015em; }
 .section-intro .impact-line { font-family: var(--display-impact); font-weight: 700; letter-spacing: -.015em; }
 .section-intro-content > p:last-child { max-width: 36rem; margin: 1.65rem 0 0; color: #5d5b5c; font-size: 1.03rem; line-height: 1.65; }
+.origin-dossier { position: relative; display: grid; grid-template-columns: clamp(82px, 8vw, 116px) 1fr; width: min(560px, 100%); min-height: 170px; margin-top: clamp(2.6rem, 7vh, 5rem); overflow: hidden; color: var(--paper); background: #0b0b0e; clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%); box-shadow: 0 22px 46px rgba(26,20,18,.1); }
+.origin-dossier::before { content: ""; position: absolute; z-index: 3; top: 0; bottom: 0; width: 22%; background: linear-gradient(90deg, transparent, rgba(225,28,43,.13), transparent); filter: blur(8px); animation: dossier-scan 5.2s ease-in-out infinite; pointer-events: none; }
+.origin-dossier::after { content: "IDENTIDADE CONFIRMADA"; position: absolute; right: 1rem; bottom: .7rem; color: rgba(255,255,255,.18); font: 700 .42rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .14em; }
+.origin-dossier-mark { position: relative; display: grid; place-items: center; border-right: 1px solid rgba(255,255,255,.08); background: linear-gradient(145deg, rgba(225,28,43,.18), transparent); }
+.origin-dossier-mark::before { content: ""; position: absolute; width: 68%; aspect-ratio: 1; border: 1px dashed rgba(225,28,43,.26); border-radius: 50%; animation: spin 18s linear infinite; }
+.origin-dossier-mark img { position: relative; z-index: 1; width: 72%; height: auto; filter: drop-shadow(0 8px 18px rgba(225,28,43,.25)); }
+.origin-dossier-content { position: relative; z-index: 1; padding: 1.3rem 1.35rem 1.15rem; }
+.origin-dossier-content > span { display: block; color: var(--red-hot); font: 800 .48rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; text-transform: uppercase; }
+.origin-dossier-content > strong { display: block; margin-top: .35rem; font: 700 clamp(1.55rem, 2.5vw, 2.35rem)/.9 var(--display-impact); letter-spacing: -.01em; text-transform: uppercase; }
+.origin-dossier dl { display: grid; grid-template-columns: .6fr 1fr 1.15fr; gap: .8rem; margin: 1.15rem 0 0; padding-top: .8rem; border-top: 1px solid rgba(255,255,255,.08); }
+.origin-dossier dl div { min-width: 0; }
+.origin-dossier dt, .origin-dossier dd { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-transform: uppercase; }
+.origin-dossier dt { color: #62636c; font: 700 .42rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; }
+.origin-dossier dd { margin-top: .28rem; color: #c3c1bd; font-size: .52rem; font-weight: 800; letter-spacing: .05em; }
 .origin-cards { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); min-height: clamp(500px, 42vw, 590px); overflow: hidden; border-top: 1px solid #cac6bf; border-bottom: 1px solid #cac6bf; isolation: isolate; }
 .origin-cards::before { content: "TRAJETÓRIA DO SÍMBOLO / 01—03"; position: absolute; z-index: 3; top: 1.2rem; right: 1.5rem; color: #9a9690; font: 700 .48rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; }
 .origin-cards::after { content: ""; position: absolute; z-index: 0; top: 9rem; left: 7%; width: 88%; height: 1px; background: linear-gradient(90deg, transparent, var(--red) 9% 91%, transparent); box-shadow: 0 0 12px rgba(225,28,43,.2); transform: rotate(15deg); transform-origin: left center; }
@@ -457,6 +471,12 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   45% { height: 100%; opacity: .9; background: var(--red-hot); }
   100% { height: 36%; opacity: .48; }
 }
+@keyframes dossier-scan {
+  0%, 12% { left: -28%; opacity: 0; }
+  30% { opacity: .72; }
+  76% { opacity: .3; }
+  90%, 100% { left: 108%; opacity: 0; }
+}
 
 @keyframes ticker { to { transform: translateX(-50%); } }
 @keyframes pulse { 50% { opacity: .35; transform: scale(.8); } }
@@ -542,6 +562,11 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .hero-visual img { width: 85%; right: -7%; }
   .visual-caption { font-size: .58rem; }
   .origin-cards { display: block; min-height: 0; }
+  .origin-dossier { grid-template-columns: 70px 1fr; min-height: 158px; margin-top: 2.4rem; }
+  .origin-dossier-content { padding: 1.05rem 1rem; }
+  .origin-dossier dl { gap: .45rem; }
+  .origin-dossier dd { font-size: .46rem; }
+  .origin-dossier::after { display: none; }
   .origin-cards::before { top: .9rem; right: 1rem; }
   .origin-cards::after { display: none; }
   .origin-card, .origin-card:nth-child(2), .origin-card:nth-child(3) { --step-offset: 0; min-height: 190px; padding: 3.8rem 1rem 1.6rem; border-left: 0; border-bottom: 1px solid #d3cfc8; }

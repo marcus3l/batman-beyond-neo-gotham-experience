@@ -332,6 +332,20 @@ export default function Home() {
             <p>
               Terry McGinnis não escolheu o símbolo. O símbolo o encontrou. Agora, entre o peso do legado e as ameaças de uma nova era, ele precisa provar que Neo-Gotham ainda pode acreditar no Batman.
             </p>
+            <aside className="origin-dossier" aria-label="Arquivo do sucessor">
+              <div className="origin-dossier-mark" aria-hidden="true">
+                <img src="/assets/batman-beyond-bat.png" alt="" />
+              </div>
+              <div className="origin-dossier-content">
+                <span>Arquivo do sucessor / 01</span>
+                <strong>Terry McGinnis</strong>
+                <dl>
+                  <div><dt>Status</dt><dd>Ativo</dd></div>
+                  <div><dt>Mentor</dt><dd>Bruce Wayne</dd></div>
+                  <div><dt>Jurisdição</dt><dd>Neo-Gotham</dd></div>
+                </dl>
+              </div>
+            </aside>
           </div>
         </div>
 
