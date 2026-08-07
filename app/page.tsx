@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 const originSteps = [
   {
@@ -178,6 +178,7 @@ const interceptedSignals = [
 ] as const;
 
 export default function Home() {
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cast, setCast] = useState<"allies" | "villains">("allies");
   const [sent, setSent] = useState(false);
@@ -188,6 +189,8 @@ export default function Home() {
   const [activeSuitFeature, setActiveSuitFeature] = useState(0);
   const [suitAuto, setSuitAuto] = useState(true);
   const [identityOpen, setIdentityOpen] = useState(false);
+  const [heroMuted, setHeroMuted] = useState(true);
+  const [heroPaused, setHeroPaused] = useState(false);
   const currentSignal = interceptedSignals[activeSignal];
   const currentSuitFeature = suitFeatures[activeSuitFeature];
 
@@ -516,12 +519,61 @@ export default function Home() {
             <span>NG–ID / VARREDURA 01</span>
             <span>CANAL 20.99 / SEGURO</span>
           </div>
-          <img
-            src="/assets/hero-neo-gotham-banner.webp"
-            alt="Batman do Futuro observando Neo-Gotham sob a lua e o tráfego aéreo"
-            loading="eager"
-            fetchPriority="high"
-          />
+          <video
+            ref={heroVideoRef}
+            data-scroll-video
+            autoPlay
+            muted={heroMuted}
+            loop
+            playsInline
+            preload="metadata"
+            poster="/assets/hero-neo-gotham-banner.webp"
+            aria-label="Abertura de Batman do Futuro em reprodução no banner"
+            onPlay={() => setHeroPaused(false)}
+            onPause={() => setHeroPaused(true)}
+            onTimeUpdate={(event) => {
+              const duration = event.currentTarget.duration || 60;
+              event.currentTarget.closest<HTMLElement>(".hero-visual")?.style.setProperty(
+                "--hero-progress",
+                `${Math.min(100, (event.currentTarget.currentTime / duration) * 100)}%`,
+              );
+            }}
+          >
+            <source src="/videos/batman-beyond-opening-hero.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-media-controls" aria-label="Controles da abertura">
+            <span><i /> Abertura original · 01:00</span>
+            <button
+              type="button"
+              aria-pressed={!heroMuted}
+              onClick={() => {
+                const video = heroVideoRef.current;
+                setHeroMuted((current) => {
+                  const next = !current;
+                  if (video) {
+                    video.muted = next;
+                    void video.play().catch(() => undefined);
+                  }
+                  return next;
+                });
+              }}
+            >
+              {heroMuted ? "Ativar som" : "Silenciar"}
+            </button>
+            <button
+              type="button"
+              aria-pressed={heroPaused}
+              onClick={() => {
+                const video = heroVideoRef.current;
+                if (!video) return;
+                if (video.paused) void video.play().catch(() => undefined);
+                else video.pause();
+              }}
+            >
+              {heroPaused ? "Reproduzir" : "Pausar"}
+            </button>
+          </div>
+          <div className="hero-media-progress" aria-hidden="true"><span /></div>
           <div className="hero-target" aria-hidden="true"><span /><i /></div>
 
           <aside id="terry-identity" className="identity-dossier" aria-hidden={!identityOpen}>

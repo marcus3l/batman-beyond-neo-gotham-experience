@@ -578,6 +578,7 @@ img {
   animation: pulse 1.6s ease-in-out infinite;
 }
 .hero-visual {
+  --hero-progress: 0%;
   position: absolute;
   inset: 0;
   width: 100%;
@@ -625,7 +626,8 @@ img {
     transparent
   );
 }
-.hero-visual > img {
+.hero-visual > img,
+.hero-visual > video {
   position: absolute;
   z-index: 1;
   inset: 0;
@@ -641,9 +643,79 @@ img {
     filter 0.7s ease,
     transform 0.9s cubic-bezier(0.2, 0.75, 0.2, 1);
 }
-.hero-visual.identity-open > img {
+.hero-visual.identity-open > img,
+.hero-visual.identity-open > video {
   filter: contrast(1.13) saturate(1.02) brightness(0.7);
   transform: scale(1.045);
+}
+.hero-media-controls {
+  position: absolute;
+  z-index: 10;
+  top: clamp(10.5rem, 18vh, 13rem);
+  right: var(--space);
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(5, 5, 8, 0.7);
+  backdrop-filter: blur(16px);
+  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+}
+.hero-media-controls > span {
+  min-height: 40px;
+  padding: 0 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(255, 255, 255, 0.52);
+  font: 700 0.46rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.hero-media-controls > span i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--red-hot);
+  box-shadow: 0 0 9px rgba(255, 43, 55, 0.8);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.hero-media-controls button {
+  min-height: 40px;
+  padding: 0 0.8rem;
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: #d5d4d7;
+  cursor: pointer;
+  font-size: 0.5rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.hero-media-controls button:hover,
+.hero-media-controls button:focus-visible {
+  background: rgba(255, 43, 55, 0.12);
+  color: #fff;
+  outline: none;
+}
+.hero-media-progress {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+.hero-media-progress span {
+  display: block;
+  width: var(--hero-progress);
+  height: 100%;
+  background: var(--red-hot);
+  box-shadow: 0 0 12px rgba(255, 43, 55, 0.55);
+  transition: width 0.2s linear;
 }
 .hero-moon {
   display: none;
@@ -5469,7 +5541,8 @@ h2 em {
     clip-path: polygon(0 22%, 100% 0, 100% 100%, 0 100%);
     opacity: 1;
   }
-  .hero-visual > img {
+  .hero-visual > img,
+  .hero-visual > video {
     height: 100%;
     width: 100%;
     object-position: 56% center;
@@ -5481,6 +5554,13 @@ h2 em {
   }
   .hero-telemetry {
     top: 4rem;
+  }
+  .hero-media-controls {
+    top: 4rem;
+    right: var(--space);
+  }
+  .hero-media-controls > span {
+    display: none;
   }
   .hero-target {
     top: 44%;
@@ -5728,14 +5808,22 @@ h2 em {
   .hero-visual {
     height: 410px;
   }
-  .hero-visual > img {
+  .hero-visual > img,
+  .hero-visual > video {
     width: 100%;
     right: 0;
     object-position: 64% center;
   }
   .hero-telemetry {
-    top: 2.4rem;
-    right: 1.2rem;
+    display: none;
+  }
+  .hero-media-controls {
+    top: 2rem;
+    right: 1rem;
+  }
+  .hero-media-controls button {
+    min-height: 36px;
+    padding: 0 0.65rem;
   }
   .hero-target {
     top: 43%;
