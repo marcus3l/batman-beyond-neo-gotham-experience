@@ -192,6 +192,8 @@ img { display: block; max-width: 100%; }
   --wing-from: #0b0b0e;
   --wing-next: #b81522;
   margin-top: calc(var(--wing-height) * -1);
+  margin-bottom: 0;
+  background: transparent;
 }
 .wing-red-dark { --wing-from: #d91a28; --wing-next: #0b0b0e; }
 .wing-dark-light { --wing-from: #0b0b0e; --wing-next: #f2eee8; }
@@ -216,10 +218,12 @@ img { display: block; max-width: 100%; }
   clip-path: polygon(0 0, 100% 0, 100% 38%, 60% 52%, 31% 66%, 14% 100%, 9% 47%, 0 25%);
 }
 .wing-dark-red .wing-transition-left {
-  clip-path: polygon(0 0, 100% 0, 91% 28%, 76% 52%, 57% 100%, 0 58%);
+  background: var(--wing-next);
+  clip-path: polygon(0 55%, 42% 62%, 68% 74%, 90% 0, 100% 30%, 100% 100%, 0 100%);
 }
 .wing-dark-red .wing-transition-right {
-  clip-path: polygon(0 0, 100% 0, 100% 58%, 43% 100%, 24% 52%, 9% 28%);
+  background: var(--wing-next);
+  clip-path: polygon(0 30%, 10% 0, 32% 74%, 58% 62%, 100% 55%, 100% 100%, 0 100%);
 }
 .wing-transition:not(.is-visible) .wing-transition-left { transform: scaleX(1.22); }
 .wing-transition:not(.is-visible) .wing-transition-right { transform: scaleX(1.22); }
