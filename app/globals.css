@@ -131,7 +131,7 @@ h2 em { color: var(--red); font-style: normal; }
 .transmission-grid { position: absolute; inset: 0; opacity: .34; background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px); background-size: 54px 54px; mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 100%); animation: transmission-grid-drift 18s linear infinite; }
 .transmission-grid::before { content: ""; position: absolute; top: clamp(1.25rem, 3vh, 2.2rem); right: clamp(2.8rem, 5vw, 6rem); left: clamp(2.8rem, 5vw, 6rem); height: 1px; background: linear-gradient(90deg, rgba(225,28,43,.8) 0 5%, rgba(255,255,255,.09) 5% 47%, transparent 47% 53%, rgba(255,255,255,.09) 53% 95%, rgba(225,28,43,.8) 95%); }
 .transmission-grid::after { content: "NG-SYS / INTERCEPTAÇÃO ATIVA / 88.7 MHZ"; position: absolute; top: calc(clamp(1.25rem, 3vh, 2.2rem) + .75rem); left: clamp(2.8rem, 5vw, 6rem); color: rgba(255,255,255,.22); font: 600 .46rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; }
-.transmission-sweep { position: absolute; top: -35%; bottom: -35%; left: 62%; width: 14%; opacity: .38; background: linear-gradient(90deg, transparent, rgba(225,28,43,.12), rgba(255,45,61,.28), transparent); filter: blur(8px); transform: skewX(-19deg); animation: transmission-sweep 6.4s cubic-bezier(.65,0,.35,1) infinite; }
+.transmission-sweep { position: absolute; top: 10%; bottom: 14%; left: 62%; width: 1px; opacity: .18; background: linear-gradient(180deg, transparent, rgba(225,28,43,.24) 22%, rgba(255,45,61,.62) 50%, rgba(225,28,43,.2) 78%, transparent); filter: drop-shadow(0 0 7px rgba(225,28,43,.28)); transform: skewX(-12deg); animation: transmission-sweep 6.4s cubic-bezier(.65,0,.35,1) infinite; }
 .transmission-crosshair { position: absolute; top: 48%; left: 60%; width: min(33vw, 420px); aspect-ratio: 1; border: 1px solid rgba(225,28,43,.08); border-radius: 50%; transform: translate(-50%, -50%); }
 .transmission-crosshair::before, .transmission-crosshair::after { content: ""; position: absolute; background: rgba(225,28,43,.09); }
 .transmission-crosshair::before { top: 50%; right: -13%; left: -13%; height: 1px; }
@@ -391,10 +391,10 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   to { background-position: 0 0, 0 0, 54px 54px, 54px 54px; }
 }
 @keyframes transmission-sweep {
-  0%, 12% { opacity: 0; transform: translateX(-520%) skewX(-19deg); }
-  28% { opacity: .42; }
-  72% { opacity: .2; }
-  88%, 100% { opacity: 0; transform: translateX(430%) skewX(-19deg); }
+  0%, 12% { opacity: 0; transform: translate3d(-70vw, 0, 0) skewX(-12deg); }
+  30% { opacity: .2; }
+  70% { opacity: .12; }
+  88%, 100% { opacity: 0; transform: translate3d(42vw, 0, 0) skewX(-12deg); }
 }
 @keyframes transmission-edge-pulse {
   0%, 100% { opacity: .18; filter: drop-shadow(0 0 0 rgba(225,28,43,0)); transform: translateY(-12px); }
