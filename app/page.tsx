@@ -150,6 +150,7 @@ export default function Home() {
 
       panels.forEach((panel, index) => {
         const frame = panel.querySelector<HTMLElement>(".cinematic-frame");
+        const frameEdge = panel.querySelector<HTMLElement>(".cinematic-frame-edge");
         const video = panel.querySelector<HTMLVideoElement>(".cinematic-frame video");
         const copy = panel.querySelector<HTMLElement>(".cinematic-copy");
         if (!frame || !video || !copy) return;
@@ -157,14 +158,17 @@ export default function Home() {
         const progress = reveals[index];
         const reverse = index % 2 === 1;
         const edgeIntensity = index === 0 ? Math.pow(Math.sin(Math.PI * progress), 0.65) : 0;
-        frame.style.setProperty("--frame-edge", edgeIntensity.toFixed(3));
-        frame.style.setProperty("--frame-glow", (edgeIntensity * 0.42).toFixed(3));
 
         const topLeft = reverse ? 38 * (1 - progress) : 62 * (1 - progress);
         const topRight = reverse ? 62 * (1 - progress) : 38 * (1 - progress);
         const bottomRight = reverse ? 62 + 38 * progress : 38 + 62 * progress;
         const bottomLeft = reverse ? 38 + 62 * progress : 62 + 38 * progress;
-        frame.style.clipPath = `polygon(0 ${topLeft}%, 100% ${topRight}%, 100% ${bottomRight}%, 0 ${bottomLeft}%)`;
+        const framePath = `polygon(0 ${topLeft}%, 100% ${topRight}%, 100% ${bottomRight}%, 0 ${bottomLeft}%)`;
+        frame.style.clipPath = framePath;
+        if (frameEdge) {
+          frameEdge.style.clipPath = framePath;
+          frameEdge.style.opacity = edgeIntensity.toFixed(3);
+        }
 
         const videoShift = 5 - progress * 10;
         video.style.transform = `translateY(${videoShift}%) scale(1.06)`;
@@ -436,6 +440,7 @@ export default function Home() {
             </div>
             {videoClips.map((video, index) => (
               <article className={`cinematic-panel cinematic-panel-${index + 1}`} key={video.basename}>
+                <div className="cinematic-frame-edge" aria-hidden="true" />
                 <div className="cinematic-frame">
                   <video
                     data-stack-video
