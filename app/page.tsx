@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 const originSteps = [
   {
@@ -178,7 +178,6 @@ const interceptedSignals = [
 ] as const;
 
 export default function Home() {
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cast, setCast] = useState<"allies" | "villains">("allies");
   const [sent, setSent] = useState(false);
@@ -188,9 +187,6 @@ export default function Home() {
   const [signalAuto, setSignalAuto] = useState(true);
   const [activeSuitFeature, setActiveSuitFeature] = useState(0);
   const [suitAuto, setSuitAuto] = useState(true);
-  const [identityOpen, setIdentityOpen] = useState(false);
-  const [heroMuted, setHeroMuted] = useState(true);
-  const [heroPaused, setHeroPaused] = useState(false);
   const currentSignal = interceptedSignals[activeSignal];
   const currentSuitFeature = suitFeatures[activeSuitFeature];
 
@@ -491,138 +487,23 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="hero" id="inicio">
-        <div className="hero-grid" aria-hidden="true" />
-        <div className="hero-copy">
-          <p className="eyebrow"><span>Arquivo 01</span> Protocolo de sucessão ativo</p>
-          <img className="hero-wordmark" src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />
-          <h1 className="sr-only">Batman do Futuro</h1>
-          <p className="hero-lead">
-            Neo-Gotham não precisa de outro herói. Precisa de um novo Batman para enfrentar as ameaças de uma era sem limites.
-          </p>
-          <div className="hero-actions">
-            <a className="button" href="#origem">Conheça o novo Batman <span aria-hidden="true">↘</span></a>
-            <a className="text-button" href="#midia">Explorar cenas <span aria-hidden="true">↓</span></a>
-          </div>
-          <div className="hero-status" aria-label="Status da transmissão">
-            <span className="status-dot" />
-            <span>Neo-Gotham</span>
-            <span>Conexão segura</span>
-            <span>Canal 20.99</span>
-          </div>
-        </div>
-
-        <div className={identityOpen ? "hero-visual identity-open" : "hero-visual"}>
-          <div className="hero-moon" aria-hidden="true" />
-          <div className="hero-number" aria-hidden="true">2099</div>
-          <div className="hero-telemetry" aria-hidden="true">
-            <span>NG–ID / VARREDURA 01</span>
-            <span>CANAL 20.99 / SEGURO</span>
-          </div>
+      <section className="hero hero-opening" id="inicio">
+        <h1 className="sr-only">Batman do Futuro</h1>
+        <div className="hero-visual hero-video-only">
           <video
-            ref={heroVideoRef}
             data-scroll-video
             autoPlay
-            muted={heroMuted}
+            muted
             loop
             playsInline
             preload="metadata"
             poster="/assets/hero-neo-gotham-banner.webp"
             aria-label="Abertura de Batman do Futuro em reprodução no banner"
-            onPlay={() => setHeroPaused(false)}
-            onPause={() => setHeroPaused(true)}
-            onTimeUpdate={(event) => {
-              const duration = event.currentTarget.duration || 60;
-              event.currentTarget.closest<HTMLElement>(".hero-visual")?.style.setProperty(
-                "--hero-progress",
-                `${Math.min(100, (event.currentTarget.currentTime / duration) * 100)}%`,
-              );
-            }}
           >
             <source src="/videos/batman-beyond-opening-hero.mp4" type="video/mp4" />
           </video>
-          <div className="hero-media-controls" aria-label="Controles da abertura">
-            <span><i /> Abertura original · 01:00</span>
-            <button
-              type="button"
-              aria-pressed={!heroMuted}
-              onClick={() => {
-                const video = heroVideoRef.current;
-                setHeroMuted((current) => {
-                  const next = !current;
-                  if (video) {
-                    video.muted = next;
-                    void video.play().catch(() => undefined);
-                  }
-                  return next;
-                });
-              }}
-            >
-              {heroMuted ? "Ativar som" : "Silenciar"}
-            </button>
-            <button
-              type="button"
-              aria-pressed={heroPaused}
-              onClick={() => {
-                const video = heroVideoRef.current;
-                if (!video) return;
-                if (video.paused) void video.play().catch(() => undefined);
-                else video.pause();
-              }}
-            >
-              {heroPaused ? "Reproduzir" : "Pausar"}
-            </button>
-          </div>
-          <div className="hero-media-progress" aria-hidden="true"><span /></div>
-          <div className="hero-target" aria-hidden="true"><span /><i /></div>
-
-          <aside id="terry-identity" className="identity-dossier" aria-hidden={!identityOpen}>
-            <div className="identity-dossier-head">
-              <span><i /> Identidade confirmada</span>
-              <small>NG–ID / 01</small>
-            </div>
-            <div className="identity-profile">
-              <div className="identity-mark" aria-hidden="true">
-                <img src="/assets/batman-beyond-bat.png" alt="" />
-              </div>
-              <div>
-                <span>O sucessor</span>
-                <strong>Terry<br />McGinnis</strong>
-              </div>
-            </div>
-            <p>Um jovem guiado por instinto, treinado pela lenda e escolhido para carregar o símbolo em uma nova era.</p>
-            <dl>
-              <div><dt>Designação</dt><dd>Batman</dd></div>
-              <div><dt>Mentor</dt><dd>Bruce Wayne</dd></div>
-              <div><dt>Jurisdição</dt><dd>Neo-Gotham</dd></div>
-            </dl>
-            <div className="identity-clearance"><span /><strong>Acesso autorizado</strong><small>100%</small></div>
-          </aside>
-
-          <button
-            className="identity-trigger"
-            type="button"
-            aria-expanded={identityOpen}
-            aria-controls="terry-identity"
-            onClick={() => setIdentityOpen((current) => !current)}
-          >
-            <span className="identity-trigger-label">
-              <small><i /> Identidade</small>
-              <strong aria-live="polite">{identityOpen ? "Terry McGinnis" : "Dados criptografados"}</strong>
-            </span>
-            <span className="identity-trigger-action">{identityOpen ? "Ocultar" : "Revelar"}<i aria-hidden="true">↗</i></span>
-          </button>
         </div>
-
-        <a className="scroll-cue" href="#origem"><span>Role para explorar</span><i aria-hidden="true">↓</i></a>
       </section>
-
-      <div className="signal-strip" aria-hidden="true">
-        <div>
-          <span>Novo herói</span><i>◆</i><span>Nova cidade</span><i>◆</i><span>Mesmo símbolo</span><i>◆</i>
-          <span>Novo herói</span><i>◆</i><span>Nova cidade</span><i>◆</i><span>Mesmo símbolo</span><i>◆</i>
-        </div>
-      </div>
 
       <section className="section origin" id="origem">
         <div className="section-intro">
@@ -667,6 +548,13 @@ export default function Home() {
           </div>
         </aside>
       </section>
+
+      <div className="signal-strip signal-strip-transmission" aria-hidden="true">
+        <div>
+          <span>Novo herói</span><i>◆</i><span>Nova cidade</span><i>◆</i><span>Mesmo símbolo</span><i>◆</i>
+          <span>Novo herói</span><i>◆</i><span>Nova cidade</span><i>◆</i><span>Mesmo símbolo</span><i>◆</i>
+        </div>
+      </div>
 
       <section className="transmissions" id="midia" aria-labelledby="transmissions-title">
         <div className="section-heading row-heading">
