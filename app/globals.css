@@ -204,6 +204,7 @@ h2 em { color: var(--red); font-style: normal; }
 .suit-list p { margin: 0; color: #83848c; font-size: .84rem; line-height: 1.55; }
 
 .cast { background: var(--paper); color: var(--ink); }
+.cast .impact-font { display: inline-block; transform: translateY(-.11em); }
 .cast-tabs { display: flex; border: 1px solid #c9c5be; }
 .cast-tabs button { min-width: 130px; padding: 1rem 1.4rem; border: 0; background: transparent; color: #777; cursor: pointer; font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .cast-tabs button.active { background: var(--ink); color: var(--white); }
