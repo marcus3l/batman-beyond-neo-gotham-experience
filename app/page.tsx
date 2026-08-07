@@ -84,12 +84,54 @@ const navigationItems = [
   ["05", "Personagens", "personagens"],
 ] as const;
 
+const interceptedSignals = [
+  {
+    title: "Patrulha aérea",
+    detail: "Neo-Gotham / setor norte",
+    state: "Ao vivo",
+    stateClass: "is-live",
+    status: "Sinal ao vivo",
+    record: "REC 01",
+    text: "Uma patrulha cruza o setor norte. O sistema acompanha altitude, velocidade e ameaças em aproximação.",
+    frequency: "FREQ. 88.7",
+    location: "SETOR NORTE / 2099",
+    bars: [42, 72, 34, 58, 86, 38, 66, 48, 82, 55, 74, 46],
+  },
+  {
+    title: "Protocolo do traje",
+    detail: "Telemetria sincronizada",
+    state: "Sincronizado",
+    stateClass: "is-tracked",
+    status: "Traje sincronizado",
+    record: "REC 02",
+    text: "O traje transmite telemetria em tempo real. Propulsores, sensores e camuflagem respondem dentro dos parâmetros.",
+    frequency: "FREQ. 91.2",
+    location: "BATCAVERNA / LINK",
+    bars: [28, 52, 84, 70, 44, 92, 64, 36, 76, 48, 88, 58],
+  },
+  {
+    title: "Assinatura desconhecida",
+    detail: "Origem não identificada",
+    state: "Rastreando",
+    stateClass: "is-alert",
+    status: "Sinal hostil",
+    record: "REC 03",
+    text: "Uma frequência sem identificação atravessa o distrito baixo. A assinatura muda antes que o sistema consiga bloqueá-la.",
+    frequency: "FREQ. 104.6",
+    location: "DISTRITO BAIXO / ???",
+    bars: [82, 30, 68, 96, 38, 78, 26, 90, 54, 34, 86, 64],
+  },
+] as const;
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cast, setCast] = useState<"allies" | "villains">("allies");
   const [sent, setSent] = useState(false);
   const [progress, setProgress] = useState(0);
   const [activeSection, setActiveSection] = useState("");
+  const [activeSignal, setActiveSignal] = useState(0);
+  const [signalAuto, setSignalAuto] = useState(true);
+  const currentSignal = interceptedSignals[activeSignal];
 
   useEffect(() => {
     const onScroll = () => {
@@ -107,6 +149,14 @@ export default function Home() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!signalAuto || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setTimeout(() => {
+      setActiveSignal((current) => (current + 1) % interceptedSignals.length);
+    }, 6500);
+    return () => window.clearTimeout(timer);
+  }, [activeSignal, signalAuto]);
 
   useEffect(() => {
     const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("[data-scroll-video]"));
@@ -417,30 +467,68 @@ export default function Home() {
             <div className="transmission-link" aria-hidden="true"><span />CANAL SEGURO / CONEXÃO ESTABELECIDA</div>
           </div>
           <aside className="transmissions-brief reveal-rise motion-delay-2" data-reveal aria-label="Status da transmissão">
-            <div className="brief-status"><span aria-hidden="true" />Sinal ativo <b>REC 02</b></div>
-            <p>Registros interceptados revelam a cidade, o novo Batman e ameaças que transformaram o futuro em um campo de batalha.</p>
-            <div className="signal-meter" aria-hidden="true">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((bar) => <i key={bar} />)}
+            <div className="brief-head">
+              <div className="brief-status"><span aria-hidden="true" />{currentSignal.status} <b>{currentSignal.record}</b></div>
+              <div className="signal-controls">
+                <div className="signal-selector" role="tablist" aria-label="Selecionar sinal interceptado">
+                  {interceptedSignals.map((signal, index) => (
+                    <button
+                      id={`signal-tab-${index}`}
+                      className={activeSignal === index ? "is-active" : undefined}
+                      type="button"
+                      role="tab"
+                      aria-selected={activeSignal === index}
+                      aria-controls="signal-panel"
+                      onClick={() => setActiveSignal(index)}
+                      key={signal.record}
+                    >
+                      0{index + 1}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  className="signal-auto"
+                  type="button"
+                  aria-pressed={signalAuto}
+                  aria-label={signalAuto ? "Pausar troca automática de sinais" : "Retomar troca automática de sinais"}
+                  title={signalAuto ? "Pausar sinais" : "Retomar sinais"}
+                  onClick={() => setSignalAuto((current) => !current)}
+                >
+                  {signalAuto ? "Ⅱ" : "▶"}
+                </button>
+              </div>
             </div>
-            <div className="brief-meta"><span>FREQ. 88.7</span><span>NEO-GOTHAM / 2099</span></div>
+
+            <div
+              className="brief-signal-content"
+              id="signal-panel"
+              role="tabpanel"
+              aria-labelledby={`signal-tab-${activeSignal}`}
+              key={currentSignal.record}
+            >
+              <p>{currentSignal.text}</p>
+              <div className="signal-meter" aria-hidden="true">
+                {currentSignal.bars.map((height, index) => <i style={{ height: `${height}%` }} key={`${currentSignal.record}-${index}`} />)}
+              </div>
+              <div className="brief-meta"><span>{currentSignal.frequency}</span><span>{currentSignal.location}</span></div>
+            </div>
           </aside>
 
           <div className="transmission-channel-rail" aria-label="Canais interceptados">
-            <article className="reveal-rise motion-delay-1" data-reveal>
-              <span className="channel-number">01</span>
-              <div><b>Patrulha aérea</b><small>Neo-Gotham / setor norte</small></div>
-              <i className="channel-state is-live">Ao vivo</i>
-            </article>
-            <article className="reveal-rise motion-delay-2" data-reveal>
-              <span className="channel-number">02</span>
-              <div><b>Protocolo do traje</b><small>Telemetria sincronizada</small></div>
-              <i className="channel-state">Rastreando</i>
-            </article>
-            <article className="reveal-rise motion-delay-3" data-reveal>
-              <span className="channel-number">03</span>
-              <div><b>Assinatura desconhecida</b><small>Origem não identificada</small></div>
-              <i className="channel-state is-locked">Bloqueado</i>
-            </article>
+            {interceptedSignals.map((signal, index) => (
+              <button
+                className={`transmission-channel reveal-rise motion-delay-${index + 1}${activeSignal === index ? " is-active" : ""}`}
+                type="button"
+                aria-pressed={activeSignal === index}
+                onClick={() => setActiveSignal(index)}
+                data-reveal
+                key={signal.record}
+              >
+                <span className="channel-number">0{index + 1}</span>
+                <span className="channel-copy"><b>{signal.title}</b><small>{signal.detail}</small></span>
+                <i className={`channel-state ${signal.stateClass}`}>{signal.state}</i>
+              </button>
+            ))}
           </div>
         </div>
 
