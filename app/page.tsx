@@ -21,12 +21,52 @@ const originSteps = [
 ];
 
 const suitFeatures = [
-  ["01", "Asas retráteis", "Controle e liberdade para cruzar os céus de Neo-Gotham."],
-  ["02", "Propulsores", "Velocidade para alcançar qualquer ponto da cidade antes que seja tarde."],
-  ["03", "Camuflagem", "Tecnologia furtiva que transforma cada sombra em uma oportunidade."],
-  ["04", "Visão e sensores", "Análise de ambientes e comunicação em tempo real com a Batcaverna."],
-  ["05", "Amplificação física", "Mais força, velocidade e resistência contra ameaças aprimoradas."],
-];
+  {
+    number: "01",
+    title: "Asas retráteis",
+    text: "Sustentação, manobra e controle absoluto para dominar o espaço entre os arranha-céus.",
+    code: "FLT / W-01",
+    source: "ARQ. REBIRTH / 02",
+    video: "/videos/suit-wings.mp4",
+    poster: "/assets/suit-wings.jpg",
+  },
+  {
+    number: "02",
+    title: "Propulsão aérea",
+    text: "Velocidade de resposta para atravessar Neo-Gotham antes que a ameaça consiga desaparecer.",
+    code: "THR / P-08",
+    source: "ARQ. ASCENSION / 13",
+    video: "/videos/suit-propulsion.mp4",
+    poster: "/assets/suit-propulsion.jpg",
+  },
+  {
+    number: "03",
+    title: "Camuflagem ativa",
+    text: "O traje refrata o ambiente e apaga a assinatura visual de Terry em território hostil.",
+    code: "STL / C-03",
+    source: "ARQ. REBIRTH / 02",
+    video: "/videos/suit-camouflage.mp4",
+    poster: "/assets/suit-camouflage.jpg",
+  },
+  {
+    number: "04",
+    title: "Resposta tática",
+    text: "Sensores e reflexos assistidos leem o combate em tempo real e antecipam cada movimento.",
+    code: "VIS / T-12",
+    source: "ARQ. SPELLBOUND / 10",
+    video: "/videos/suit-tactical.mp4",
+    poster: "/assets/suit-tactical.jpg",
+  },
+  {
+    number: "05",
+    title: "Força ampliada",
+    text: "Potência, resistência e impacto calibrados para enfrentar múltiplos alvos sem perder mobilidade.",
+    code: "PWR / A-05",
+    source: "ARQ. REBIRTH / 02",
+    video: "/videos/suit-strength.mp4",
+    poster: "/assets/suit-strength.jpg",
+  },
+] as const;
 
 const casts = {
   allies: [
@@ -131,7 +171,10 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("");
   const [activeSignal, setActiveSignal] = useState(0);
   const [signalAuto, setSignalAuto] = useState(true);
+  const [activeSuitFeature, setActiveSuitFeature] = useState(0);
+  const [suitAuto, setSuitAuto] = useState(true);
   const currentSignal = interceptedSignals[activeSignal];
+  const currentSuitFeature = suitFeatures[activeSuitFeature];
 
   useEffect(() => {
     const onScroll = () => {
@@ -157,6 +200,14 @@ export default function Home() {
     }, 6500);
     return () => window.clearTimeout(timer);
   }, [activeSignal, signalAuto]);
+
+  useEffect(() => {
+    if (!suitAuto || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setTimeout(() => {
+      setActiveSuitFeature((current) => (current + 1) % suitFeatures.length);
+    }, 7200);
+    return () => window.clearTimeout(timer);
+  }, [activeSuitFeature, suitAuto]);
 
   useEffect(() => {
     const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("[data-scroll-video]"));
@@ -731,24 +782,86 @@ export default function Home() {
         <div className="suit-title reveal-mask" data-reveal>
           <p className="eyebrow light"><span>05</span> Vista o futuro</p>
           <h2>Muito mais<br />do que <em>uma armadura.</em></h2>
-          <p>Criado para uma nova era, o traje combina proteção, mobilidade e poder em um único sistema.</p>
+          <p>O traje não é apenas proteção. É um sistema de voo, infiltração e combate projetado para transformar cada movimento em vantagem.</p>
+          <div className="suit-status" aria-label="Estado do traje">
+            <span><i /> Sistema operacional</span>
+            <strong>100%</strong>
+            <small>NG–SUIT / ONLINE</small>
+          </div>
         </div>
-        <div className="suit-core suit-video reveal-scale" data-reveal aria-hidden="true">
-          <video data-scroll-video muted loop playsInline preload="metadata" poster="/videos/02-batman-arrival-poster.jpg" aria-hidden="true">
-            <source src="/videos/02-batman-arrival.webm" type="video/webm" />
-            <source src="/videos/02-batman-arrival.mp4" type="video/mp4" />
-          </video>
-          <span className="core-ring" />
-          <span className="core-label">PROTOCOLO<br />BEYOND</span>
-        </div>
-        <div className="suit-list">
-          {suitFeatures.map(([number, title, text], index) => (
-            <article className={`reveal-rise motion-delay-${Math.min(index, 4)}`} data-reveal key={number}>
-              <span>{number}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
+        <div className="suit-console reveal-scale" data-reveal>
+          <div className="suit-viewport">
+            <video
+              data-scroll-video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              src={currentSuitFeature.video}
+              poster={currentSuitFeature.poster}
+              onLoadedData={(event) => {
+                const bounds = event.currentTarget.getBoundingClientRect();
+                if (bounds.bottom > 0 && bounds.top < window.innerHeight) {
+                  void event.currentTarget.play().catch(() => undefined);
+                } else {
+                  event.currentTarget.pause();
+                }
+              }}
+              aria-label={`Demonstração do recurso: ${currentSuitFeature.title}`}
+            />
+            <span className="suit-screen-grid" aria-hidden="true" />
+            <span className="suit-frame-edge" aria-hidden="true" />
+            <div className="suit-hud-top">
+              <span><i /> Protocolo Beyond</span>
+              <strong>{currentSuitFeature.code}</strong>
+            </div>
+            <div className="suit-hud-copy" aria-live="polite">
+              <span>{currentSuitFeature.number} / 05</span>
+              <h3>{currentSuitFeature.title}</h3>
+              <p>{currentSuitFeature.text}</p>
+            </div>
+            <div className="suit-hud-bottom">
+              <span>{currentSuitFeature.source}</span>
+              <span>TELEMETRIA / ATIVA</span>
+            </div>
+          </div>
+
+          <div className="suit-controls">
+            <div className="suit-control-head">
+              <div>
+                <span>Capacidades registradas</span>
+                <strong>Selecione um módulo do traje</strong>
+              </div>
+              <button
+                className={suitAuto ? "is-active" : ""}
+                type="button"
+                onClick={() => setSuitAuto((current) => !current)}
+                aria-pressed={suitAuto}
+              >
+                <i /> {suitAuto ? "Auto" : "Manual"}
+              </button>
+            </div>
+            <div className="suit-feature-nav" role="tablist" aria-label="Tecnologias do traje">
+              {suitFeatures.map((feature, index) => (
+                <button
+                  className={activeSuitFeature === index ? "is-active" : ""}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeSuitFeature === index}
+                  onClick={() => {
+                    setActiveSuitFeature(index);
+                    setSuitAuto(false);
+                  }}
+                  key={feature.number}
+                >
+                  <span>{feature.number}</span>
+                  <strong>{feature.title}</strong>
+                  <small>{feature.code}</small>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
