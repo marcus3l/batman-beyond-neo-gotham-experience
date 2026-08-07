@@ -199,6 +199,32 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.01, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    elements.forEach((element) => {
+      if (!element.classList.contains("is-visible")) observer.observe(element);
+    });
+    return () => observer.disconnect();
+  }, [cast]);
+
   function submitSignal(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSent(true);
@@ -283,16 +309,18 @@ export default function Home() {
 
       <section className="section origin" id="origem">
         <div className="section-intro">
-          <p className="eyebrow"><span>01</span> De rebelde a símbolo</p>
-          <h2>Nasce um<br /><em>novo Batman.</em></h2>
-          <p>
-            Terry McGinnis nunca planejou se tornar um herói. Quando Neo-Gotham precisa novamente de um protetor, ele veste o traje — mas usar o símbolo é apenas o começo.
-          </p>
+          <div className="section-intro-content reveal-mask" data-reveal>
+            <p className="eyebrow"><span>01</span> De rebelde a símbolo</p>
+            <h2>Nasce um<br /><em>novo Batman.</em></h2>
+            <p>
+              Terry McGinnis nunca planejou se tornar um herói. Quando Neo-Gotham precisa novamente de um protetor, ele veste o traje — mas usar o símbolo é apenas o começo.
+            </p>
+          </div>
         </div>
 
         <div className="origin-cards">
-          {originSteps.map((step) => (
-            <article className="origin-card" key={step.number}>
+          {originSteps.map((step, index) => (
+            <article className={`origin-card reveal-rise motion-delay-${index}`} data-reveal key={step.number}>
               <span className="card-index">{step.number}</span>
               <div>
                 <h3>{step.title}</h3>
@@ -347,7 +375,7 @@ export default function Home() {
       </section>
 
       <section className="city" id="cidade">
-        <div className="city-copy">
+        <div className="city-copy reveal-city" data-reveal>
           <p className="eyebrow light"><span>03</span> Proteja a cidade</p>
           <h2>Bem-vindo a<br /><em>Neo-Gotham.</em></h2>
           <p className="city-lead">
@@ -362,7 +390,7 @@ export default function Home() {
             ["Patrulhe", "Cruze os céus e encontre perigos ocultos pela cidade vertical."],
             ["Proteja", "Enfrente criminosos capazes de transformar o futuro em uma arma."],
           ].map(([title, text], index) => (
-            <article key={title}>
+            <article className={`reveal-rise motion-delay-${index}`} data-reveal key={title}>
               <span>0{index + 1}</span>
               <h3>{title}</h3>
               <p>{text}</p>
@@ -372,20 +400,20 @@ export default function Home() {
       </section>
 
       <section className="section legacy">
-        <div className="legacy-quote">
+        <div className="legacy-quote reveal-mask" data-reveal>
           <p className="eyebrow"><span>04</span> Carregue o símbolo</p>
           <h2>O homem muda.<br /><em>A missão permanece.</em></h2>
           <blockquote>“O símbolo não pertence ao passado. Ele pertence a quem tiver coragem de defendê-lo.”</blockquote>
         </div>
 
         <div className="duo">
-          <article className="duo-card terry">
+          <article className="duo-card terry reveal-duo-left" data-reveal>
             <span className="duo-label">O sucessor</span>
             <div className="duo-monogram">T</div>
             <h3>Terry<br />McGinnis</h3>
             <p>Instinto, velocidade e uma nova forma de lutar pelo futuro.</p>
           </article>
-          <article className="duo-card bruce">
+          <article className="duo-card bruce reveal-duo-right motion-delay-1" data-reveal>
             <span className="duo-label">A lenda</span>
             <div className="duo-monogram">B</div>
             <h3>Bruce<br />Wayne</h3>
@@ -395,12 +423,12 @@ export default function Home() {
       </section>
 
       <section className="suit" id="traje">
-        <div className="suit-title">
+        <div className="suit-title reveal-mask" data-reveal>
           <p className="eyebrow light"><span>05</span> Vista o futuro</p>
           <h2>Muito mais<br />do que <em>uma armadura.</em></h2>
           <p>Criado para uma nova era, o traje combina proteção, mobilidade e poder em um único sistema.</p>
         </div>
-        <div className="suit-core suit-video" aria-hidden="true">
+        <div className="suit-core suit-video reveal-scale" data-reveal aria-hidden="true">
           <video data-scroll-video muted loop playsInline preload="metadata" poster="/videos/02-batman-arrival-poster.jpg" aria-hidden="true">
             <source src="/videos/02-batman-arrival.webm" type="video/webm" />
             <source src="/videos/02-batman-arrival.mp4" type="video/mp4" />
@@ -409,8 +437,8 @@ export default function Home() {
           <span className="core-label">PROTOCOLO<br />BEYOND</span>
         </div>
         <div className="suit-list">
-          {suitFeatures.map(([number, title, text]) => (
-            <article key={number}>
+          {suitFeatures.map(([number, title, text], index) => (
+            <article className={`reveal-rise motion-delay-${Math.min(index, 4)}`} data-reveal key={number}>
               <span>{number}</span>
               <h3>{title}</h3>
               <p>{text}</p>
@@ -420,7 +448,7 @@ export default function Home() {
       </section>
 
       <section className="section cast" id="personagens">
-        <div className="section-heading row-heading">
+        <div className="section-heading row-heading reveal-mask" data-reveal>
           <div>
             <p className="eyebrow"><span>06</span> Dossiês de Neo-Gotham</p>
             <h2>Escolha um<br /><em>lado da história.</em></h2>
@@ -433,7 +461,7 @@ export default function Home() {
 
         <div className="cast-grid" aria-live="polite">
           {casts[cast].map(([initials, name, text], index) => (
-            <article className="cast-card" key={name}>
+            <article className={`cast-card reveal-rise motion-delay-${index}`} data-reveal key={name}>
               <span className="cast-number">0{index + 1}</span>
               <div className="cast-portrait" aria-hidden="true"><span>{initials}</span></div>
               <h3>{name}</h3>
@@ -445,11 +473,11 @@ export default function Home() {
       </section>
 
       <section className="signal-form-section">
-        <div>
+        <div className="reveal-mask" data-reveal>
           <p className="eyebrow light"><span>07</span> O legado continua</p>
           <h2>O futuro ainda<br />precisa de <em>um Batman.</em></h2>
         </div>
-        <form className="signal-form" onSubmit={submitSignal}>
+        <form className="signal-form reveal-rise motion-delay-1" data-reveal onSubmit={submitSignal}>
           <label htmlFor="email">Receba novas transmissões de Neo-Gotham.</label>
           <div className="input-row">
             <input id="email" name="email" type="email" placeholder="SEU E-MAIL" required aria-describedby="privacy-note" />
