@@ -41,9 +41,46 @@ const casts = {
   ],
 };
 
+const videoClips = [
+  {
+    code: "TRANSMISSÃO 01",
+    title: "Voo sobre Neo-Gotham",
+    duration: "00:08",
+    tone: "media-blue",
+    basename: "01-neo-gotham-flight",
+    description: "Uma patrulha aérea entre as luzes da cidade do futuro.",
+  },
+  {
+    code: "PROTOCOLO DO TRAJE",
+    title: "Batman em ação",
+    duration: "00:08",
+    tone: "media-red",
+    basename: "02-batman-arrival",
+    description: "A chegada do novo Batman marca o início de uma nova era.",
+  },
+  {
+    code: "TRANSMISSÃO 02",
+    title: "Inque nas alturas",
+    duration: "00:08",
+    tone: "media-violet",
+    basename: "03-inque-rooftop",
+    description: "Uma ameaça mutável surge acima das ruas de Neo-Gotham.",
+  },
+  {
+    code: "TRANSMISSÃO 03",
+    title: "Curaré em combate",
+    duration: "00:08",
+    tone: "media-red",
+    basename: "04-curare-action",
+    description: "Velocidade e precisão em um confronto sem espaço para erros.",
+  },
+] as const;
+
+const transmissionVideos = [videoClips[0], videoClips[2], videoClips[3]];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [videoOpen, setVideoOpen] = useState(false);
+  const [activeVideo, setActiveVideo] = useState<(typeof videoClips)[number] | null>(null);
   const [cast, setCast] = useState<"allies" | "villains">("allies");
   const [sent, setSent] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -59,11 +96,19 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = videoOpen ? "hidden" : "";
+    document.body.style.overflow = activeVideo ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [videoOpen]);
+  }, [activeVideo]);
+
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveVideo(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
 
   function submitSignal(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -103,8 +148,8 @@ export default function Home() {
           <a href="#personagens" onClick={closeMenu}>Personagens</a>
         </nav>
 
-        <button className="button button-small header-cta" type="button" onClick={() => setVideoOpen(true)}>
-          Assistir ao trailer <span aria-hidden="true">▶</span>
+        <button className="button button-small header-cta" type="button" onClick={() => setActiveVideo(videoClips[1])}>
+          Ver cenas <span aria-hidden="true">▶</span>
         </button>
       </header>
 
@@ -119,8 +164,8 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a className="button" href="#origem">Conheça o novo Batman <span aria-hidden="true">↘</span></a>
-            <button className="text-button" type="button" onClick={() => setVideoOpen(true)}>
-              <span className="play-dot" aria-hidden="true">▶</span> Assistir ao trailer
+            <button className="text-button" type="button" onClick={() => setActiveVideo(videoClips[1])}>
+              <span className="play-dot" aria-hidden="true">▶</span> Assistir às cenas
             </button>
           </div>
           <div className="hero-status" aria-label="Status da transmissão">
@@ -177,21 +222,36 @@ export default function Home() {
             <p className="eyebrow"><span>02</span> Arquivo de transmissão</p>
             <h2 id="transmissions-title">Veja o futuro<br /><em>entrar em ação.</em></h2>
           </div>
-          <p>Os espaços de mídia já estão preparados para receber trailers, teasers e conteúdos de bastidores.</p>
+          <p>Registros interceptados revelam a cidade, o novo Batman e ameaças que transformaram o futuro em um campo de batalha.</p>
         </div>
 
         <div className="media-grid">
-          {[
-            ["Trailer oficial", "01:42", "media-red"],
-            ["Por trás do traje", "03:10", "media-violet"],
-            ["Os céus de Neo-Gotham", "02:28", "media-blue"],
-          ].map(([title, duration, tone], index) => (
-            <button className={`media-card ${tone}`} type="button" key={title} onClick={() => setVideoOpen(true)}>
-              <span className="media-code">TRANSMISSÃO 0{index + 1}</span>
+          {transmissionVideos.map((video) => (
+            <button
+              className={`media-card ${video.tone}`}
+              type="button"
+              key={video.basename}
+              onClick={() => setActiveVideo(video)}
+              aria-label={`Assistir à cena: ${video.title}`}
+            >
+              <video
+                className="media-background"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={`/videos/${video.basename}-poster.jpg`}
+                aria-hidden="true"
+              >
+                <source src={`/videos/${video.basename}.webm`} type="video/webm" />
+                <source src={`/videos/${video.basename}.mp4`} type="video/mp4" />
+              </video>
+              <span className="media-code">{video.code}</span>
               <span className="media-play" aria-hidden="true">▶</span>
-              <span className="media-title">{title}</span>
-              <span className="media-duration">{duration}</span>
-              <span className="media-placeholder">Vídeo em breve</span>
+              <span className="media-title">{video.title}</span>
+              <span className="media-duration">{video.duration}</span>
+              <span className="media-placeholder">Cena disponível</span>
             </button>
           ))}
         </div>
@@ -251,11 +311,20 @@ export default function Home() {
           <h2>Muito mais<br />do que <em>uma armadura.</em></h2>
           <p>Criado para uma nova era, o traje combina proteção, mobilidade e poder em um único sistema.</p>
         </div>
-        <div className="suit-core" aria-hidden="true">
+        <button
+          className="suit-core suit-video"
+          type="button"
+          onClick={() => setActiveVideo(videoClips[1])}
+          aria-label="Assistir à cena: Batman em ação"
+        >
+          <video autoPlay muted loop playsInline preload="metadata" poster="/videos/02-batman-arrival-poster.jpg" aria-hidden="true">
+            <source src="/videos/02-batman-arrival.webm" type="video/webm" />
+            <source src="/videos/02-batman-arrival.mp4" type="video/mp4" />
+          </video>
           <span className="core-ring" />
-          <span className="core-bat">M</span>
+          <span className="suit-play" aria-hidden="true">▶</span>
           <span className="core-label">PROTOCOLO<br />BEYOND</span>
-        </div>
+        </button>
         <div className="suit-list">
           {suitFeatures.map(([number, title, text]) => (
             <article key={number}>
@@ -320,15 +389,25 @@ export default function Home() {
         </small>
       </footer>
 
-      {videoOpen && (
-        <div className="modal" role="dialog" aria-modal="true" aria-labelledby="video-title" onMouseDown={() => setVideoOpen(false)}>
+      {activeVideo && (
+        <div className="modal" role="dialog" aria-modal="true" aria-labelledby="video-title" onMouseDown={() => setActiveVideo(null)}>
           <div className="modal-card" onMouseDown={(event) => event.stopPropagation()}>
-            <button className="modal-close" type="button" onClick={() => setVideoOpen(false)} aria-label="Fechar vídeo">×</button>
-            <div className="video-placeholder">
-              <span className="media-play" aria-hidden="true">▶</span>
-              <p>TRANSMISSÃO PROGRAMADA</p>
-              <h2 id="video-title">Vídeo em breve</h2>
-              <span>Este espaço está pronto para receber o trailer oficial.</span>
+            <button className="modal-close" type="button" onClick={() => setActiveVideo(null)} aria-label="Fechar vídeo">×</button>
+            <video
+              className="modal-video"
+              controls
+              autoPlay
+              playsInline
+              poster={`/videos/${activeVideo.basename}-poster.jpg`}
+            >
+              <source src={`/videos/${activeVideo.basename}.webm`} type="video/webm" />
+              <source src={`/videos/${activeVideo.basename}.mp4`} type="video/mp4" />
+              Seu navegador não oferece suporte à reprodução de vídeo.
+            </video>
+            <div className="modal-caption">
+              <p>{activeVideo.code}</p>
+              <h2 id="video-title">{activeVideo.title}</h2>
+              <span>{activeVideo.description}</span>
             </div>
           </div>
         </div>
