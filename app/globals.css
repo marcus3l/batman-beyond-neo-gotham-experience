@@ -6523,6 +6523,7 @@ h2 em {
 
 /* Central editorial opening for Terry's origin. */
 .origin {
+  z-index: 6;
   display: block;
   padding-top: clamp(1.25rem, 2vw, 2.25rem);
   padding-bottom: clamp(8rem, 9vw, 9.5rem);
