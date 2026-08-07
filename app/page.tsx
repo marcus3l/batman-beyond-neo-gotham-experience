@@ -208,17 +208,36 @@ export default function Home() {
       return;
     }
 
+    let lastScrollY = window.scrollY;
+    let scrollDirection: "up" | "down" = "down";
+    const updateScrollDirection = () => {
+      const nextScrollY = window.scrollY;
+      if (Math.abs(nextScrollY - lastScrollY) > 3) {
+        scrollDirection = nextScrollY < lastScrollY ? "up" : "down";
+        lastScrollY = nextScrollY;
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+          if (entry.isIntersecting) {
+            entry.target.classList.toggle("reveal-reverse", scrollDirection === "up");
+            entry.target.classList.add("is-visible");
+          } else {
+            entry.target.classList.remove("is-visible");
+          }
         });
       },
       { threshold: 0, rootMargin: "-4% 0px -10% 0px" },
     );
 
+    window.addEventListener("scroll", updateScrollDirection, { passive: true });
     elements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", updateScrollDirection);
+    };
   }, [cast]);
 
   function submitSignal(event: FormEvent<HTMLFormElement>) {

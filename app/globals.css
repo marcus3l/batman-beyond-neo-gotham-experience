@@ -259,6 +259,21 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
 .reveal-mark:not(.is-visible) { opacity: 0; transform: translate3d(52px, -30px, 0) rotate(7deg) scale(.72); }
 .reveal-mark.is-visible { animation: reveal-mark-in .95s cubic-bezier(.16,.82,.2,1) var(--motion-delay) both; }
 
+.reveal-reverse.reveal-mask:not(.is-visible) { clip-path: polygon(97% 0, 100% 0, 100% 100%, 97% 84%); transform: translateY(-22px); }
+.reveal-reverse.reveal-mask.is-visible { animation: reveal-mask-up .72s cubic-bezier(.22,.72,.2,1) var(--motion-delay) both; }
+.reveal-reverse.reveal-rise:not(.is-visible) { clip-path: polygon(0 0, 100% 18%, 100% 82%, 0 100%); transform: translateY(-34px); }
+.reveal-reverse.reveal-rise.is-visible { animation: reveal-rise-up .68s cubic-bezier(.22,.72,.2,1) var(--motion-delay) both; }
+.reveal-reverse.reveal-city:not(.is-visible) { clip-path: polygon(96% 14%, 100% 0, 100% 100%, 96% 86%); }
+.reveal-reverse.reveal-city.is-visible { animation: reveal-city-up .82s cubic-bezier(.22,.72,.2,1) var(--motion-delay) both; }
+.reveal-reverse.reveal-duo-left { clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%); }
+.reveal-reverse.reveal-duo-right { clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%); }
+.reveal-reverse.reveal-duo-left:not(.is-visible), .reveal-reverse.reveal-duo-right:not(.is-visible) { opacity: 0; transform: translateY(-28px) scale(.97); }
+.reveal-reverse.reveal-duo-left.is-visible, .reveal-reverse.reveal-duo-right.is-visible { animation: reveal-soft-up .72s cubic-bezier(.22,.72,.2,1) var(--motion-delay) both; }
+.reveal-reverse.reveal-scale:not(.is-visible) { transform: translateY(-24px) scale(.86) rotate(3deg); filter: saturate(.72); }
+.reveal-reverse.reveal-scale.is-visible { animation: reveal-scale-up .76s cubic-bezier(.22,.72,.2,1) var(--motion-delay) both; }
+.reveal-reverse.reveal-mark:not(.is-visible) { transform: translate3d(-24px, 18px, 0) rotate(-3deg) scale(.88); }
+.reveal-reverse.reveal-mark.is-visible { animation: reveal-mark-up .72s cubic-bezier(.22,.72,.2,1) var(--motion-delay) both; }
+
 @keyframes reveal-mask-in {
   from { opacity: 0; clip-path: polygon(0 0, 3% 16%, 3% 84%, 0 100%); transform: translateY(28px); }
   to { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translateY(0); }
@@ -285,6 +300,30 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
 }
 @keyframes reveal-mark-in {
   from { opacity: 0; transform: translate3d(52px, -30px, 0) rotate(7deg) scale(.72); }
+  to { opacity: .96; transform: translate3d(0, 0, 0) rotate(0) scale(1); }
+}
+@keyframes reveal-mask-up {
+  from { opacity: 0; clip-path: polygon(97% 0, 100% 0, 100% 100%, 97% 84%); transform: translateY(-22px); }
+  to { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translateY(0); }
+}
+@keyframes reveal-rise-up {
+  from { opacity: 0; clip-path: polygon(0 0, 100% 18%, 100% 82%, 0 100%); transform: translateY(-34px); }
+  to { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translateY(0); }
+}
+@keyframes reveal-city-up {
+  from { clip-path: polygon(96% 14%, 100% 0, 100% 100%, 96% 86%); }
+  to { clip-path: polygon(0 0, 100% 0, 84% 100%, 0 100%); }
+}
+@keyframes reveal-soft-up {
+  from { opacity: 0; transform: translateY(-28px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes reveal-scale-up {
+  from { opacity: 0; transform: translateY(-24px) scale(.86) rotate(3deg); filter: saturate(.72); }
+  to { opacity: 1; transform: translateY(0) scale(1) rotate(0); filter: saturate(1); }
+}
+@keyframes reveal-mark-up {
+  from { opacity: 0; transform: translate3d(-24px, 18px, 0) rotate(-3deg) scale(.88); }
   to { opacity: .96; transform: translate3d(0, 0, 0) rotate(0) scale(1); }
 }
 @keyframes bat-signal {
