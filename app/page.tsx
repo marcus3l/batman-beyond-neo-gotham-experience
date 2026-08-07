@@ -384,6 +384,44 @@ export default function Home() {
     };
   }, [cast]);
 
+  useEffect(() => {
+    const reveal = document.querySelector<HTMLElement>(".city-panorama-reveal");
+    if (!reveal) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let animationFrame = 0;
+
+    const updatePanorama = () => {
+      const viewportHeight = window.innerHeight;
+      const rect = reveal.getBoundingClientRect();
+      const travel = Math.max(1, reveal.offsetHeight - viewportHeight);
+      const leadIn = viewportHeight * .16;
+      const linear = Math.min(1, Math.max(0, (leadIn - rect.top) / (travel + leadIn)));
+      const progress = reduceMotion ? 1 : linear * linear * (3 - 2 * linear);
+
+      reveal.style.setProperty("--panorama-progress", progress.toFixed(4));
+      reveal.style.setProperty("--panorama-inset", `${((1 - progress) * 16).toFixed(3)}%`);
+      reveal.style.setProperty("--panorama-scale", (1.12 - progress * .105).toFixed(4));
+      reveal.style.setProperty("--panorama-shift", `${((1 - progress) * 1.8).toFixed(3)}%`);
+      reveal.style.setProperty("--panorama-brightness", (.7 + progress * .12).toFixed(3));
+      animationFrame = 0;
+    };
+
+    const requestUpdate = () => {
+      if (!animationFrame) animationFrame = window.requestAnimationFrame(updatePanorama);
+    };
+
+    updatePanorama();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
   function submitSignal(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSent(true);
@@ -758,29 +796,31 @@ export default function Home() {
 
       <WingTransition tone="red-city" />
 
-      <figure className="city-panorama-break">
-        <img src="/assets/neo-gotham-panorama.jpg" alt="Vista panorâmica noturna de Neo-Gotham" />
-        <div className="city-panorama-target" aria-hidden="true">
-          <span />
-          <div><b>Torre central</b><small>RASTREIO / 07</small></div>
-        </div>
-        <div className="city-panorama-hud reveal-rise" data-reveal aria-hidden="true">
-          <div className="city-panorama-topline">
-            <span><i /> Localização confirmada</span>
-            <span>VISÃO AÉREA / CANAL 07</span>
+      <div className="city-panorama-reveal">
+        <figure className="city-panorama-break">
+          <img src="/assets/neo-gotham-panorama.jpg" alt="Vista panorâmica noturna de Neo-Gotham" />
+          <div className="city-panorama-target" aria-hidden="true">
+            <span />
+            <div><b>Torre central</b><small>RASTREIO / 07</small></div>
           </div>
-          <div className="city-panorama-caption">
-            <span>Distrito 07 · 23:48</span>
-            <strong>Setor Central</strong>
-            <small>PERÍMETRO SOB VIGILÂNCIA / ROTA 04</small>
+          <div className="city-panorama-hud reveal-rise" data-reveal aria-hidden="true">
+            <div className="city-panorama-topline">
+              <span><i /> Localização confirmada</span>
+              <span>VISÃO AÉREA / CANAL 07</span>
+            </div>
+            <div className="city-panorama-caption">
+              <span>Distrito 07 · 23:48</span>
+              <strong>Setor Central</strong>
+              <small>PERÍMETRO SOB VIGILÂNCIA / ROTA 04</small>
+            </div>
+            <div className="city-panorama-coordinates">
+              <span>ALT. 418 M</span>
+              <b>FREQ. 88.7</b>
+            </div>
           </div>
-          <div className="city-panorama-coordinates">
-            <span>ALT. 418 M</span>
-            <b>FREQ. 88.7</b>
-          </div>
-        </div>
-        <figcaption className="sr-only">Panorama da cidade de Neo-Gotham observado pelo sistema de vigilância.</figcaption>
-      </figure>
+          <figcaption className="sr-only">Panorama da cidade de Neo-Gotham observado pelo sistema de vigilância.</figcaption>
+        </figure>
+      </div>
 
       <WingTransition tone="city-light" />
 
