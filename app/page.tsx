@@ -127,11 +127,8 @@ const videoClips = [
 ] as const;
 
 const navigationItems = [
-  ["01", "Origem", "origem"],
-  ["02", "Cenas", "midia"],
-  ["03", "Neo-Gotham", "cidade"],
-  ["04", "O traje", "traje"],
-  ["05", "Personagens", "personagens"],
+  ["play", "Mídia", "midia"],
+  ["bat", "Dossiê", "personagens"],
 ] as const;
 
 const interceptedSignals = [
@@ -436,43 +433,52 @@ export default function Home() {
       <div className="scroll-progress" style={{ width: `${progress}%` }} />
 
       <header className={progress > .4 ? "site-header is-scrolled" : "site-header"}>
-        <a className="brand" href="#inicio" aria-label="Batman do Futuro — início">
-          <img src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />
-          <span aria-hidden="true"><i /> Link ativo</span>
-        </a>
+        <div className="header-utility">
+          <span><i aria-hidden="true" /> Neo-Gotham · Português</span>
+          <span>Canal 20.99 <b>Sinal ativo</b></span>
+        </div>
 
-        <button
-          className={menuOpen ? "menu-button is-open" : "menu-button"}
-          type="button"
-          aria-expanded={menuOpen}
-          aria-controls="main-navigation"
-          onClick={() => setMenuOpen((current) => !current)}
-        >
-          <span />
-          <span />
-          <span />
-          <span className="sr-only">Abrir menu</span>
-        </button>
+        <div className="header-main">
+          <a className="brand" href="#inicio" aria-label="Batman do Futuro — início">
+            <img src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />
+            <span aria-hidden="true">Protocolo <b>Beyond</b></span>
+          </a>
 
-        <nav id="main-navigation" className={menuOpen ? "nav is-open" : "nav"} aria-label="Navegação principal">
-          {navigationItems.map(([number, label, id]) => (
-            <a
-              className={activeSection === id ? "is-active" : undefined}
-              href={`#${id}`}
-              aria-current={activeSection === id ? "location" : undefined}
-              onClick={closeMenu}
-              key={id}
-            >
-              <span>{number}</span>
-              <strong>{label}</strong>
-            </a>
-          ))}
-        </nav>
+          <button
+            className={menuOpen ? "menu-button is-open" : "menu-button"}
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="main-navigation"
+            onClick={() => setMenuOpen((current) => !current)}
+          >
+            <span />
+            <span />
+            <span />
+            <span className="sr-only">Abrir menu</span>
+          </button>
 
-        <a className="button button-small header-cta" href="#midia">
-          <span><small>Arquivo visual</small><strong>Acessar cenas</strong></span>
-          <i aria-hidden="true">↘</i>
-        </a>
+          <nav id="main-navigation" className={menuOpen ? "nav is-open" : "nav"} aria-label="Navegação principal">
+            {navigationItems.map(([icon, label, id]) => (
+              <a
+                className={activeSection === id ? "is-active" : undefined}
+                href={`#${id}`}
+                aria-current={activeSection === id ? "location" : undefined}
+                onClick={closeMenu}
+                key={id}
+              >
+                <span className={`nav-icon nav-icon-${icon}`} aria-hidden="true">
+                  {icon === "play" ? "▶" : <img src="/assets/batman-beyond-bat.png" alt="" />}
+                </span>
+                <strong>{label}</strong>
+              </a>
+            ))}
+          </nav>
+
+          <a className="button button-small header-cta" href="#midia">
+            <span><small>Arquivo visual</small><strong>Ver cenas</strong></span>
+            <i aria-hidden="true">↓</i>
+          </a>
+        </div>
       </header>
 
       <section className="hero" id="inicio">
