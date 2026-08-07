@@ -505,6 +505,8 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="hero-origin-bridge" data-reveal aria-hidden="true" />
+
       <section className="section origin" id="origem">
         <div className="section-intro">
           <div className="section-intro-content reveal-mask" data-reveal>
