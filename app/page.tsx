@@ -268,13 +268,14 @@ export default function Home() {
       panels.forEach((panel, index) => {
         const frame = panel.querySelector<HTMLElement>(".cinematic-frame");
         const frameEdge = panel.querySelector<HTMLElement>(".cinematic-frame-edge");
+        const batSignal = panel.querySelector<HTMLElement>(".cinematic-bat-signal");
         const video = panel.querySelector<HTMLVideoElement>(".cinematic-frame video");
         const copy = panel.querySelector<HTMLElement>(".cinematic-copy");
         if (!frame || !video || !copy) return;
 
         const progress = reveals[index];
         const reverse = index % 2 === 1;
-        const edgeIntensity = index === 0 ? Math.pow(Math.sin(Math.PI * progress), 0.65) : 0;
+        const edgeIntensity = Math.pow(Math.sin(Math.PI * progress), 0.8) * .46;
 
         const topLeft = reverse ? 38 * (1 - progress) : 62 * (1 - progress);
         const topRight = reverse ? 62 * (1 - progress) : 38 * (1 - progress);
@@ -285,6 +286,14 @@ export default function Home() {
         if (frameEdge) {
           frameEdge.style.clipPath = framePath;
           frameEdge.style.opacity = edgeIntensity.toFixed(3);
+        }
+        if (batSignal) {
+          const signalWindow = reduceMotion
+            ? 0
+            : Math.max(0, Math.sin(Math.PI * Math.min(1, progress / .48)));
+          const signalScale = .52 + progress * 1.8;
+          batSignal.style.opacity = signalWindow.toFixed(3);
+          batSignal.style.transform = `translate(-50%, -50%) scale(${signalScale}) rotate(${reverse ? 2.5 : -2.5}deg)`;
         }
 
         const videoShift = 5 - progress * 10;
@@ -606,6 +615,11 @@ export default function Home() {
             {videoClips.map((video, index) => (
               <article className={`cinematic-panel cinematic-panel-${index + 1}`} key={video.basename}>
                 <div className="cinematic-frame-edge" aria-hidden="true" />
+                <div className="cinematic-bat-signal" aria-hidden="true">
+                  <span />
+                  <img src="/assets/batman-beyond-bat.png" alt="" />
+                  <span />
+                </div>
                 <div className="cinematic-frame">
                   <video
                     data-stack-video
