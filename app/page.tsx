@@ -938,12 +938,21 @@ export default function Home() {
 
         <div className="cast-grid" aria-live="polite">
           {casts[cast].map(([initials, name, text], index) => (
-            <article className={`cast-card reveal-rise motion-delay-${index}`} data-reveal key={name}>
-              <span className="cast-number">0{index + 1}</span>
-              <div className="cast-portrait" aria-hidden="true"><span>{initials}</span></div>
+            <article className={`cast-card cast-${cast} reveal-rise motion-delay-${index}`} data-reveal key={name}>
+              <div className="cast-card-head">
+                <span className="cast-number">0{index + 1}</span>
+                <span className="cast-card-status"><i />{cast === "allies" ? "Canal seguro" : "Alerta ativo"}</span>
+              </div>
+              <div className="cast-portrait" aria-hidden="true">
+                <span>{initials}</span>
+                <small>NG–DOSSIÊ / 0{index + 1}</small>
+              </div>
               <h3>{name}</h3>
               <p>{text}</p>
-              <span className="cast-line" />
+              <div className="cast-card-foot" aria-hidden="true">
+                <span>Arquivo criptografado</span>
+                <i>↗</i>
+              </div>
             </article>
           ))}
         </div>
@@ -955,12 +964,19 @@ export default function Home() {
           <h2>O futuro ainda<br />precisa de <em>um Batman.</em></h2>
         </div>
         <form className="signal-form reveal-rise motion-delay-1" data-reveal onSubmit={submitSignal}>
+          <div className="signal-form-head">
+            <span><i /> Canal aberto</span>
+            <small>NG–SIGNAL / 07</small>
+          </div>
           <label htmlFor="email">Receba novas transmissões de Neo-Gotham.</label>
           <div className="input-row">
             <input id="email" name="email" type="email" placeholder="SEU E-MAIL" required aria-describedby="privacy-note" />
             <button type="submit" aria-label="Cadastrar e-mail">↗</button>
           </div>
-          <p id="privacy-note">Sem spam. Apenas sinais importantes do futuro.</p>
+          <div className="signal-form-meta">
+            <p id="privacy-note">Sem spam. Apenas sinais importantes do futuro.</p>
+            <span>Criptografia ativa</span>
+          </div>
           {sent && <p className="form-success" role="status">Sinal recebido. Conexão estabelecida.</p>}
         </form>
       </section>
