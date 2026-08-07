@@ -313,7 +313,7 @@ export default function Home() {
             <p className="eyebrow"><span>01</span> De rebelde a símbolo</p>
             <h2><span className="impact-line">Nasce um</span><br /><em>novo Batman.</em></h2>
             <p>
-              Terry McGinnis nunca planejou se tornar um herói. Quando Neo-Gotham precisa novamente de um protetor, ele veste o traje — mas usar o símbolo é apenas o começo.
+              Terry McGinnis não escolheu o símbolo. O símbolo o encontrou. Agora, entre o peso do legado e as ameaças de uma nova era, ele precisa provar que Neo-Gotham ainda pode acreditar no Batman.
             </p>
           </div>
         </div>

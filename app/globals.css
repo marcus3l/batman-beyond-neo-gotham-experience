@@ -107,15 +107,15 @@ img { display: block; max-width: 100%; }
 .signal-strip i { font-style: normal; font-size: .55rem; }
 
 .section, .transmissions { padding: var(--section-y) var(--space); }
-.origin { position: relative; display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 8vw, 9rem); background: var(--paper); color: var(--ink); isolation: isolate; }
+.origin { position: relative; display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 7.5rem); padding-top: clamp(4rem, 6vw, 6rem); padding-bottom: clamp(5rem, 7vw, 7rem); background: var(--paper); color: var(--ink); isolation: isolate; }
 .origin::after { content: ""; position: absolute; z-index: 4; right: 0; bottom: -1px; left: 0; height: clamp(3.5rem, 7vw, 8rem); background: #0b0b0e; clip-path: polygon(0 100%, 100% 0, 100% 100%); pointer-events: none; }
 .section-intro { position: sticky; top: 8rem; align-self: start; }
 h2 { margin: 0; font: 400 clamp(3.4rem, 7vw, 7.5rem)/.82 var(--display); letter-spacing: -.03em; text-transform: uppercase; }
 h2 em { color: var(--red); font-style: normal; }
 .section-intro .impact-line { font-family: var(--display-impact); font-weight: 700; letter-spacing: -.015em; }
-.section-intro-content > p:last-child { max-width: 38rem; margin: 2.2rem 0 0; color: #5d5b5c; font-size: 1.03rem; line-height: 1.75; }
+.section-intro-content > p:last-child { max-width: 36rem; margin: 1.65rem 0 0; color: #5d5b5c; font-size: 1.03rem; line-height: 1.65; }
 .origin-cards { border-top: 1px solid #cac6bf; }
-.origin-card { min-height: 220px; display: grid; grid-template-columns: 60px 1fr 40px; gap: 1.3rem; align-items: center; border-bottom: 1px solid #cac6bf; transition: background .25s ease, padding .25s ease; }
+.origin-card { min-height: 180px; display: grid; grid-template-columns: 60px 1fr 40px; gap: 1.3rem; align-items: center; border-bottom: 1px solid #cac6bf; transition: background .25s ease, padding .25s ease; }
 .origin-card:hover { padding: 0 1.3rem; background: var(--white); }
 .card-index { align-self: start; margin-top: 2rem; color: var(--red); font: 400 1.1rem var(--display); }
 .origin-card h3 { margin: 0 0 .8rem; font: 400 clamp(1.7rem, 3vw, 2.7rem)/1 var(--display); text-transform: uppercase; }
@@ -342,7 +342,7 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .hero-visual { height: 410px; }
   .hero-visual img { width: 85%; right: -7%; }
   .visual-caption { font-size: .58rem; }
-  .origin-card { grid-template-columns: 38px 1fr 20px; min-height: 240px; }
+  .origin-card { grid-template-columns: 38px 1fr 20px; min-height: 180px; }
   .cinematic-reel { height: 400vh; }
   .cinematic-copy, .cinematic-panel:nth-child(even) .cinematic-copy { top: 13%; right: auto; bottom: auto; left: var(--space); width: calc(100% - (var(--space) * 3)); text-align: left; }
   .cinematic-panel:nth-child(even) .cinematic-copy > p { justify-content: flex-start; }
