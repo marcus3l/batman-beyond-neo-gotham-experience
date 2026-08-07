@@ -129,7 +129,7 @@ export default function Home() {
       const reelProgress = Math.min(1, Math.max(0, -reelRect.top / scrollDistance));
       const sequenceProgress = reelProgress * panels.length;
       const reveals = panels.map((_, index) => {
-        const revealWindow = index === 0 ? 0.16 : 0.72;
+        const revealWindow = index === 0 ? 0.44 : 0.72;
         const linear = Math.min(1, Math.max(0, (sequenceProgress - index) / revealWindow));
         return reduceMotion ? (linear > 0 ? 1 : 0) : linear * linear * (3 - 2 * linear);
       });
@@ -156,6 +156,9 @@ export default function Home() {
 
         const progress = reveals[index];
         const reverse = index % 2 === 1;
+        const edgeIntensity = index === 0 ? Math.pow(Math.sin(Math.PI * progress), 0.65) : 0;
+        frame.style.setProperty("--frame-edge", edgeIntensity.toFixed(3));
+        frame.style.setProperty("--frame-glow", (edgeIntensity * 0.42).toFixed(3));
 
         const topLeft = reverse ? 38 * (1 - progress) : 62 * (1 - progress);
         const topRight = reverse ? 62 * (1 - progress) : 38 * (1 - progress);

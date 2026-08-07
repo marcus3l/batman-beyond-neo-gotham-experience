@@ -233,10 +233,11 @@ h2 em { color: var(--red); font-style: normal; }
 .standby-buffer small { font-size: .44rem; }
 .cinematic-panel { position: absolute; inset: 0; visibility: hidden; isolation: isolate; }
 .cinematic-panel-1 { z-index: 1; visibility: visible; }
+.cinematic-panel-1 .cinematic-frame { --frame-edge: 0; --frame-glow: 0; filter: drop-shadow(0 -2px 0 rgba(255,43,55,var(--frame-edge))) drop-shadow(0 2px 0 rgba(255,43,55,var(--frame-edge))) drop-shadow(0 0 14px rgba(225,28,43,var(--frame-glow))); }
 .cinematic-panel-2 { z-index: 2; }
 .cinematic-panel-3 { z-index: 3; }
 .cinematic-panel-4 { z-index: 4; }
-.cinematic-frame { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; background: #08090c; color: var(--white); clip-path: polygon(0 62%, 100% 38%, 100% 38%, 0 62%); isolation: isolate; will-change: clip-path; }
+.cinematic-frame { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; background: #08090c; color: var(--white); clip-path: polygon(0 62%, 100% 38%, 100% 38%, 0 62%); isolation: isolate; will-change: clip-path, filter; }
 .cinematic-panel:first-child .cinematic-frame { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 .cinematic-panel:nth-child(even) .cinematic-frame { clip-path: polygon(0 38%, 100% 62%, 100% 62%, 0 38%); }
 .cinematic-frame::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(5,5,7,.78), transparent 42%, rgba(5,5,7,.2)), linear-gradient(180deg, rgba(5,5,7,.35), transparent 45%, rgba(5,5,7,.56)); }
