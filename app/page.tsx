@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 const suitFeatures = [
   {
@@ -160,7 +160,9 @@ const interceptedSignals = [
 ] as const;
 
 export default function Home() {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
   const [cast, setCast] = useState<"allies" | "villains">("allies");
   const [sent, setSent] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -171,6 +173,40 @@ export default function Home() {
   const [suitAuto, setSuitAuto] = useState(true);
   const currentSignal = interceptedSignals[activeSignal];
   const currentSuitFeature = suitFeatures[activeSuitFeature];
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.34;
+
+    const startAudio = () => {
+      if (soundEnabled) void audio.play().catch(() => undefined);
+    };
+
+    const resumeVisibleAudio = () => {
+      if (document.visibilityState === "visible") startAudio();
+    };
+
+    if (soundEnabled) startAudio();
+    else audio.pause();
+
+    audio.addEventListener("canplay", startAudio, { once: true });
+    window.addEventListener("pageshow", startAudio);
+    window.addEventListener("focus", startAudio);
+    document.addEventListener("visibilitychange", resumeVisibleAudio);
+    window.addEventListener("pointerdown", startAudio, { once: true, capture: true });
+    window.addEventListener("keydown", startAudio, { once: true, capture: true });
+
+    return () => {
+      audio.removeEventListener("canplay", startAudio);
+      window.removeEventListener("pageshow", startAudio);
+      window.removeEventListener("focus", startAudio);
+      document.removeEventListener("visibilitychange", resumeVisibleAudio);
+      window.removeEventListener("pointerdown", startAudio, true);
+      window.removeEventListener("keydown", startAudio, true);
+    };
+  }, [soundEnabled]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -416,9 +452,30 @@ export default function Home() {
     setMenuOpen(false);
   }
 
+  function toggleSound() {
+    const audio = audioRef.current;
+    setSoundEnabled((current) => {
+      const next = !current;
+      if (audio) {
+        if (next) void audio.play().catch(() => undefined);
+        else audio.pause();
+      }
+      return next;
+    });
+  }
+
   return (
     <main>
       <div className="scroll-progress" style={{ width: `${progress}%` }} />
+      <audio
+        ref={audioRef}
+        src="/audio/batman-beyond-main-title.m4a"
+        autoPlay
+        loop
+        muted={false}
+        playsInline
+        preload="auto"
+      />
 
       <header className={progress > .4 ? "site-header is-scrolled" : "site-header"}>
         <div className="header-utility">
@@ -462,10 +519,28 @@ export default function Home() {
             ))}
           </nav>
 
-          <a className="button button-small header-cta" href="#midia">
-            <span><small>Arquivo visual</small><strong>Ver cenas</strong></span>
-            <i aria-hidden="true">↓</i>
-          </a>
+          <div className="header-actions">
+            <button
+              className={soundEnabled ? "sound-toggle is-active" : "sound-toggle is-muted"}
+              type="button"
+              aria-pressed={soundEnabled}
+              aria-label={soundEnabled ? "Desativar trilha sonora" : "Ativar trilha sonora"}
+              onClick={toggleSound}
+            >
+              <span className="sound-toggle-icon" aria-hidden="true">
+                <i /><i /><i />
+              </span>
+              <span className="sound-toggle-copy">
+                <small>Trilha sonora</small>
+                <strong>{soundEnabled ? "Som ativo" : "Som desativado"}</strong>
+              </span>
+            </button>
+
+            <a className="button button-small header-cta" href="#midia">
+              <span><small>Arquivo visual</small><strong>Ver cenas</strong></span>
+              <i aria-hidden="true">↓</i>
+            </a>
+          </div>
         </div>
       </header>
 
