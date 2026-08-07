@@ -469,7 +469,7 @@ h2 em { color: var(--red); font-style: normal; }
 .legacy-status { width: min(580px, 96%); margin-top: 1rem; padding-top: .9rem; display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid #d4d0ca; color: #8b8885; font-size: .48rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
 .legacy-status span:first-child { display: flex; align-items: center; gap: .5rem; color: var(--red); }
 .legacy-status i { width: 5px; height: 5px; border-radius: 50%; background: var(--red); box-shadow: 0 0 8px rgba(225,28,43,.4); animation: pulse 1.8s ease-in-out infinite; }
-.duo { min-height: 660px; display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+.duo { min-height: clamp(800px, 60vw, 900px); display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
 .duo-card { position: relative; isolation: isolate; padding: 2rem; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
 .duo-card::before { content: ""; position: absolute; z-index: 2; inset: 0; background: repeating-linear-gradient(120deg, transparent 0 30px, rgba(255,255,255,.035) 30px 31px); pointer-events: none; }
 .duo-card::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, rgba(5,5,7,.04) 15%, rgba(5,5,7,.12) 48%, rgba(5,5,7,.92) 100%); pointer-events: none; }
@@ -890,7 +890,7 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .city-route article { width: calc(100% - 1rem); }
   .city-route article:nth-child(2) { width: calc(100% - 3.5rem); margin-left: 3rem; }
   .city-route article:nth-child(3) { width: calc(100% - 2rem); margin-left: 1rem; }
-  .duo { min-height: 600px; }
+  .duo { min-height: 720px; }
   .suit { min-height: 0; grid-template-columns: 1fr; }
   .suit-console { grid-template-columns: 1fr; }
   .suit-controls { border-top: 1px solid rgba(255,255,255,.1); border-left: 0; }
