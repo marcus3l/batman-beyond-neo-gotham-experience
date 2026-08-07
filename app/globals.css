@@ -390,15 +390,15 @@ h2 em { color: var(--red); font-style: normal; }
 
 .city { min-height: 900px; display: grid; grid-template-columns: .92fr 1.08fr; background: var(--red); color: var(--white); position: relative; overflow: hidden; isolation: isolate; }
 .city::after { content: "NEO"; position: absolute; z-index: 0; left: -4vw; bottom: -9vw; font: 400 32vw/.75 var(--display); color: rgba(0,0,0,.1); pointer-events: none; }
-.city-copy { position: relative; z-index: 2; padding: var(--section-y) var(--space); background: linear-gradient(145deg, #e11c2b 0%, #b21723 48%, #79121a 100%); clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%); }
+.city-copy { position: relative; z-index: 2; padding: var(--section-y) var(--space); display: flex; flex-direction: column; justify-content: center; background: linear-gradient(145deg, #e11c2b 0%, #b21723 48%, #79121a 100%); clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%); }
 .city-copy::after { content: ""; position: absolute; inset: 0 8% 0 auto; width: 1px; background: linear-gradient(transparent, rgba(255,255,255,.42), transparent); opacity: .4; transform: skewX(-8deg); }
-.city h2 { margin: clamp(2rem, 5vh, 3.5rem) 0 0; text-transform: uppercase; }
+.city h2 { margin: clamp(1.6rem, 3.5vh, 2.6rem) 0 0; text-transform: uppercase; }
 .city h2 > span { display: block; font: 700 clamp(3.4rem, 5.4vw, 6.5rem)/.72 var(--display-impact); letter-spacing: -.025em; }
-.city-copy h2 em { display: block; width: max-content; max-width: 100%; margin-top: .18em; color: var(--white); font: 400 clamp(3.25rem, 5.2vw, 5.7rem)/.82 var(--display); font-style: normal; letter-spacing: -.035em; }
-.city-lead { max-width: 550px; margin: clamp(2.5rem, 5vh, 4rem) 0 0; padding-left: 1.25rem; border-left: 2px solid rgba(255,255,255,.48); line-height: 1.75; color: rgba(255,255,255,.8); }
-.city-statement { max-width: 610px; margin: clamp(4.5rem, 10vh, 7rem) 0 0; display: grid; gap: .55rem; text-transform: uppercase; }
-.city-statement span { width: max-content; padding-bottom: .65rem; border-bottom: 1px solid rgba(255,255,255,.36); color: rgba(255,255,255,.62); font: 700 .68rem/1 var(--body); letter-spacing: .24em; }
-.city-statement strong { max-width: 560px; color: var(--white); font: 650 clamp(2.6rem, 4.2vw, 4.7rem)/.88 var(--display-impact); letter-spacing: -.018em; }
+.city-copy h2 em { display: block; width: max-content; max-width: 100%; margin-top: .12em; color: var(--white); font: 400 clamp(3.1rem, 4.8vw, 5.3rem)/.82 var(--display); font-style: normal; letter-spacing: -.035em; }
+.city-lead { max-width: 500px; margin: clamp(1.8rem, 3.5vh, 2.7rem) 0 0; padding-left: 1rem; border-left: 1px solid rgba(255,255,255,.52); line-height: 1.68; color: rgba(255,255,255,.76); }
+.city-statement { max-width: 560px; margin: clamp(2.6rem, 5vh, 3.75rem) 0 0; padding-top: 1.2rem; display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: clamp(1rem, 2vw, 2rem); align-items: start; border-top: 1px solid rgba(255,255,255,.28); text-transform: uppercase; }
+.city-statement span { color: rgba(255,255,255,.58); font: 700 .58rem/1.35 var(--body); letter-spacing: .22em; }
+.city-statement strong { max-width: 340px; color: var(--white); font: 650 clamp(1.55rem, 2.25vw, 2.45rem)/.96 var(--display-impact); letter-spacing: -.012em; }
 
 .city-panels { position: relative; z-index: 3; padding: clamp(5rem, 9vw, 8.5rem) var(--space) clamp(4rem, 8vw, 7rem) clamp(2rem, 4vw, 4rem); display: grid; align-content: center; gap: clamp(1.25rem, 2.6vw, 2.25rem); background: linear-gradient(145deg, rgba(255,51,64,.22), rgba(111,8,18,.46)); }
 .city-panels::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .2; background-image: linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px); background-size: 62px 62px; mask-image: linear-gradient(90deg, transparent, #000 24%, #000); }
@@ -975,6 +975,7 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .city-route-code { position: absolute; top: .8rem; right: 1rem; }
   .city-route-copy p { font-size: .82rem; }
   .city-panels-footer { flex-wrap: wrap; justify-content: flex-start; gap: .8rem 1.5rem; }
+  .city-statement { grid-template-columns: 1fr; gap: .65rem; }
   .city-panorama-break { height: 420px; }
   .city-panorama-break > img { object-position: 48% 50%; }
   .city-panorama-hud { inset: 3rem var(--space); grid-template-columns: 1fr; }

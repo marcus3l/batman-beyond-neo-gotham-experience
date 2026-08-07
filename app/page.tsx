@@ -711,7 +711,7 @@ export default function Home() {
           <p className="eyebrow light"><span>03</span> Proteja a cidade</p>
           <h2><span>Bem-vindo a</span><em>Neo-Gotham.</em></h2>
           <p className="city-lead">
-            Arranha-céus atravessam as nuvens. Veículos cortam o céu. Luzes de neon escondem becos onde tecnologia e crime caminham lado a lado.
+            Torres atravessam as nuvens. Veículos cortam o céu. Sob o neon, tecnologia e crime dividem as mesmas ruas.
           </p>
           <p className="city-statement">
             <span>A cidade mudou.</span>
