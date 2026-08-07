@@ -382,7 +382,7 @@ export default function Home() {
       <header className={progress > .4 ? "site-header is-scrolled" : "site-header"}>
         <a className="brand" href="#inicio" aria-label="Batman do Futuro — início">
           <img src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />
-          <span aria-hidden="true">Protocolo Beyond</span>
+          <span aria-hidden="true"><i /> Link ativo</span>
         </a>
 
         <button
@@ -414,8 +414,8 @@ export default function Home() {
         </nav>
 
         <a className="button button-small header-cta" href="#midia">
-          <span><small>Arquivo visual</small><strong>Ver cenas</strong></span>
-          <i aria-hidden="true">↓</i>
+          <span><small>Arquivo visual</small><strong>Acessar cenas</strong></span>
+          <i aria-hidden="true">↘</i>
         </a>
       </header>
 
