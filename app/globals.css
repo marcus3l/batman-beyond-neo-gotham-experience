@@ -476,11 +476,11 @@ img {
 
 .hero {
   position: relative;
-  min-height: 100svh;
-  display: grid;
-  grid-template-columns: minmax(0, 48%) minmax(0, 52%);
+  min-height: max(760px, 100svh);
+  display: block;
   overflow: hidden;
   background: var(--ink);
+  border-bottom: 1px solid rgba(255, 43, 55, 0.32);
 }
 .hero::before {
   content: "";
@@ -493,19 +493,23 @@ img {
   z-index: 3;
 }
 .hero-grid {
+  z-index: 3;
   position: absolute;
   inset: 0;
-  opacity: 0.12;
+  opacity: 0.1;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
   background-size: 70px 70px;
-  mask-image: linear-gradient(90deg, #000, transparent 72%);
+  mask-image: linear-gradient(90deg, #000, transparent 52%);
+  pointer-events: none;
 }
 .hero-copy {
   position: relative;
-  z-index: 5;
-  padding: clamp(9rem, 18vh, 12rem) 3vw 6rem var(--space);
+  z-index: 7;
+  width: min(760px, 52vw);
+  min-height: max(760px, 100svh);
+  padding: clamp(9rem, 17vh, 11.5rem) 4vw 7rem var(--space);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -531,17 +535,21 @@ img {
   color: var(--white);
 }
 .hero-wordmark {
-  width: min(620px, 94%);
+  width: min(580px, 96%);
   height: auto;
   margin-left: -1.5%;
-  filter: drop-shadow(0 14px 35px rgba(225, 28, 43, 0.12));
+  filter:
+    drop-shadow(0 14px 35px rgba(225, 28, 43, 0.16))
+    drop-shadow(0 2px 0 rgba(0, 0, 0, 0.6));
 }
 .hero-lead {
-  width: min(600px, 95%);
+  width: min(520px, 95%);
   margin: 1.5rem 0 2.2rem;
-  color: #c3c2c5;
+  color: #d5d4d7;
   font-size: clamp(1rem, 1.4vw, 1.25rem);
   line-height: 1.65;
+  text-wrap: balance;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.75);
 }
 .hero-actions {
   display: flex;
@@ -570,10 +578,11 @@ img {
   animation: pulse 1.6s ease-in-out infinite;
 }
 .hero-visual {
-  position: relative;
-  min-height: 100svh;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 100%;
   background: #08090c;
-  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
   overflow: hidden;
   isolation: isolate;
 }
@@ -583,9 +592,16 @@ img {
   inset: 0;
   z-index: 2;
   background:
-    linear-gradient(90deg, rgba(5, 5, 7, 0.72), transparent 24%),
-    linear-gradient(0deg, rgba(5, 5, 7, 0.72), transparent 42%),
-    linear-gradient(180deg, rgba(5, 5, 7, 0.2), transparent 25%);
+    linear-gradient(
+      90deg,
+      rgba(4, 4, 6, 0.98) 0%,
+      rgba(4, 4, 6, 0.9) 24%,
+      rgba(4, 4, 6, 0.52) 43%,
+      rgba(4, 4, 6, 0.08) 67%,
+      rgba(4, 4, 6, 0.25) 100%
+    ),
+    linear-gradient(0deg, rgba(4, 4, 6, 0.82), transparent 34%),
+    linear-gradient(180deg, rgba(4, 4, 6, 0.42), transparent 30%);
 }
 .hero-visual::after {
   content: "";
@@ -593,7 +609,10 @@ img {
   z-index: 4;
   inset: 0;
   pointer-events: none;
-  opacity: 0.13;
+  opacity: 0.1;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
+    inset 0 -1px 0 rgba(255, 43, 55, 0.22);
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
@@ -613,18 +632,18 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 45% center;
+  object-position: center center;
   mix-blend-mode: normal;
-  filter: contrast(1.08) saturate(0.96) brightness(0.88);
-  transform: scale(1.01);
+  filter: contrast(1.08) saturate(0.96) brightness(0.82);
+  transform: scale(1.015);
   transform-origin: center;
   transition:
     filter 0.7s ease,
     transform 0.9s cubic-bezier(0.2, 0.75, 0.2, 1);
 }
 .hero-visual.identity-open > img {
-  filter: contrast(1.14) saturate(1.02) brightness(0.78);
-  transform: scale(1.035);
+  filter: contrast(1.13) saturate(1.02) brightness(0.7);
+  transform: scale(1.045);
 }
 .hero-moon {
   display: none;
@@ -635,7 +654,7 @@ img {
   top: 10%;
   right: -5%;
   font: 400 clamp(8rem, 24vw, 25rem)/0.75 var(--display);
-  color: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.025);
   letter-spacing: -0.04em;
   transform: rotate(-90deg) translateY(-25%);
   transform-origin: right center;
@@ -669,8 +688,8 @@ img {
 .hero-target {
   position: absolute;
   z-index: 6;
-  top: 63%;
-  left: 34%;
+  top: 34%;
+  left: 70%;
   width: clamp(108px, 10vw, 168px);
   aspect-ratio: 1;
   border: 1px solid rgba(255, 43, 55, 0.58);
@@ -5270,16 +5289,14 @@ h2 em {
     grid-template-columns: 1fr;
   }
   .hero-copy {
-    min-height: 78svh;
-    padding-right: 45%;
+    width: min(700px, 70vw);
+    min-height: max(760px, 100svh);
+    padding-right: 5vw;
   }
   .hero-visual {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 55%;
+    width: 100%;
     min-height: 100%;
-    opacity: 0.82;
+    opacity: 1;
   }
   .hero-visual.identity-open {
     opacity: 1;
@@ -5435,6 +5452,7 @@ h2 em {
     min-height: 980px;
   }
   .hero-copy {
+    width: 100%;
     min-height: 730px;
     padding: 8rem var(--space) 14rem;
     justify-content: flex-start;
@@ -5454,7 +5472,7 @@ h2 em {
   .hero-visual > img {
     height: 100%;
     width: 100%;
-    object-position: 45% center;
+    object-position: 56% center;
   }
   .hero-moon {
     top: 8%;
@@ -5465,8 +5483,8 @@ h2 em {
     top: 4rem;
   }
   .hero-target {
-    top: 63%;
-    left: 34%;
+    top: 44%;
+    left: 70%;
   }
   .identity-dossier {
     right: var(--space);
@@ -5713,15 +5731,15 @@ h2 em {
   .hero-visual > img {
     width: 100%;
     right: 0;
-    object-position: 34% center;
+    object-position: 64% center;
   }
   .hero-telemetry {
     top: 2.4rem;
     right: 1.2rem;
   }
   .hero-target {
-    top: 62%;
-    left: 38%;
+    top: 43%;
+    left: 72%;
     width: 98px;
   }
   .identity-dossier {

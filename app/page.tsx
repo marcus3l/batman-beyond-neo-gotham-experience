@@ -491,11 +491,11 @@ export default function Home() {
       <section className="hero" id="inicio">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
-          <p className="eyebrow"><span>Arquivo 01</span> O futuro de Gotham começa agora</p>
+          <p className="eyebrow"><span>Arquivo 01</span> Protocolo de sucessão ativo</p>
           <img className="hero-wordmark" src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />
           <h1 className="sr-only">Batman do Futuro</h1>
           <p className="hero-lead">
-            Em uma cidade dominada pela tecnologia e por novas ameaças, um jovem rebelde assume o símbolo que marcou gerações.
+            Neo-Gotham não precisa de outro herói. Precisa de um novo Batman para enfrentar as ameaças de uma era sem limites.
           </p>
           <div className="hero-actions">
             <a className="button" href="#origem">Conheça o novo Batman <span aria-hidden="true">↘</span></a>
