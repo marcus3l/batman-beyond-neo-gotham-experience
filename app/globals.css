@@ -123,11 +123,11 @@ h2 em { color: var(--red); font-style: normal; }
 .origin-card p { max-width: 37rem; margin: 0; color: #5d5b5c; line-height: 1.65; }
 .card-arrow { font-size: 1.6rem; }
 
-.transmissions { position: relative; padding-bottom: 0; overflow: clip; background: #0b0b0e; isolation: isolate; }
+.transmissions { --transmission-intro-height: clamp(640px, 78svh, 820px); position: relative; padding-bottom: 0; overflow: clip; background: #0b0b0e; isolation: isolate; }
 .transmissions-mark { position: absolute; z-index: 1; top: clamp(1.75rem, 3.5vw, 4rem); right: var(--space); width: clamp(120px, 14vw, 230px); pointer-events: none; }
 .transmissions-mark::before { content: ""; position: absolute; inset: -14%; border: 1px solid rgba(225,28,43,.3); border-radius: 50%; animation: bat-radar 4.8s ease-out infinite; }
 .transmissions-mark img { position: relative; z-index: 1; display: block; width: 100%; height: auto; animation: bat-signal 4.8s ease-in-out infinite; transform-origin: 50% 58%; }
-.transmissions .section-heading { position: sticky; z-index: 2; top: 0; min-height: clamp(640px, 78svh, 820px); margin: calc(var(--section-y) * -1) 0 0; padding: clamp(5rem, 9vh, 7rem) 0 clamp(3rem, 6vh, 4.5rem); align-items: center; background: #0b0b0e; }
+.transmissions .section-heading { position: sticky; z-index: 2; top: 0; min-height: var(--transmission-intro-height); margin: calc(var(--section-y) * -1) 0 0; padding: clamp(5rem, 9vh, 7rem) 0 clamp(3rem, 6vh, 4.5rem); align-items: center; background: #0b0b0e; }
 .transmissions .row-heading { margin-bottom: 0; }
 .transmissions .row-heading h2 { font-family: var(--display-impact); font-weight: 700; letter-spacing: -.015em; line-height: .78; }
 .row-heading { display: flex; justify-content: space-between; gap: 3rem; align-items: end; margin-bottom: 3.8rem; }
@@ -138,8 +138,8 @@ h2 em { color: var(--red); font-style: normal; }
 .brief-status b { margin-left: auto; color: #6f7078; font: 600 .58rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; }
 .transmissions-brief > p { margin: 1rem 0 1.15rem; color: #a0a1a8; font-size: .9rem; line-height: 1.65; }
 .brief-meta { display: flex; justify-content: space-between; gap: 1rem; padding-top: .8rem; border-top: 1px solid rgba(255,255,255,.08); color: #666770; font: 500 .55rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
-.cinematic-reel { position: relative; z-index: 4; height: 460vh; margin: 0 calc(var(--space) * -1); background: var(--ink); }
-.cinematic-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--ink); clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%); isolation: isolate; filter: drop-shadow(0 -18px 34px rgba(0,0,0,.3)); }
+.cinematic-reel { position: relative; z-index: 4; height: 460vh; margin: calc(var(--transmission-intro-height) * -1) calc(var(--space) * -1) 0; background: transparent; }
+.cinematic-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: transparent; clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%); isolation: isolate; filter: drop-shadow(0 -18px 34px rgba(0,0,0,.3)); }
 .cinematic-panel { position: absolute; inset: 0; visibility: hidden; isolation: isolate; }
 .cinematic-panel-1 { z-index: 1; visibility: visible; }
 .cinematic-panel-2 { z-index: 2; }
@@ -152,7 +152,6 @@ h2 em { color: var(--red); font-style: normal; }
 .cinematic-frame video { position: absolute; z-index: 0; top: -10%; left: 0; width: 100%; height: 120%; object-fit: cover; pointer-events: none; filter: saturate(.88) contrast(1.08); transition: filter .5s ease; will-change: transform; }
 .cinematic-scan { position: absolute; z-index: 2; inset: 0; opacity: .18; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.08) 3px 4px); mix-blend-mode: overlay; pointer-events: none; }
 .cinematic-copy { position: absolute; z-index: 5; top: 11%; left: var(--space); width: min(1500px, calc(100vw - (var(--space) * 2) - 4rem)); opacity: 0; pointer-events: none; text-shadow: 0 4px 25px rgba(0,0,0,.8); will-change: opacity, transform; }
-.cinematic-panel:first-child .cinematic-copy { opacity: 1; }
 .cinematic-panel:nth-child(even) .cinematic-copy { top: auto; right: var(--space); bottom: 10%; left: auto; text-align: right; }
 .cinematic-copy > p { display: flex; align-items: center; gap: 1rem; margin: 0 0 1rem; color: var(--red-hot); font-size: .62rem; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
 .cinematic-panel:nth-child(even) .cinematic-copy > p { justify-content: flex-end; }
@@ -163,7 +162,7 @@ h2 em { color: var(--red); font-style: normal; }
 .cinematic-panel:nth-child(even) .cinematic-title-line { margin-left: auto; }
 .cinematic-copy > span { display: block; max-width: 34rem; margin-top: 1.4rem; color: rgba(255,255,255,.7); font-size: .85rem; line-height: 1.55; }
 .cinematic-panel:nth-child(even) .cinematic-copy > span { margin-left: auto; }
-.cinematic-progress { position: absolute; z-index: 20; top: 50%; right: 1.25rem; display: flex; flex-direction: column; gap: .85rem; transform: translateY(-50%); }
+.cinematic-progress { position: absolute; z-index: 20; top: 50%; right: 1.25rem; display: flex; flex-direction: column; gap: .85rem; opacity: 0; transform: translateY(-50%); transition: opacity .25s ease; }
 .cinematic-progress span { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; color: rgba(255,255,255,.35); background: rgba(5,5,7,.28); backdrop-filter: blur(5px); font: 400 .58rem var(--display); transition: color .25s ease, border-color .25s ease, background .25s ease; }
 
 .city { min-height: 900px; display: grid; grid-template-columns: 1.05fr .95fr; background: var(--red); color: var(--white); position: relative; overflow: hidden; }
@@ -384,7 +383,8 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .origin, .legacy, .city, .signal-form-section { grid-template-columns: 1fr; }
   .section-intro { position: static; }
   .row-heading { align-items: flex-start; flex-direction: column; }
-  .transmissions .row-heading { min-height: 92svh; justify-content: center; gap: clamp(2.5rem, 7vh, 4.5rem); }
+  .transmissions { --transmission-intro-height: 92svh; }
+  .transmissions .row-heading { justify-content: center; gap: clamp(2.5rem, 7vh, 4.5rem); }
   .transmissions-mark { width: clamp(105px, 18vw, 150px); }
   .cinematic-reel { height: 430vh; }
   .cinematic-copy { top: 12%; width: min(620px, 78vw); }

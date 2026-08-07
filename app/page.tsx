@@ -127,10 +127,9 @@ export default function Home() {
       const reelRect = reel.getBoundingClientRect();
       const scrollDistance = Math.max(1, reel.offsetHeight - viewportHeight);
       const reelProgress = Math.min(1, Math.max(0, -reelRect.top / scrollDistance));
-      const sequenceProgress = reelProgress * (panels.length - 1);
+      const sequenceProgress = reelProgress * panels.length;
       const reveals = panels.map((_, index) => {
-        if (index === 0) return 1;
-        const linear = Math.min(1, Math.max(0, (sequenceProgress - (index - 1)) / 0.72));
+        const linear = Math.min(1, Math.max(0, (sequenceProgress - index) / 0.72));
         return reduceMotion ? (linear > 0 ? 1 : 0) : linear * linear * (3 - 2 * linear);
       });
       let topLayer = 0;
@@ -139,6 +138,8 @@ export default function Home() {
       });
 
       const progressLabels = Array.from(reel.querySelectorAll<HTMLElement>(".cinematic-progress span"));
+      const progressRail = reel.querySelector<HTMLElement>(".cinematic-progress");
+      if (progressRail) progressRail.style.opacity = reveals[0].toFixed(3);
       progressLabels.forEach((label, index) => {
         const active = index === topLayer;
         label.style.color = active ? "#ffffff" : "rgba(255,255,255,.35)";
@@ -165,7 +166,7 @@ export default function Home() {
         video.style.transform = `translateY(${videoShift}%) scale(1.06)`;
 
         const coveredByNext = index < panels.length - 1 ? reveals[index + 1] : 0;
-        const entrance = index === 0 ? 1 : Math.min(1, Math.max(0, (progress - 0.56) / 0.24));
+        const entrance = Math.min(1, Math.max(0, (progress - 0.56) / 0.24));
         const exit = 1 - Math.min(1, Math.max(0, coveredByNext / 0.3));
         const copyProgress = entrance * exit;
         copy.style.opacity = copyProgress.toFixed(3);
