@@ -658,7 +658,7 @@ export default function Home() {
         <figcaption className="sr-only">Panorama da cidade de Neo-Gotham observado pelo sistema de vigilância.</figcaption>
       </figure>
 
-      <section className="section legacy">
+      <section className="section legacy" id="legado">
         <div className="legacy-quote reveal-mask" data-reveal>
           <p className="eyebrow"><span>04</span> Carregue o símbolo</p>
           <h2><span>O homem muda.</span><em>A missão permanece.</em></h2>
@@ -687,13 +687,39 @@ export default function Home() {
 
         <div className="duo">
           <article className="duo-card terry reveal-duo-left" data-reveal>
+            <video
+              className="duo-media"
+              data-scroll-video
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/assets/terry-profile.jpg"
+              aria-hidden="true"
+            >
+              <source src="/videos/terry-profile.mp4" type="video/mp4" />
+            </video>
             <span className="duo-label">O sucessor</span>
+            <span className="duo-signal" aria-hidden="true"><i /> ARQ / TM–01</span>
             <div className="duo-monogram">T</div>
             <h3>Terry<br />McGinnis</h3>
             <p>Instinto, velocidade e uma nova forma de lutar pelo futuro.</p>
           </article>
           <article className="duo-card bruce reveal-duo-right motion-delay-1" data-reveal>
+            <video
+              className="duo-media"
+              data-scroll-video
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/assets/bruce-profile.jpg"
+              aria-hidden="true"
+            >
+              <source src="/videos/bruce-profile.mp4" type="video/mp4" />
+            </video>
             <span className="duo-label">A lenda</span>
+            <span className="duo-signal" aria-hidden="true"><i /> ARQ / BW–01</span>
             <div className="duo-monogram">B</div>
             <h3>Bruce<br />Wayne</h3>
             <p>Experiência, estratégia e uma missão que nunca terminou.</p>
