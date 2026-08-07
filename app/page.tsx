@@ -76,16 +76,32 @@ const videoClips = [
   },
 ] as const;
 
+const navigationItems = [
+  ["01", "Origem", "origem"],
+  ["02", "Cenas", "midia"],
+  ["03", "Neo-Gotham", "cidade"],
+  ["04", "O traje", "traje"],
+  ["05", "Personagens", "personagens"],
+] as const;
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cast, setCast] = useState<"allies" | "villains">("allies");
   const [sent, setSent] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const onScroll = () => {
       const available = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(available > 0 ? (window.scrollY / available) * 100 : 0);
+
+      let currentSection = "";
+      navigationItems.forEach(([, , id]) => {
+        const section = document.getElementById(id);
+        if (section && section.getBoundingClientRect().top <= window.innerHeight * .42) currentSection = id;
+      });
+      setActiveSection(currentSection);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -262,13 +278,14 @@ export default function Home() {
     <main>
       <div className="scroll-progress" style={{ width: `${progress}%` }} />
 
-      <header className="site-header">
+      <header className={progress > .4 ? "site-header is-scrolled" : "site-header"}>
         <a className="brand" href="#inicio" aria-label="Batman do Futuro — início">
           <img src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />
+          <span aria-hidden="true">Protocolo Beyond</span>
         </a>
 
         <button
-          className="menu-button"
+          className={menuOpen ? "menu-button is-open" : "menu-button"}
           type="button"
           aria-expanded={menuOpen}
           aria-controls="main-navigation"
@@ -281,15 +298,23 @@ export default function Home() {
         </button>
 
         <nav id="main-navigation" className={menuOpen ? "nav is-open" : "nav"} aria-label="Navegação principal">
-          <a href="#origem" onClick={closeMenu}>Origem</a>
-          <a href="#midia" onClick={closeMenu}>Cenas</a>
-          <a href="#cidade" onClick={closeMenu}>Neo-Gotham</a>
-          <a href="#traje" onClick={closeMenu}>O traje</a>
-          <a href="#personagens" onClick={closeMenu}>Personagens</a>
+          {navigationItems.map(([number, label, id]) => (
+            <a
+              className={activeSection === id ? "is-active" : undefined}
+              href={`#${id}`}
+              aria-current={activeSection === id ? "location" : undefined}
+              onClick={closeMenu}
+              key={id}
+            >
+              <span>{number}</span>
+              <strong>{label}</strong>
+            </a>
+          ))}
         </nav>
 
         <a className="button button-small header-cta" href="#midia">
-          Ver cenas <span aria-hidden="true">↓</span>
+          <span><small>Arquivo visual</small><strong>Ver cenas</strong></span>
+          <i aria-hidden="true">↓</i>
         </a>
       </header>
 
