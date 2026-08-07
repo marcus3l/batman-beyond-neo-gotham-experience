@@ -469,7 +469,7 @@ export default function Home() {
         <div className="section-heading row-heading reveal-mask" data-reveal>
           <div>
             <p className="eyebrow"><span>06</span> Dossiês de Neo-Gotham</p>
-            <h2>Escolha um<br /><em>lado da história.</em></h2>
+            <h2>Escolha um<br /><em className="impact-font">lado da história.</em></h2>
           </div>
           <div className="cast-tabs" role="group" aria-label="Filtrar personagens">
             <button className={cast === "allies" ? "active" : ""} type="button" onClick={() => setCast("allies")}>Aliados</button>
