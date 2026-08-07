@@ -524,8 +524,28 @@ export default function Home() {
       <section className="section legacy">
         <div className="legacy-quote reveal-mask" data-reveal>
           <p className="eyebrow"><span>04</span> Carregue o símbolo</p>
-          <h2>O homem muda.<br /><em>A missão permanece.</em></h2>
-          <blockquote>“O símbolo não pertence ao passado. Ele pertence a quem tiver coragem de defendê-lo.”</blockquote>
+          <h2><span>O homem muda.</span><em>A missão permanece.</em></h2>
+          <p className="legacy-lead">
+            O traje evolui, a cidade se transforma e um novo homem assume o símbolo. O compromisso, porém, atravessa gerações.
+          </p>
+
+          <figure className="legacy-record reveal-rise motion-delay-1" data-reveal>
+            <figcaption>
+              <span>Registro da Batcaverna</span>
+              <small>ARQ / BW–01</small>
+            </figcaption>
+            <blockquote>“O símbolo não pertence ao passado. Ele pertence a quem tiver coragem de defendê-lo.”</blockquote>
+            <div className="legacy-author">
+              <strong>Bruce Wayne</strong>
+              <span>Mentor · Protocolo de sucessão</span>
+            </div>
+          </figure>
+
+          <div className="legacy-status reveal-rise motion-delay-2" data-reveal aria-label="Status do legado">
+            <span><i aria-hidden="true" /> Símbolo ativo</span>
+            <span>Legado transferido</span>
+            <span>Neo-Gotham / 2099</span>
+          </div>
         </div>
 
         <div className="duo">
