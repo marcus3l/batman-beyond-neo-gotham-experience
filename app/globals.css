@@ -112,6 +112,7 @@ img { display: block; max-width: 100%; }
 .section-intro { position: sticky; top: 8rem; align-self: start; }
 h2 { margin: 0; font: 400 clamp(3.4rem, 7vw, 7.5rem)/.82 var(--display); letter-spacing: -.03em; text-transform: uppercase; }
 h2 em { color: var(--red); font-style: normal; }
+.section-intro .impact-line { font-family: var(--display-impact); font-weight: 700; letter-spacing: -.015em; }
 .section-intro-content > p:last-child { max-width: 38rem; margin: 2.2rem 0 0; color: #5d5b5c; font-size: 1.03rem; line-height: 1.75; }
 .origin-cards { border-top: 1px solid #cac6bf; }
 .origin-card { min-height: 220px; display: grid; grid-template-columns: 60px 1fr 40px; gap: 1.3rem; align-items: center; border-bottom: 1px solid #cac6bf; transition: background .25s ease, padding .25s ease; }

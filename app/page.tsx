@@ -311,7 +311,7 @@ export default function Home() {
         <div className="section-intro">
           <div className="section-intro-content reveal-mask" data-reveal>
             <p className="eyebrow"><span>01</span> De rebelde a símbolo</p>
-            <h2>Nasce um<br /><em>novo Batman.</em></h2>
+            <h2><span className="impact-line">Nasce um</span><br /><em>novo Batman.</em></h2>
             <p>
               Terry McGinnis nunca planejou se tornar um herói. Quando Neo-Gotham precisa novamente de um protetor, ele veste o traje — mas usar o símbolo é apenas o começo.
             </p>
