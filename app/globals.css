@@ -191,7 +191,11 @@ img { display: block; max-width: 100%; }
 .wing-dark-red { --wing-from: #0b0b0e; --wing-next: #b81522; }
 .wing-red-dark { --wing-from: #d91a28; --wing-next: #0b0b0e; }
 .wing-dark-light { --wing-from: #0b0b0e; --wing-next: #f2eee8; }
-.wing-light-red { --wing-from: #f2eee8; --wing-next: #b81522; }
+.wing-light-red {
+  --wing-from: #f2eee8;
+  --wing-next: #b81522;
+  margin-bottom: calc(var(--wing-height) * -.68);
+}
 .wing-red-city { --wing-from: #d91a28; --wing-next: transparent; background: transparent; }
 .wing-city-light { --wing-from: #0b0b0e; --wing-next: #f2eee8; z-index: 32; }
 .wing-city-light .wing-transition-left { background: linear-gradient(rgba(5,5,7,.2), rgba(5,5,7,.48)), url("/assets/neo-gotham-panorama.jpg") left bottom / 100vw auto no-repeat; }
