@@ -1003,16 +1003,16 @@ export default function Home() {
         </form>
       </section>
 
-      <WingTransition tone="red-dark" />
-
-      <footer>
-        <img src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />
-        <p>O amanhã pertence ao morcego.</p>
-        <div className="footer-links">
+      <footer className="site-footer">
+        <div className="footer-brand">
+          <img src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />
+          <p>O amanhã pertence ao morcego.</p>
+        </div>
+        <nav className="footer-links" aria-label="Links do rodapé">
           <a href="#inicio">Voltar ao topo ↑</a>
           <a href="/fonts/license.txt">Licença Batman Future</a>
           <a href="/fonts/teko-license.txt">Licença Teko</a>
-        </div>
+        </nav>
         <small>
           Projeto conceitual não oficial para portfólio. Batman do Futuro e personagens relacionados pertencem à DC e à Warner Bros. Entertainment.
         </small>
