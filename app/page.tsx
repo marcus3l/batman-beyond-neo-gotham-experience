@@ -789,7 +789,7 @@ export default function Home() {
           <p className="eyebrow"><span>04</span> Carregue o símbolo</p>
           <h2><span>O homem muda.</span><em>A missão permanece.</em></h2>
           <p className="legacy-lead">
-            O traje evolui, a cidade se transforma e um novo homem assume o símbolo. O compromisso, porém, atravessa gerações.
+            O traje evolui. Um novo homem assume o símbolo. O compromisso atravessa gerações.
           </p>
 
           <figure className="legacy-record reveal-rise motion-delay-1" data-reveal>
@@ -797,7 +797,7 @@ export default function Home() {
               <span>Registro da Batcaverna</span>
               <small>ARQ / BW–01</small>
             </figcaption>
-            <blockquote>“O símbolo não pertence ao passado. Ele pertence a quem tiver coragem de defendê-lo.”</blockquote>
+            <blockquote>“O símbolo não pertence ao passado. Pertence a quem tiver coragem de defendê-lo.”</blockquote>
             <div className="legacy-author">
               <strong>Bruce Wayne</strong>
               <span>Mentor · Protocolo de sucessão</span>
