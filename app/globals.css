@@ -107,7 +107,7 @@ img { display: block; max-width: 100%; }
 .signal-strip i { font-style: normal; font-size: .55rem; }
 
 .section, .transmissions { padding: var(--section-y) var(--space); }
-.origin { position: relative; display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 7.5rem); padding-top: clamp(4rem, 6vw, 6rem); padding-bottom: clamp(5rem, 7vw, 7rem); background: var(--paper); color: var(--ink); isolation: isolate; }
+.origin { position: relative; z-index: 2; display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 7.5rem); padding-top: clamp(4rem, 6vw, 6rem); padding-bottom: clamp(5rem, 7vw, 7rem); overflow: visible; background: var(--paper); color: var(--ink); isolation: isolate; }
 .origin::after { content: ""; position: absolute; z-index: 4; right: 0; bottom: -1px; left: 0; height: clamp(3.5rem, 7vw, 8rem); background-color: #0b0b0e; background-image: linear-gradient(180deg, transparent 40%, #0b0b0e 100%), radial-gradient(ellipse at 64% 44%, rgba(225,28,43,.065), transparent 64%), linear-gradient(rgba(255,255,255,.011) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.011) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 54px 54px, 54px 54px; clip-path: polygon(0 100%, 100% 0, 100% 100%); filter: drop-shadow(0 2px 0 rgba(225,28,43,.14)); animation: transition-wedge-drift 18s linear infinite; pointer-events: none; }
 .section-intro { position: sticky; top: 8rem; align-self: start; }
 h2 { margin: 0; font: 400 clamp(3.4rem, 7vw, 7.5rem)/.82 var(--display); letter-spacing: -.03em; text-transform: uppercase; }
@@ -116,7 +116,7 @@ h2 em { color: var(--red); font-style: normal; }
 .section-intro .impact-line { font-family: var(--display-impact); font-weight: 700; letter-spacing: -.015em; }
 .origin-lead { max-width: 37rem; margin: clamp(2.2rem, 4vh, 3rem) 0 0; padding: .15rem 0 .15rem 1.25rem; border-left: 3px solid var(--red); color: #565351; font-size: 1.05rem; line-height: 1.7; text-wrap: pretty; }
 .origin-lead::first-line { color: #242223; font-weight: 650; }
-.origin-dossier { position: relative; display: grid; grid-template-columns: clamp(82px, 8vw, 116px) 1fr; width: min(560px, 100%); min-height: 170px; margin-top: clamp(2.6rem, 7vh, 5rem); overflow: hidden; color: var(--paper); background: #0b0b0e; clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%); box-shadow: 0 22px 46px rgba(26,20,18,.1); }
+.origin-dossier { position: absolute; z-index: 8; bottom: clamp(-4.5rem, -3.5vw, -2.25rem); left: var(--space); display: grid; grid-template-columns: clamp(82px, 8vw, 116px) 1fr; width: min(560px, calc(50% - var(--space))); min-height: 170px; margin: 0; overflow: hidden; color: var(--paper); background: #0b0b0e; clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%); box-shadow: 0 22px 46px rgba(0,0,0,.24); }
 .origin-dossier::before { content: ""; position: absolute; z-index: 3; top: 0; bottom: 0; width: 22%; background: linear-gradient(90deg, transparent, rgba(225,28,43,.13), transparent); filter: blur(8px); animation: dossier-scan 5.2s ease-in-out infinite; pointer-events: none; }
 .origin-dossier::after { content: "IDENTIDADE CONFIRMADA"; position: absolute; right: 1rem; bottom: .7rem; color: rgba(255,255,255,.18); font: 700 .42rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .14em; }
 .origin-dossier-mark { position: relative; display: grid; place-items: center; border-right: 1px solid rgba(255,255,255,.08); background: linear-gradient(145deg, rgba(225,28,43,.18), transparent); }
@@ -528,6 +528,8 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .scroll-cue { display: none; }
   .origin, .legacy, .city, .signal-form-section { grid-template-columns: 1fr; }
   .section-intro { position: static; }
+  .origin-dossier { position: relative; bottom: auto; left: auto; grid-row: 2; width: min(560px, 100%); margin-bottom: 1rem; }
+  .origin-cards { grid-row: 3; }
   .row-heading { align-items: flex-start; flex-direction: column; }
   .transmissions { --transmission-intro-height: clamp(760px, 96svh, 900px); }
   .transmissions .section-heading { grid-template-columns: 1fr; grid-template-rows: auto auto auto; align-content: center; gap: clamp(1.35rem, 3.5vh, 2.5rem); padding-top: clamp(5rem, 10vh, 7rem); }
