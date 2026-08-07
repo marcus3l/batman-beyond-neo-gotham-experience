@@ -388,7 +388,7 @@ h2 em { color: var(--red); font-style: normal; }
 .duo-card.terry .duo-signal i { background: white; box-shadow: 0 0 9px rgba(255,255,255,.7); }
 .duo-monogram { position: absolute; z-index: 2; top: 13%; left: 50%; transform: translateX(-50%); font: 400 17rem/.9 var(--display); color: rgba(255,255,255,.055); text-shadow: 0 0 35px rgba(0,0,0,.18); }
 .duo-card h3 { position: relative; z-index: 4; margin: 0; font: 700 clamp(3.1rem, 4.45vw, 5.15rem)/.76 var(--display-impact); letter-spacing: -.025em; text-transform: uppercase; text-shadow: 0 4px 28px rgba(0,0,0,.45); }
-.duo-card p { position: relative; z-index: 4; max-width: 280px; margin: 1.55rem 0 0; color: rgba(255,255,255,.75); line-height: 1.65; }
+.duo-card p { position: relative; z-index: 4; max-width: 280px; margin: 1.22rem 0 0; color: rgba(255,255,255,.75); line-height: 1.65; }
 
 .suit { padding: var(--section-y) var(--space); display: grid; grid-template-columns: .8fr .6fr 1fr; gap: clamp(2rem, 5vw, 6rem); align-items: center; background: #08090c; position: relative; overflow: hidden; }
 .suit::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 49% 50%, rgba(225,28,43,.17), transparent 29%), linear-gradient(90deg, transparent 49.9%, rgba(255,255,255,.06) 50%, transparent 50.1%); }
