@@ -44,7 +44,7 @@ const casts = {
 const videoClips = [
   {
     code: "TRANSMISSÃO 01",
-    title: "Voo sobre Neo-Gotham",
+    title: ["Voo sobre", "Neo-Gotham"],
     duration: "00:08",
     tone: "media-blue",
     basename: "01-neo-gotham-flight",
@@ -52,7 +52,7 @@ const videoClips = [
   },
   {
     code: "PROTOCOLO DO TRAJE",
-    title: "Batman em ação",
+    title: ["Batman", "Em ação"],
     duration: "00:08",
     tone: "media-red",
     basename: "02-batman-arrival",
@@ -60,7 +60,7 @@ const videoClips = [
   },
   {
     code: "TRANSMISSÃO 02",
-    title: "Inque nas alturas",
+    title: ["Inque nas alturas"],
     duration: "00:08",
     tone: "media-violet",
     basename: "03-inque-rooftop",
@@ -68,7 +68,7 @@ const videoClips = [
   },
   {
     code: "TRANSMISSÃO 03",
-    title: "Curaré em combate",
+    title: ["Curaré em combate"],
     duration: "00:08",
     tone: "media-red",
     basename: "04-curare-action",
@@ -362,7 +362,7 @@ export default function Home() {
                 </div>
                 <div className="cinematic-copy">
                   <p>{video.code}<span>{video.duration}</span></p>
-                  <h3>{video.title}</h3>
+                  <h3>{video.title.map((line) => <span className="cinematic-title-line" key={line}>{line}</span>)}</h3>
                   <span>{video.description}</span>
                 </div>
               </article>
