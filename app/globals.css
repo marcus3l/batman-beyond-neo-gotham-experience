@@ -456,7 +456,14 @@ h2 em { color: var(--red); font-style: normal; }
 .city-route-code { align-self: start; color: rgba(255,255,255,.42); font-size: .48rem; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
 .city-panels-footer { position: relative; z-index: 2; padding-top: 1rem; display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.46); font-size: .5rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 
-.city-panorama-reveal { --panorama-progress: 0; --panorama-inset: 16%; --panorama-scale: 1.12; --panorama-shift: 1.8%; --panorama-brightness: .7; position: relative; z-index: 4; height: 155svh; margin: -1px 0; background: radial-gradient(circle at 50% 50%, #11131b, var(--ink) 68%); }
+.city-panorama-reveal { --panorama-progress: 0; --panorama-inset: 10%; --panorama-scale: 1.12; --panorama-shift: 1.8%; --panorama-brightness: .7; position: relative; z-index: 4; height: 155svh; margin: -1px 0; background: var(--ink); }
+.city-panorama-standby { position: sticky; z-index: 3; top: 0; height: 100svh; margin-bottom: -100svh; overflow: hidden; background: radial-gradient(ellipse at 50% 78%, rgba(225,28,43,.1), transparent 48%), repeating-linear-gradient(90deg, rgba(255,255,255,.022) 0 1px, transparent 1px 8vw), repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 34px), linear-gradient(180deg, #0b0c11, #06070a); pointer-events: none; }
+.city-panorama-standby::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(225,28,43,.08), transparent 24%, transparent 76%, rgba(225,28,43,.06)); opacity: calc(1 - var(--panorama-progress)); }
+.city-panorama-standby::after { content: ""; position: absolute; top: calc(100% - var(--panorama-inset)); right: var(--space); left: var(--space); height: 1px; background: linear-gradient(90deg, transparent, rgba(255,43,55,.34) 12%, var(--red-hot) 50%, rgba(255,43,55,.34) 88%, transparent); box-shadow: 0 0 14px rgba(255,43,55,.42); transform: translateY(-1px); }
+.city-panorama-standby-label { position: absolute; z-index: 1; right: var(--space); bottom: clamp(1.15rem, 2vw, 1.8rem); left: var(--space); display: flex; align-items: center; justify-content: space-between; gap: 2rem; color: rgba(255,255,255,.42); font: 800 .48rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; opacity: calc(1 - var(--panorama-progress)); }
+.city-panorama-standby-label span { display: flex; align-items: center; gap: .65rem; color: rgba(255,255,255,.66); }
+.city-panorama-standby-label i { width: 5px; height: 5px; border-radius: 50%; background: var(--red-hot); box-shadow: 0 0 10px rgba(255,43,55,.82); animation: pulse 1.6s ease-in-out infinite; }
+.city-panorama-standby-label b { font: inherit; }
 .city-panorama-break { position: sticky; z-index: 4; top: 0; height: 100svh; margin: 0; overflow: hidden; background: var(--ink); clip-path: inset(0 0 var(--panorama-inset)); isolation: isolate; will-change: clip-path; }
 .city-panorama-break::before { content: ""; position: absolute; z-index: 1; inset: 0; opacity: calc(.94 - (var(--panorama-progress) * .18)); background: linear-gradient(90deg, rgba(5,5,7,.6), rgba(5,5,7,.08) 42%, rgba(5,5,7,.2)), linear-gradient(0deg, rgba(5,5,7,.38), transparent 28%, rgba(8,15,42,.12)), linear-gradient(120deg, rgba(225,28,43,.16), transparent 45%); pointer-events: none; }
 .city-panorama-break::after { content: ""; position: absolute; z-index: 2; inset: 0; opacity: .13; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.14) 3px 4px); mix-blend-mode: overlay; pointer-events: none; }
@@ -924,6 +931,7 @@ h2 em { color: var(--red); font-style: normal; }
   .city-copy::after { display: none; }
   .city-panels { padding: 4rem var(--space) var(--section-y); }
   .city-panorama-reveal { height: auto; }
+  .city-panorama-standby { display: none; }
   .city-panorama-break { position: relative; top: auto; height: clamp(500px, 75svh, 680px); clip-path: none; }
   .city-panorama-break > img { filter: saturate(.86) contrast(1.13) brightness(.78); transform: scale(1.04); }
   .city-panorama-hud { opacity: 1; transform: none; }
@@ -1060,6 +1068,7 @@ h2 em { color: var(--red); font-style: normal; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .city-panorama-reveal { height: auto; }
+  .city-panorama-standby { display: none; }
   .city-panorama-break { position: relative; top: auto; height: min(82svh, 780px); clip-path: none; }
   .city-panorama-break > img { filter: saturate(.86) contrast(1.13) brightness(.82); transform: scale(1.015); }
   .city-panorama-hud { opacity: 1; transform: none; }

@@ -400,7 +400,7 @@ export default function Home() {
       const progress = reduceMotion ? 1 : linear * linear * (3 - 2 * linear);
 
       reveal.style.setProperty("--panorama-progress", progress.toFixed(4));
-      reveal.style.setProperty("--panorama-inset", `${((1 - progress) * 16).toFixed(3)}%`);
+      reveal.style.setProperty("--panorama-inset", `${((1 - progress) * 10).toFixed(3)}%`);
       reveal.style.setProperty("--panorama-scale", (1.12 - progress * .105).toFixed(4));
       reveal.style.setProperty("--panorama-shift", `${((1 - progress) * 1.8).toFixed(3)}%`);
       reveal.style.setProperty("--panorama-brightness", (.7 + progress * .12).toFixed(3));
@@ -797,6 +797,12 @@ export default function Home() {
       <WingTransition tone="red-city" />
 
       <div className="city-panorama-reveal">
+        <div className="city-panorama-standby" aria-hidden="true">
+          <div className="city-panorama-standby-label">
+            <span><i /> Abertura panorâmica</span>
+            <b>Campo visual / 07</b>
+          </div>
+        </div>
         <figure className="city-panorama-break">
           <img src="/assets/neo-gotham-panorama.jpg" alt="Vista panorâmica noturna de Neo-Gotham" />
           <div className="city-panorama-target" aria-hidden="true">
