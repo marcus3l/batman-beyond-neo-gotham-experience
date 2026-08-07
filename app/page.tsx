@@ -81,6 +81,16 @@ const casts = {
   ],
 };
 
+function WingTransition({ tone }: { tone: "light-dark" | "dark-red" | "red-dark" | "dark-light" | "light-red" }) {
+  return (
+    <div className={`wing-transition wing-${tone}`} data-reveal aria-hidden="true">
+      <span className="wing-transition-left" />
+      <span className="wing-transition-right" />
+      <i />
+    </div>
+  );
+}
+
 const videoClips = [
   {
     code: "VIGÍLIA AÉREA",
@@ -555,6 +565,8 @@ export default function Home() {
         </aside>
       </section>
 
+      <WingTransition tone="light-dark" />
+
       <section className="transmissions" id="midia" aria-labelledby="transmissions-title">
         <div className="section-heading row-heading">
           <div className="transmission-atmosphere" aria-hidden="true">
@@ -694,6 +706,8 @@ export default function Home() {
         </div>
       </section>
 
+      <WingTransition tone="dark-red" />
+
       <section className="city" id="cidade">
         <div className="city-copy reveal-city" data-reveal>
           <p className="eyebrow light"><span>03</span> Proteja a cidade</p>
@@ -744,6 +758,8 @@ export default function Home() {
         </div>
       </section>
 
+      <WingTransition tone="red-dark" />
+
       <figure className="city-panorama-break">
         <img src="/assets/neo-gotham-panorama.jpg" alt="Vista panorâmica noturna de Neo-Gotham" />
         <div className="city-panorama-target" aria-hidden="true">
@@ -767,6 +783,8 @@ export default function Home() {
         </div>
         <figcaption className="sr-only">Panorama da cidade de Neo-Gotham observado pelo sistema de vigilância.</figcaption>
       </figure>
+
+      <WingTransition tone="dark-light" />
 
       <section className="section legacy" id="legado">
         <div className="legacy-quote reveal-mask" data-reveal>
@@ -836,6 +854,8 @@ export default function Home() {
           </article>
         </div>
       </section>
+
+      <WingTransition tone="light-dark" />
 
       <section className="suit" id="traje">
         <div className="suit-title reveal-mask" data-reveal>
@@ -924,6 +944,8 @@ export default function Home() {
         </div>
       </section>
 
+      <WingTransition tone="dark-light" />
+
       <section className="section cast" id="personagens">
         <div className="section-heading row-heading reveal-mask" data-reveal>
           <div>
@@ -958,6 +980,8 @@ export default function Home() {
         </div>
       </section>
 
+      <WingTransition tone="light-red" />
+
       <section className="signal-form-section">
         <div className="reveal-mask" data-reveal>
           <p className="eyebrow light"><span>07</span> O legado continua</p>
@@ -980,6 +1004,8 @@ export default function Home() {
           {sent && <p className="form-success" role="status">Sinal recebido. Conexão estabelecida.</p>}
         </form>
       </section>
+
+      <WingTransition tone="red-dark" />
 
       <footer>
         <img src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />

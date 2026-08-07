@@ -180,9 +180,36 @@ img { display: block; max-width: 100%; }
 .signal-strip span { font: 400 1.2rem/1 var(--display); letter-spacing: .06em; text-transform: uppercase; }
 .signal-strip i { font-style: normal; font-size: .55rem; }
 
+.wing-transition {
+  --wing-height: clamp(58px, 6.5vw, 108px);
+  --wing-from: #0b0b0e;
+  --wing-next: #f2eee8;
+  position: relative; z-index: 30; height: var(--wing-height); margin-bottom: calc(var(--wing-height) * -1);
+  overflow: hidden; isolation: isolate; pointer-events: none; background: var(--wing-next);
+}
+.wing-light-dark { --wing-from: #f4f0ea; --wing-next: #0b0b0e; }
+.wing-dark-red { --wing-from: #0b0b0e; --wing-next: #b81522; }
+.wing-red-dark { --wing-from: #d91a28; --wing-next: #0b0b0e; }
+.wing-dark-light { --wing-from: #0b0b0e; --wing-next: #f2eee8; }
+.wing-light-red { --wing-from: #f2eee8; --wing-next: #b81522; }
+.wing-transition > span { position: absolute; z-index: 2; top: 0; width: 59%; height: 100%; background: var(--wing-from); will-change: transform; transition: transform 1.05s cubic-bezier(.18,.78,.18,1); }
+.wing-transition-left { left: 0; transform-origin: left top; clip-path: polygon(0 0, 100% 0, 91% 28%, 76% 52%, 57% 100%, 0 58%); }
+.wing-transition-right { right: 0; transform-origin: right top; clip-path: polygon(0 0, 100% 0, 100% 58%, 43% 100%, 24% 52%, 9% 28%); }
+.wing-transition:not(.is-visible) .wing-transition-left { transform: scaleX(1.22); }
+.wing-transition:not(.is-visible) .wing-transition-right { transform: scaleX(1.22); }
+.wing-transition.is-visible .wing-transition-left { transform: scaleX(1) translateX(-1.5%); }
+.wing-transition.is-visible .wing-transition-right { transform: scaleX(1) translateX(1.5%); }
+.wing-transition > i { position: absolute; z-index: 4; top: 35%; left: 50%; width: clamp(38px, 4vw, 68px); height: 3px; background: var(--red-hot); clip-path: polygon(0 50%, 42% 50%, 50% 0, 58% 50%, 100% 50%, 100% 100%, 57% 100%, 50% 45%, 43% 100%, 0 100%); box-shadow: 0 0 18px rgba(255,43,55,.42); opacity: 0; transform: translate(-50%, -50%) scaleX(.18); transition: opacity .45s ease .28s, transform .8s cubic-bezier(.18,.78,.18,1) .18s; }
+.wing-transition.is-visible > i { opacity: .9; transform: translate(-50%, -50%) scaleX(1); }
+.wing-transition::after { content: ""; position: absolute; z-index: 3; top: 0; left: 50%; width: 1px; height: 72%; background: linear-gradient(var(--red-hot), transparent); opacity: 0; transform: translateX(-50%) scaleY(.2); transform-origin: top; transition: opacity .45s ease .35s, transform .75s ease .25s; }
+.wing-transition.is-visible::after { opacity: .48; transform: translateX(-50%) scaleY(1); }
+.wing-transition.reveal-reverse > span { transition-duration: .72s; }
+.wing-transition.reveal-reverse > i { transition-delay: .08s; }
+
 .section, .transmissions { padding: var(--section-y) var(--space); }
 .origin { position: relative; z-index: 2; display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 7.5rem); padding-top: clamp(4rem, 6vw, 6rem); padding-bottom: clamp(5rem, 7vw, 7rem); overflow: visible; background: var(--paper); color: var(--ink); isolation: isolate; }
 .origin::after { content: ""; position: absolute; z-index: 4; right: 0; bottom: -1px; left: 0; height: clamp(3.5rem, 7vw, 8rem); background-color: #0b0b0e; background-image: linear-gradient(180deg, transparent 40%, #0b0b0e 100%), radial-gradient(ellipse at 64% 44%, rgba(225,28,43,.065), transparent 64%), linear-gradient(rgba(255,255,255,.011) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.011) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 54px 54px, 54px 54px; clip-path: polygon(0 100%, 100% 0, 100% 100%); filter: drop-shadow(0 2px 0 rgba(225,28,43,.14)); animation: transition-wedge-drift 18s linear infinite; pointer-events: none; }
+.origin::after { display: none; }
 .section-intro { position: sticky; top: 8rem; align-self: start; }
 h2 { margin: 0; font: 400 clamp(3.4rem, 7vw, 7.5rem)/.82 var(--display); letter-spacing: -.03em; text-transform: uppercase; }
 h2 em { color: var(--red); font-style: normal; }
@@ -882,6 +909,7 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
 
 @media (max-width: 560px) {
   :root { --space: 1.2rem; --section-y: 5.5rem; }
+  .wing-transition { --wing-height: 54px; }
   h2 { font-size: clamp(2.9rem, 16vw, 4.8rem); }
   .hero { min-height: 900px; }
   .hero-copy { min-height: 670px; padding-top: 7rem; }
