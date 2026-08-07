@@ -188,7 +188,11 @@ img { display: block; max-width: 100%; }
   overflow: hidden; isolation: isolate; pointer-events: none; background: var(--wing-next);
 }
 .wing-light-dark { --wing-from: #f4f0ea; --wing-next: #0b0b0e; }
-.wing-dark-red { --wing-from: #0b0b0e; --wing-next: #b81522; }
+.wing-dark-red {
+  --wing-from: #0b0b0e;
+  --wing-next: #b81522;
+  margin-top: calc(var(--wing-height) * -1);
+}
 .wing-red-dark { --wing-from: #d91a28; --wing-next: #0b0b0e; }
 .wing-dark-light { --wing-from: #0b0b0e; --wing-next: #f2eee8; }
 .wing-light-red {
