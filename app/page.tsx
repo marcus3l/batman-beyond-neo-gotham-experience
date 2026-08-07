@@ -260,9 +260,7 @@ export default function Home() {
       if (progressRail) progressRail.style.opacity = reveals[0].toFixed(3);
       progressLabels.forEach((label, index) => {
         const active = index === topLayer;
-        label.style.color = active ? "#ffffff" : "rgba(255,255,255,.35)";
-        label.style.borderColor = active ? "#e11c2b" : "rgba(255,255,255,.25)";
-        label.style.background = active ? "#e11c2b" : "rgba(5,5,7,.28)";
+        label.classList.toggle("is-active", active);
       });
 
       panels.forEach((panel, index) => {

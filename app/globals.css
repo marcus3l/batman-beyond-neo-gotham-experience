@@ -305,8 +305,12 @@ h2 em { color: var(--red); font-style: normal; }
 .cinematic-panel:nth-child(even) .cinematic-title-line { margin-left: auto; }
 .cinematic-copy > span { display: block; max-width: 34rem; margin-top: 1.4rem; color: rgba(255,255,255,.7); font-size: .85rem; line-height: 1.55; }
 .cinematic-panel:nth-child(even) .cinematic-copy > span { margin-left: auto; }
-.cinematic-progress { position: absolute; z-index: 20; top: 50%; right: 1.25rem; display: flex; flex-direction: column; gap: .85rem; opacity: 0; transform: translateY(-50%); transition: opacity .25s ease; }
-.cinematic-progress span { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; color: rgba(255,255,255,.35); background: rgba(5,5,7,.28); backdrop-filter: blur(5px); font: 400 .58rem var(--display); transition: color .25s ease, border-color .25s ease, background .25s ease; }
+.cinematic-progress { position: absolute; z-index: 20; top: 43%; right: 1.35rem; padding-block: .35rem; display: flex; flex-direction: column; gap: .72rem; opacity: 0; transform: translateY(-50%); transition: opacity .25s ease; }
+.cinematic-progress::before { content: ""; position: absolute; z-index: 0; top: 0; bottom: 0; left: 50%; width: 1px; background: linear-gradient(transparent, rgba(255,255,255,.16) 16%, rgba(255,255,255,.16) 84%, transparent); transform: translateX(-50%); }
+.cinematic-progress span { position: relative; z-index: 1; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.2); border-radius: 0; color: rgba(255,255,255,.38); background: rgba(5,5,8,.5); clip-path: polygon(50% 0, 84% 12%, 100% 50%, 84% 88%, 50% 100%, 16% 88%, 0 50%, 16% 12%); backdrop-filter: blur(8px); font: 400 .55rem var(--display); box-shadow: inset 0 0 0 1px rgba(255,255,255,.025); transition: color .28s ease, border-color .28s ease, background .28s ease, box-shadow .28s ease, transform .28s ease; }
+.cinematic-progress span::after { content: ""; position: absolute; right: 4px; bottom: 4px; width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.22); transition: background .28s ease, box-shadow .28s ease; }
+.cinematic-progress span.is-active { border-color: rgba(255,43,55,.95); color: var(--white); background: linear-gradient(145deg, #ff2b37, #ae101d); box-shadow: 0 0 0 4px rgba(255,43,55,.08), 0 0 18px rgba(255,43,55,.38), inset 0 1px 0 rgba(255,255,255,.18); transform: scale(1.12); }
+.cinematic-progress span.is-active::after { background: var(--white); box-shadow: 0 0 6px rgba(255,255,255,.8); }
 
 .city { min-height: 900px; display: grid; grid-template-columns: .92fr 1.08fr; background: var(--red); color: var(--white); position: relative; overflow: hidden; isolation: isolate; }
 .city::after { content: "NEO"; position: absolute; z-index: 0; left: -4vw; bottom: -9vw; font: 400 32vw/.75 var(--display); color: rgba(0,0,0,.1); pointer-events: none; }
