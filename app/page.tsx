@@ -2,24 +2,6 @@
 
 import { FormEvent, useEffect, useState } from "react";
 
-const originSteps = [
-  {
-    number: "01",
-    title: "Aceite o chamado",
-    text: "Uma descoberta inesperada coloca Terry diante de uma escolha capaz de mudar seu destino.",
-  },
-  {
-    number: "02",
-    title: "Aprenda com a lenda",
-    text: "Guiado por Bruce Wayne, Terry transforma instinto em estratégia e coragem em propósito.",
-  },
-  {
-    number: "03",
-    title: "Torne-se o futuro",
-    text: "Um novo homem veste o traje. Uma missão que parecia encerrada ganha vida novamente.",
-  },
-];
-
 const suitFeatures = [
   {
     number: "01",
@@ -514,23 +496,6 @@ export default function Home() {
               Terry McGinnis não escolheu o símbolo. O símbolo o encontrou. Agora, entre o peso do legado e as ameaças de uma nova era, ele precisa provar que Neo-Gotham ainda pode acreditar no Batman.
             </p>
           </div>
-        </div>
-
-        <div className="origin-cards">
-          {originSteps.map((step, index) => (
-            <article className={`origin-card reveal-rise motion-delay-${index}`} data-reveal key={step.number}>
-              <span className="card-index">{step.number}</span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </div>
-              <span className="card-arrow" aria-hidden="true">↗</span>
-              <div className="origin-card-progress" aria-label={`Evolução: ${["Instinto", "Estratégia", "Propósito"][index]}`}>
-                <span>{["Instinto", "Estratégia", "Propósito"][index]}<b>{[33, 66, 100][index]}%</b></span>
-                <i aria-hidden="true" />
-              </div>
-            </article>
-          ))}
         </div>
 
         <aside className="origin-dossier reveal-rise motion-delay-2" data-reveal aria-label="Arquivo do sucessor">

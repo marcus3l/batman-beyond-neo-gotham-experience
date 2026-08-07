@@ -6525,7 +6525,7 @@ h2 em {
 .origin {
   display: block;
   padding-top: clamp(2.75rem, 5vw, 5.5rem);
-  padding-bottom: clamp(10rem, 12vw, 13rem);
+  padding-bottom: clamp(8rem, 10vw, 10.5rem);
 }
 
 .origin .section-intro {
@@ -6652,10 +6652,6 @@ h2 em {
 
   .origin .section-intro h2 .impact-line {
     font-size: 0.74em;
-  }
-
-  .origin-cards {
-    margin-top: 3.5rem;
   }
 
   .origin-dossier {
