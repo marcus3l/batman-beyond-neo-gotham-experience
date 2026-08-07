@@ -455,7 +455,12 @@ export default function Home() {
             <span>NG–ID / VARREDURA 01</span>
             <span>CANAL 20.99 / SEGURO</span>
           </div>
-          <img src="/assets/neo-gotham-hero.png" alt="Silhueta estilizada do Batman do Futuro diante de Neo-Gotham" />
+          <img
+            src="/assets/hero-legacy-banner.webp"
+            alt="Terry McGinnis como Batman do Futuro diante de Bruce Wayne e Neo-Gotham"
+            loading="eager"
+            fetchPriority="high"
+          />
           <div className="hero-target" aria-hidden="true"><span /><i /></div>
 
           <aside id="terry-identity" className="identity-dossier" aria-hidden={!identityOpen}>
