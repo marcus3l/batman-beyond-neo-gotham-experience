@@ -436,15 +436,15 @@ h2 em { color: var(--red); font-style: normal; }
 .city-panorama-target > div { padding-left: .75rem; display: grid; gap: .32rem; border-left: 1px solid rgba(255,255,255,.28); text-shadow: 0 3px 10px rgba(0,0,0,.8); }
 .city-panorama-target b { font-size: .52rem; letter-spacing: .14em; text-transform: uppercase; }
 .city-panorama-target small { color: rgba(255,255,255,.48); font: 700 .44rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; }
-.city-panorama-hud { position: absolute; z-index: 4; inset: clamp(3.5rem, 7vw, 6.5rem) var(--space); display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; color: var(--white); pointer-events: none; }
+.city-panorama-hud { position: absolute; z-index: 4; inset: clamp(3.5rem, 7vw, 6.5rem) var(--space); display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; color: var(--white); pointer-events: none; }
 .city-panorama-topline { grid-column: 1 / -1; align-self: start; padding-bottom: .9rem; display: flex; justify-content: space-between; gap: 2rem; border-bottom: 1px solid rgba(255,255,255,.24); color: rgba(255,255,255,.58); font-size: .5rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
 .city-panorama-topline span:first-child { display: flex; align-items: center; gap: .55rem; color: rgba(255,255,255,.82); }
 .city-panorama-topline i { width: 6px; height: 6px; border-radius: 50%; background: var(--red-hot); box-shadow: 0 0 12px rgba(255,43,55,.8); animation: pulse 1.6s ease-in-out infinite; }
-.city-panorama-caption { align-self: end; display: grid; justify-items: start; text-transform: uppercase; text-shadow: 0 6px 24px rgba(0,0,0,.7); }
-.city-panorama-caption > span { margin-bottom: .55rem; padding: .45rem .65rem; border-left: 2px solid var(--red-hot); background: rgba(5,5,7,.42); color: rgba(255,255,255,.66); font-size: .5rem; font-weight: 800; letter-spacing: .16em; }
+.city-panorama-caption { grid-column: 2; align-self: end; justify-self: end; display: grid; justify-items: end; text-align: right; text-transform: uppercase; text-shadow: 0 6px 24px rgba(0,0,0,.7); }
+.city-panorama-caption > span { margin-bottom: .55rem; padding: .45rem .65rem; border-right: 2px solid var(--red-hot); background: rgba(5,5,7,.42); color: rgba(255,255,255,.66); font-size: .5rem; font-weight: 800; letter-spacing: .16em; }
 .city-panorama-caption strong { font: 650 clamp(3.8rem, 7.5vw, 8.5rem)/.72 var(--display-impact); letter-spacing: -.025em; }
 .city-panorama-caption small { margin-top: .8rem; color: rgba(255,255,255,.58); font-size: .5rem; font-weight: 800; letter-spacing: .14em; }
-.city-panorama-coordinates { align-self: end; padding: 1rem 0 1rem 1.4rem; display: grid; justify-items: end; gap: .5rem; border-left: 1px solid rgba(255,255,255,.24); color: rgba(255,255,255,.52); font: 700 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; }
+.city-panorama-coordinates { grid-column: 1; grid-row: 2; align-self: end; justify-self: start; padding: 1rem 1.4rem 1rem 0; display: grid; justify-items: start; gap: .5rem; border-right: 1px solid rgba(255,255,255,.24); color: rgba(255,255,255,.52); font: 700 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; }
 .city-panorama-coordinates b { color: var(--red-hot); font-weight: 700; }
 
 .legacy { position: relative; background: var(--paper); color: var(--ink); display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 7rem); align-items: center; overflow: hidden; isolation: isolate; }
@@ -978,6 +978,7 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .city-panorama-break { height: 420px; }
   .city-panorama-break > img { object-position: 48% 50%; }
   .city-panorama-hud { inset: 3rem var(--space); grid-template-columns: 1fr; }
+  .city-panorama-caption { grid-column: 1; }
   .city-panorama-topline span:last-child, .city-panorama-coordinates { display: none; }
   .city-panorama-caption strong { font-size: clamp(3.5rem, 18vw, 5rem); }
   .city-panorama-caption small { max-width: 18rem; line-height: 1.5; }
