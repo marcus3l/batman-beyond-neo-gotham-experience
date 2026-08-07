@@ -6528,7 +6528,7 @@ h2 em {
   z-index: 6;
   top: auto;
   width: min(100%, 1560px);
-  margin: clamp(-12rem, -10.5vw, -6rem) auto 0;
+  margin: clamp(-7.5rem, -6vw, -3.25rem) auto 0;
   text-align: center;
 }
 
@@ -6643,7 +6643,7 @@ h2 em {
   }
 
   .origin .section-intro {
-    margin-top: -5rem;
+    margin-top: -2.25rem;
   }
 
   .origin .section-intro h2 {
@@ -6666,7 +6666,7 @@ h2 em {
 
 @media (max-width: 560px) {
   .origin .section-intro {
-    margin-top: -3.4rem;
+    margin-top: -1rem;
   }
 
   .origin .eyebrow {
