@@ -132,12 +132,35 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const reel = document.querySelector<HTMLElement>(".cinematic-reel");
     const panels = Array.from(document.querySelectorAll<HTMLElement>(".cinematic-panel"));
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let animationFrame = 0;
 
     const updateReveals = () => {
+      if (!reel || panels.length === 0) return;
       const viewportHeight = window.innerHeight;
+      const reelRect = reel.getBoundingClientRect();
+      const scrollDistance = Math.max(1, reel.offsetHeight - viewportHeight);
+      const reelProgress = Math.min(1, Math.max(0, -reelRect.top / scrollDistance));
+      const sequenceProgress = reelProgress * (panels.length - 1);
+      const reveals = panels.map((_, index) => {
+        if (index === 0) return 1;
+        const linear = Math.min(1, Math.max(0, (sequenceProgress - (index - 1)) / 0.72));
+        return reduceMotion ? (linear > 0 ? 1 : 0) : linear * linear * (3 - 2 * linear);
+      });
+      let topLayer = 0;
+      reveals.forEach((reveal, index) => {
+        if (reveal > 0.001) topLayer = index;
+      });
+
+      const progressLabels = Array.from(reel.querySelectorAll<HTMLElement>(".cinematic-progress span"));
+      progressLabels.forEach((label, index) => {
+        const active = index === topLayer;
+        label.style.color = active ? "#ffffff" : "rgba(255,255,255,.35)";
+        label.style.borderColor = active ? "#e11c2b" : "rgba(255,255,255,.25)";
+        label.style.background = active ? "#e11c2b" : "rgba(5,5,7,.28)";
+      });
 
       panels.forEach((panel, index) => {
         const frame = panel.querySelector<HTMLElement>(".cinematic-frame");
@@ -145,23 +168,35 @@ export default function Home() {
         const copy = panel.querySelector<HTMLElement>(".cinematic-copy");
         if (!frame || !video || !copy) return;
 
-        const rect = panel.getBoundingClientRect();
-        const rawProgress = (viewportHeight - rect.top) / (viewportHeight * 0.88);
-        const progress = reduceMotion ? 1 : Math.min(1, Math.max(0, rawProgress));
+        const progress = reveals[index];
         const reverse = index % 2 === 1;
 
-        const topLeft = reverse ? 43 * (1 - progress) : 58 - 43 * progress;
-        const topRight = reverse ? 58 - 43 * progress : 43 * (1 - progress);
-        const bottomRight = reverse ? 58 + 42 * progress : 43 + 42 * progress;
-        const bottomLeft = reverse ? 43 + 42 * progress : 58 + 42 * progress;
+        const topLeft = reverse ? 46 * (1 - progress) : 54 * (1 - progress);
+        const topRight = reverse ? 54 * (1 - progress) : 46 * (1 - progress);
+        const bottomRight = reverse ? 54 + 46 * progress : 46 + 54 * progress;
+        const bottomLeft = reverse ? 46 + 54 * progress : 54 + 46 * progress;
         frame.style.clipPath = `polygon(0 ${topLeft}%, 100% ${topRight}%, 100% ${bottomRight}%, 0 ${bottomLeft}%)`;
 
-        const videoShift = 8 - progress * 16;
-        video.style.transform = `translateY(${videoShift}%) scale(1.08)`;
+        const videoShift = 5 - progress * 10;
+        video.style.transform = `translateY(${videoShift}%) scale(1.06)`;
 
-        const copyProgress = Math.min(1, Math.max(0, (progress - 0.52) / 0.34));
+        const coveredByNext = index < panels.length - 1 ? reveals[index + 1] : 0;
+        const entrance = index === 0 ? 1 : Math.min(1, Math.max(0, (progress - 0.56) / 0.24));
+        const exit = 1 - Math.min(1, Math.max(0, coveredByNext / 0.3));
+        const copyProgress = entrance * exit;
         copy.style.opacity = copyProgress.toFixed(3);
-        copy.style.transform = `translateY(${(1 - copyProgress) * 34}px)`;
+        copy.style.transform = `translateY(${(1 - entrance) * 28}px)`;
+        const isTopLayer = index === topLayer;
+        const isLayerUnderTransition = index === topLayer - 1 && reveals[topLayer] < 0.999;
+        panel.style.visibility = isTopLayer || isLayerUnderTransition ? "visible" : "hidden";
+        panel.style.pointerEvents = index === topLayer ? "auto" : "none";
+
+        const shouldPlay = isTopLayer || isLayerUnderTransition;
+        if (shouldPlay) {
+          void video.play().catch(() => undefined);
+        } else {
+          video.pause();
+        }
       });
 
       animationFrame = 0;
@@ -299,36 +334,41 @@ export default function Home() {
         </div>
 
         <div className="cinematic-reel">
-          {videoClips.map((video, index) => (
-            <article className={`cinematic-panel cinematic-panel-${index + 1}`} key={video.basename}>
-              <button
-                className="cinematic-frame"
-                type="button"
-                onClick={() => setActiveVideo(video)}
-                aria-label={`Ampliar cena: ${video.title}`}
-              >
-                <video
-                  data-scroll-video
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  poster={`/videos/${video.basename}-poster.jpg`}
-                  aria-hidden="true"
+          <div className="cinematic-stage">
+            {videoClips.map((video, index) => (
+              <article className={`cinematic-panel cinematic-panel-${index + 1}`} key={video.basename}>
+                <button
+                  className="cinematic-frame"
+                  type="button"
+                  onClick={() => setActiveVideo(video)}
+                  aria-label={`Ampliar cena: ${video.title}`}
                 >
-                  <source src={`/videos/${video.basename}.webm`} type="video/webm" />
-                  <source src={`/videos/${video.basename}.mp4`} type="video/mp4" />
-                </video>
-                <span className="cinematic-scan" aria-hidden="true" />
-                <span className="cinematic-play" aria-hidden="true">▶</span>
-              </button>
-              <div className="cinematic-copy">
-                <p>{video.code}<span>{video.duration}</span></p>
-                <h3>{video.title}</h3>
-                <span>{video.description}</span>
-              </div>
-            </article>
-          ))}
+                  <video
+                    data-stack-video
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    poster={`/videos/${video.basename}-poster.jpg`}
+                    aria-hidden="true"
+                  >
+                    <source src={`/videos/${video.basename}.webm`} type="video/webm" />
+                    <source src={`/videos/${video.basename}.mp4`} type="video/mp4" />
+                  </video>
+                  <span className="cinematic-scan" aria-hidden="true" />
+                  <span className="cinematic-play" aria-hidden="true">▶</span>
+                </button>
+                <div className="cinematic-copy">
+                  <p>{video.code}<span>{video.duration}</span></p>
+                  <h3>{video.title}</h3>
+                  <span>{video.description}</span>
+                </div>
+              </article>
+            ))}
+            <div className="cinematic-progress" aria-hidden="true">
+              {videoClips.map((_, index) => <span key={index}>0{index + 1}</span>)}
+            </div>
+          </div>
         </div>
       </section>
 
