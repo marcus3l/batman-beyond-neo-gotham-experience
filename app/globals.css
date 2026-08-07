@@ -108,7 +108,7 @@ img { display: block; max-width: 100%; }
 
 .section, .transmissions { padding: var(--section-y) var(--space); }
 .origin { position: relative; display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 7.5rem); padding-top: clamp(4rem, 6vw, 6rem); padding-bottom: clamp(5rem, 7vw, 7rem); background: var(--paper); color: var(--ink); isolation: isolate; }
-.origin::after { content: ""; position: absolute; z-index: 4; right: 0; bottom: -1px; left: 0; height: clamp(3.5rem, 7vw, 8rem); background: #0b0b0e; clip-path: polygon(0 100%, 100% 0, 100% 100%); pointer-events: none; }
+.origin::after { content: ""; position: absolute; z-index: 4; right: 0; bottom: -1px; left: 0; height: clamp(3.5rem, 7vw, 8rem); background-color: #0b0b0e; background-image: linear-gradient(112deg, transparent 58%, rgba(225,28,43,.08) 74%, transparent 88%), linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 100% 100%, 54px 54px, 54px 54px; clip-path: polygon(0 100%, 100% 0, 100% 100%); animation: transmission-grid-drift 18s linear infinite; pointer-events: none; }
 .section-intro { position: sticky; top: 8rem; align-self: start; }
 h2 { margin: 0; font: 400 clamp(3.4rem, 7vw, 7.5rem)/.82 var(--display); letter-spacing: -.03em; text-transform: uppercase; }
 h2 em { color: var(--red); font-style: normal; }
@@ -124,8 +124,13 @@ h2 em { color: var(--red); font-style: normal; }
 .card-arrow { font-size: 1.6rem; }
 
 .transmissions { --transmission-intro-height: clamp(600px, 72svh, 740px); position: relative; padding-bottom: 0; overflow: clip; background: #0b0b0e; isolation: isolate; }
-.transmission-atmosphere { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
-.transmission-grid { position: absolute; inset: 0; opacity: .28; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 54px 54px; mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent); animation: transmission-grid-drift 18s linear infinite; }
+.transmission-atmosphere { position: absolute; z-index: 0; top: 0; right: calc(var(--space) * -1); bottom: 0; left: calc(var(--space) * -1); overflow: hidden; pointer-events: none; }
+.transmission-atmosphere::before, .transmission-atmosphere::after { content: ""; position: absolute; z-index: 4; top: 0; bottom: 0; width: clamp(12px, 1.15vw, 22px); opacity: .55; background: repeating-linear-gradient(180deg, transparent 0 14px, rgba(225,28,43,.5) 14px 16px, transparent 16px 30px); animation: transmission-edge-pulse 3.6s ease-in-out infinite; }
+.transmission-atmosphere::before { left: clamp(12px, 1.5vw, 28px); }
+.transmission-atmosphere::after { right: clamp(12px, 1.5vw, 28px); animation-delay: -1.8s; }
+.transmission-grid { position: absolute; inset: 0; opacity: .34; background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px); background-size: 54px 54px; mask-image: linear-gradient(90deg, rgba(0,0,0,.65), #000 7%, #000 93%, rgba(0,0,0,.65)); animation: transmission-grid-drift 18s linear infinite; }
+.transmission-grid::before { content: ""; position: absolute; top: clamp(1.25rem, 3vh, 2.2rem); right: clamp(2.8rem, 5vw, 6rem); left: clamp(2.8rem, 5vw, 6rem); height: 1px; background: linear-gradient(90deg, rgba(225,28,43,.8) 0 5%, rgba(255,255,255,.09) 5% 47%, transparent 47% 53%, rgba(255,255,255,.09) 53% 95%, rgba(225,28,43,.8) 95%); }
+.transmission-grid::after { content: "NG-SYS / INTERCEPTAÇÃO ATIVA / 88.7 MHZ"; position: absolute; top: calc(clamp(1.25rem, 3vh, 2.2rem) + .75rem); left: clamp(2.8rem, 5vw, 6rem); color: rgba(255,255,255,.22); font: 600 .46rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; }
 .transmission-sweep { position: absolute; top: -35%; bottom: -35%; left: 62%; width: 14%; opacity: .38; background: linear-gradient(90deg, transparent, rgba(225,28,43,.12), rgba(255,45,61,.28), transparent); filter: blur(8px); transform: skewX(-19deg); animation: transmission-sweep 6.4s cubic-bezier(.65,0,.35,1) infinite; }
 .transmission-crosshair { position: absolute; top: 48%; left: 60%; width: min(33vw, 420px); aspect-ratio: 1; border: 1px solid rgba(225,28,43,.08); border-radius: 50%; transform: translate(-50%, -50%); }
 .transmission-crosshair::before, .transmission-crosshair::after { content: ""; position: absolute; background: rgba(225,28,43,.09); }
@@ -157,7 +162,7 @@ h2 em { color: var(--red); font-style: normal; }
 .signal-meter i:nth-child(3n + 2) { animation-delay: -.35s; }
 .signal-meter i:nth-child(4n) { animation-delay: -.6s; }
 .brief-meta { display: flex; justify-content: space-between; gap: 1rem; padding-top: .8rem; border-top: 1px solid rgba(255,255,255,.08); color: #666770; font: 500 .55rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
-.transmission-channel-rail { position: relative; z-index: 3; grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.06); background: rgba(5,5,7,.38); }
+.transmission-channel-rail { position: relative; z-index: 3; grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); margin-inline: calc(var(--space) * -1); padding-inline: var(--space); border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.06); background: rgba(5,5,7,.38); }
 .transmission-channel-rail article { position: relative; display: grid; grid-template-columns: 32px 1fr auto; gap: .85rem; align-items: center; min-width: 0; padding: 1rem clamp(.8rem, 1.6vw, 1.5rem); }
 .transmission-channel-rail article + article { border-left: 1px solid rgba(255,255,255,.08); }
 .transmission-channel-rail article::after { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(225,28,43,.6), transparent); transform: scaleX(.08); transform-origin: left; animation: channel-scan 4.8s ease-in-out infinite; }
@@ -387,6 +392,10 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   72% { opacity: .2; }
   88%, 100% { opacity: 0; transform: translateX(430%) skewX(-19deg); }
 }
+@keyframes transmission-edge-pulse {
+  0%, 100% { opacity: .18; filter: drop-shadow(0 0 0 rgba(225,28,43,0)); transform: translateY(-12px); }
+  50% { opacity: .7; filter: drop-shadow(0 0 7px rgba(225,28,43,.42)); transform: translateY(12px); }
+}
 @keyframes signal-link {
   0% { opacity: 0; transform: translateX(-120%); }
   30%, 70% { opacity: 1; }
@@ -448,7 +457,7 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .transmissions-mark { top: 1.75rem; width: clamp(105px, 18vw, 150px); }
   .transmissions-brief { width: min(520px, 100%); }
   .transmission-crosshair { top: 23%; left: 74%; width: min(44vw, 300px); }
-  .transmission-channel-rail { grid-column: 1; display: flex; width: calc(100% + var(--space)); overflow-x: auto; scrollbar-width: none; }
+  .transmission-channel-rail { grid-column: 1; display: flex; width: calc(100% + (var(--space) * 2)); margin-inline: calc(var(--space) * -1); padding-inline: var(--space); overflow-x: auto; scrollbar-width: none; }
   .transmission-channel-rail::-webkit-scrollbar { display: none; }
   .transmission-channel-rail article { flex: 0 0 min(280px, 78vw); }
   .cinematic-reel { height: 430vh; }
@@ -486,7 +495,7 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .transmissions-mark > span { display: none; }
   .transmission-link { width: 100%; font-size: .44rem; }
   .transmissions-brief > p { font-size: .82rem; }
-  .transmission-channel-rail { width: calc(100% + var(--space)); }
+  .transmission-channel-rail { width: calc(100% + (var(--space) * 2)); }
   .transmission-channel-rail article { flex-basis: min(260px, 82vw); }
   .cinematic-reel { height: 400vh; }
   .cinematic-copy, .cinematic-panel:nth-child(even) .cinematic-copy { top: 13%; right: auto; bottom: auto; left: var(--space); width: calc(100% - (var(--space) * 3)); text-align: left; }
