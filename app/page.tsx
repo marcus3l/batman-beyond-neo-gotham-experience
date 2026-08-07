@@ -157,10 +157,11 @@ export default function Home() {
         const progress = reveals[index];
         const reverse = index % 2 === 1;
 
-        const topLeft = reverse ? 38 * (1 - progress) : 62 * (1 - progress);
-        const topRight = reverse ? 62 * (1 - progress) : 38 * (1 - progress);
-        const bottomRight = reverse ? 62 + 38 * progress : 38 + 62 * progress;
-        const bottomLeft = reverse ? 38 + 62 * progress : 62 + 38 * progress;
+        const isFirstTransmission = index === 0;
+        const topLeft = isFirstTransmission ? 8 * (1 - progress) : reverse ? 38 * (1 - progress) : 62 * (1 - progress);
+        const topRight = isFirstTransmission ? 0 : reverse ? 62 * (1 - progress) : 38 * (1 - progress);
+        const bottomRight = isFirstTransmission ? 100 * progress : reverse ? 62 + 38 * progress : 38 + 62 * progress;
+        const bottomLeft = isFirstTransmission ? 8 + 92 * progress : reverse ? 38 + 62 * progress : 62 + 38 * progress;
         frame.style.clipPath = `polygon(0 ${topLeft}%, 100% ${topRight}%, 100% ${bottomRight}%, 0 ${bottomLeft}%)`;
 
         const videoShift = 5 - progress * 10;
