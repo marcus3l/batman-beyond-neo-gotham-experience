@@ -517,8 +517,8 @@ export default function Home() {
             <span>CANAL 20.99 / SEGURO</span>
           </div>
           <img
-            src="/assets/hero-legacy-banner.webp"
-            alt="Terry McGinnis como Batman do Futuro diante de Bruce Wayne e Neo-Gotham"
+            src="/assets/hero-neo-gotham-banner.webp"
+            alt="Batman do Futuro observando Neo-Gotham sob a lua e o tráfego aéreo"
             loading="eager"
             fetchPriority="high"
           />
