@@ -643,12 +643,12 @@ export default function Home() {
         <div className="city-panorama-hud reveal-rise" data-reveal aria-hidden="true">
           <div className="city-panorama-topline">
             <span><i /> Localização confirmada</span>
-            <span>VISÃO AÉREA / SETOR CENTRAL</span>
+            <span>VISÃO AÉREA / CANAL 07</span>
           </div>
           <div className="city-panorama-caption">
             <span>Distrito 07 · 23:48</span>
-            <strong>Neo-Gotham</strong>
-            <small>PERÍMETRO SOB VIGILÂNCIA / NG–2099</small>
+            <strong>Setor Central</strong>
+            <small>PERÍMETRO SOB VIGILÂNCIA / ROTA 04</small>
           </div>
           <div className="city-panorama-coordinates">
             <span>ALT. 418 M</span>
