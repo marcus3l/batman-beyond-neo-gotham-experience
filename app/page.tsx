@@ -497,7 +497,7 @@ export default function Home() {
             loop
             playsInline
             preload="metadata"
-            poster="/assets/hero-neo-gotham-banner.webp"
+            poster="/assets/hero-video-poster.jpg"
             aria-label="Abertura de Batman do Futuro em reprodução no banner"
           >
             <source src="/videos/batman-beyond-opening-hero.mp4" type="video/mp4" />
