@@ -108,7 +108,7 @@ img { display: block; max-width: 100%; }
 
 .section, .transmissions { padding: var(--section-y) var(--space); }
 .origin { position: relative; display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 7.5rem); padding-top: clamp(4rem, 6vw, 6rem); padding-bottom: clamp(5rem, 7vw, 7rem); background: var(--paper); color: var(--ink); isolation: isolate; }
-.origin::after { content: ""; position: absolute; z-index: 4; right: 0; bottom: -1px; left: 0; height: clamp(3.5rem, 7vw, 8rem); background-color: #0b0b0e; background-image: linear-gradient(112deg, transparent 58%, rgba(225,28,43,.08) 74%, transparent 88%), linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 100% 100%, 54px 54px, 54px 54px; clip-path: polygon(0 100%, 100% 0, 100% 100%); animation: transmission-grid-drift 18s linear infinite; pointer-events: none; }
+.origin::after { content: ""; position: absolute; z-index: 4; right: 0; bottom: -1px; left: 0; height: clamp(3.5rem, 7vw, 8rem); background-color: #0b0b0e; background-image: linear-gradient(180deg, transparent 40%, #0b0b0e 100%), radial-gradient(ellipse at 64% 44%, rgba(225,28,43,.065), transparent 64%), linear-gradient(rgba(255,255,255,.011) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.011) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 54px 54px, 54px 54px; clip-path: polygon(0 100%, 100% 0, 100% 100%); filter: drop-shadow(0 2px 0 rgba(225,28,43,.14)); animation: transition-wedge-drift 18s linear infinite; pointer-events: none; }
 .section-intro { position: sticky; top: 8rem; align-self: start; }
 h2 { margin: 0; font: 400 clamp(3.4rem, 7vw, 7.5rem)/.82 var(--display); letter-spacing: -.03em; text-transform: uppercase; }
 h2 em { color: var(--red); font-style: normal; }
@@ -128,7 +128,7 @@ h2 em { color: var(--red); font-style: normal; }
 .transmission-atmosphere::before, .transmission-atmosphere::after { content: ""; position: absolute; z-index: 4; top: 0; bottom: 0; width: clamp(12px, 1.15vw, 22px); opacity: .55; background: repeating-linear-gradient(180deg, transparent 0 14px, rgba(225,28,43,.5) 14px 16px, transparent 16px 30px); animation: transmission-edge-pulse 3.6s ease-in-out infinite; }
 .transmission-atmosphere::before { left: clamp(12px, 1.5vw, 28px); }
 .transmission-atmosphere::after { right: clamp(12px, 1.5vw, 28px); animation-delay: -1.8s; }
-.transmission-grid { position: absolute; inset: 0; opacity: .34; background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px); background-size: 54px 54px; mask-image: linear-gradient(90deg, rgba(0,0,0,.65), #000 7%, #000 93%, rgba(0,0,0,.65)); animation: transmission-grid-drift 18s linear infinite; }
+.transmission-grid { position: absolute; inset: 0; opacity: .34; background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px); background-size: 54px 54px; mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 100%); animation: transmission-grid-drift 18s linear infinite; }
 .transmission-grid::before { content: ""; position: absolute; top: clamp(1.25rem, 3vh, 2.2rem); right: clamp(2.8rem, 5vw, 6rem); left: clamp(2.8rem, 5vw, 6rem); height: 1px; background: linear-gradient(90deg, rgba(225,28,43,.8) 0 5%, rgba(255,255,255,.09) 5% 47%, transparent 47% 53%, rgba(255,255,255,.09) 53% 95%, rgba(225,28,43,.8) 95%); }
 .transmission-grid::after { content: "NG-SYS / INTERCEPTAÇÃO ATIVA / 88.7 MHZ"; position: absolute; top: calc(clamp(1.25rem, 3vh, 2.2rem) + .75rem); left: clamp(2.8rem, 5vw, 6rem); color: rgba(255,255,255,.22); font: 600 .46rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; }
 .transmission-sweep { position: absolute; top: -35%; bottom: -35%; left: 62%; width: 14%; opacity: .38; background: linear-gradient(90deg, transparent, rgba(225,28,43,.12), rgba(255,45,61,.28), transparent); filter: blur(8px); transform: skewX(-19deg); animation: transmission-sweep 6.4s cubic-bezier(.65,0,.35,1) infinite; }
@@ -385,6 +385,10 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
 }
 @keyframes transmission-grid-drift {
   to { background-position: 54px 54px; }
+}
+@keyframes transition-wedge-drift {
+  from { background-position: 0 0, 0 0, 0 0, 0 0; }
+  to { background-position: 0 0, 0 0, 54px 54px, 54px 54px; }
 }
 @keyframes transmission-sweep {
   0%, 12% { opacity: 0; transform: translateX(-520%) skewX(-19deg); }
