@@ -43,36 +43,36 @@ const casts = {
 
 const videoClips = [
   {
-    code: "TRANSMISSÃO 01",
-    title: ["Voo sobre", "Neo-Gotham"],
+    code: "VIGÍLIA AÉREA",
+    title: ["Neo-Gotham", "Sob vigilância"],
     duration: "00:08",
     tone: "media-blue",
     basename: "01-neo-gotham-flight",
-    description: "Uma patrulha aérea entre as luzes da cidade do futuro.",
+    description: "O perímetro está ativo. O novo Batman assume os céus da cidade.",
   },
   {
-    code: "PROTOCOLO DO TRAJE",
-    title: ["Batman", "Em ação"],
+    code: "PROTOCOLO DE ASCENSÃO",
+    title: ["Símbolo", "Reativado"],
     duration: "00:08",
     tone: "media-red",
     basename: "02-batman-arrival",
-    description: "A chegada do novo Batman marca o início de uma nova era.",
+    description: "O traje é ativado. Uma nova presença emerge das sombras de Neo-Gotham.",
   },
   {
-    code: "TRANSMISSÃO 02",
-    title: ["Inque nas alturas"],
+    code: "ALERTA DE CONTENÇÃO",
+    title: ["Inque", "Ruptura"],
     duration: "00:08",
     tone: "media-violet",
     basename: "03-inque-rooftop",
-    description: "Uma ameaça mutável surge acima das ruas de Neo-Gotham.",
+    description: "A ameaça metamorfa rompe o perímetro e transforma o horizonte em território hostil.",
   },
   {
-    code: "TRANSMISSÃO 03",
-    title: ["Curaré em combate"],
+    code: "DIRETRIZ DE COMBATE",
+    title: ["Curaré", "Vetor letal"],
     duration: "00:08",
     tone: "media-red",
     basename: "04-curare-action",
-    description: "Velocidade e precisão em um confronto sem espaço para erros.",
+    description: "Velocidade, técnica e precisão absoluta em um confronto sem margem para falhas.",
   },
 ] as const;
 
@@ -417,7 +417,7 @@ export default function Home() {
               <div className="standby-packet">
                 <p><span />Próximo pacote</p>
                 <strong>Transmissão 01</strong>
-                <small>Voo sobre Neo-Gotham</small>
+                <small>Neo-Gotham sob vigilância</small>
               </div>
               <div className="standby-wave-wrap">
                 <span>Recebendo sinal criptografado</span>
