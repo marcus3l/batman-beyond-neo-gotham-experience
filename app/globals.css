@@ -123,7 +123,8 @@ h2 em { color: var(--red); font-style: normal; }
 .card-arrow { font-size: 1.6rem; }
 
 .transmissions { position: relative; padding-bottom: 0; overflow: clip; background: #0b0b0e; isolation: isolate; }
-.transmissions-mark { position: absolute; z-index: 1; top: clamp(1.75rem, 3.5vw, 4rem); right: var(--space); width: clamp(120px, 14vw, 230px); height: auto; opacity: .96; filter: drop-shadow(0 12px 28px rgba(225, 28, 43, .18)); pointer-events: none; }
+.transmissions-mark { position: absolute; z-index: 1; top: clamp(1.75rem, 3.5vw, 4rem); right: var(--space); width: clamp(120px, 14vw, 230px); pointer-events: none; }
+.transmissions-mark img { display: block; width: 100%; height: auto; animation: bat-signal 4.8s ease-in-out infinite; transform-origin: 50% 58%; }
 .transmissions .section-heading { position: relative; z-index: 2; }
 .transmissions .row-heading h2 { font-family: var(--display-impact); font-weight: 700; letter-spacing: -.015em; line-height: .78; }
 .row-heading { display: flex; justify-content: space-between; gap: 3rem; align-items: end; margin-bottom: 3.8rem; }
@@ -255,6 +256,8 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
 .reveal-duo-right.is-visible { animation: reveal-duo-right-in .95s cubic-bezier(.2,.75,.18,1) var(--motion-delay) both; }
 .reveal-scale:not(.is-visible) { opacity: 0; transform: scale(.72) rotate(-8deg); filter: saturate(.35); }
 .reveal-scale.is-visible { animation: reveal-scale-in 1s cubic-bezier(.2,.75,.18,1) var(--motion-delay) both; }
+.reveal-mark:not(.is-visible) { opacity: 0; transform: translate3d(52px, -30px, 0) rotate(7deg) scale(.72); }
+.reveal-mark.is-visible { animation: reveal-mark-in .95s cubic-bezier(.16,.82,.2,1) var(--motion-delay) both; }
 
 @keyframes reveal-mask-in {
   from { opacity: 0; clip-path: polygon(0 0, 3% 16%, 3% 84%, 0 100%); transform: translateY(28px); }
@@ -279,6 +282,14 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
 @keyframes reveal-scale-in {
   from { opacity: 0; transform: scale(.72) rotate(-8deg); filter: saturate(.35); }
   to { opacity: 1; transform: scale(1) rotate(0); filter: saturate(1); }
+}
+@keyframes reveal-mark-in {
+  from { opacity: 0; transform: translate3d(52px, -30px, 0) rotate(7deg) scale(.72); }
+  to { opacity: .96; transform: translate3d(0, 0, 0) rotate(0) scale(1); }
+}
+@keyframes bat-signal {
+  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 10px 22px rgba(225, 28, 43, .16)); }
+  50% { transform: translateY(-6px) scale(1.025); filter: drop-shadow(0 16px 34px rgba(225, 28, 43, .38)); }
 }
 
 @keyframes ticker { to { transform: translateX(-50%); } }

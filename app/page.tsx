@@ -211,17 +211,13 @@ export default function Home() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
         });
       },
-      { threshold: 0.01, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.05, rootMargin: "-4% 0px -10% 0px" },
     );
 
-    elements.forEach((element) => {
-      if (!element.classList.contains("is-visible")) observer.observe(element);
-    });
+    elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, [cast]);
 
@@ -333,7 +329,9 @@ export default function Home() {
       </section>
 
       <section className="transmissions" id="midia" aria-labelledby="transmissions-title">
-        <img className="transmissions-mark" src="/assets/batman-beyond-bat.png" alt="" aria-hidden="true" />
+        <div className="transmissions-mark reveal-mark" data-reveal aria-hidden="true">
+          <img src="/assets/batman-beyond-bat.png" alt="" />
+        </div>
         <div className="section-heading row-heading">
           <div>
             <p className="eyebrow"><span>02</span> Arquivo de transmissão</p>
