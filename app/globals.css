@@ -201,8 +201,16 @@ img { display: block; max-width: 100%; }
 .wing-city-light .wing-transition-left { background: linear-gradient(rgba(5,5,7,.2), rgba(5,5,7,.48)), url("/assets/neo-gotham-panorama.jpg") left bottom / 100vw auto no-repeat; }
 .wing-city-light .wing-transition-right { background: linear-gradient(rgba(5,5,7,.2), rgba(5,5,7,.48)), url("/assets/neo-gotham-panorama.jpg") right bottom / 100vw auto no-repeat; }
 .wing-transition > span { position: absolute; z-index: 2; top: 0; width: 59%; height: 100%; background: var(--wing-from); will-change: transform; transition: transform 1.05s cubic-bezier(.18,.78,.18,1); }
-.wing-transition-left { left: 0; transform-origin: left top; clip-path: polygon(0 0, 100% 0, 91% 28%, 76% 52%, 57% 100%, 0 58%); }
-.wing-transition-right { right: 0; transform-origin: right top; clip-path: polygon(0 0, 100% 0, 100% 58%, 43% 100%, 24% 52%, 9% 28%); }
+.wing-transition-left {
+  left: 0;
+  transform-origin: left top;
+  clip-path: polygon(0 0, 100% 0, 100% 25%, 91% 47%, 86% 100%, 69% 66%, 40% 52%, 0 38%);
+}
+.wing-transition-right {
+  right: 0;
+  transform-origin: right top;
+  clip-path: polygon(0 0, 100% 0, 100% 38%, 60% 52%, 31% 66%, 14% 100%, 9% 47%, 0 25%);
+}
 .wing-transition:not(.is-visible) .wing-transition-left { transform: scaleX(1.22); }
 .wing-transition:not(.is-visible) .wing-transition-right { transform: scaleX(1.22); }
 .wing-transition.is-visible .wing-transition-left { transform: scaleX(1) translateX(-1.5%); }
