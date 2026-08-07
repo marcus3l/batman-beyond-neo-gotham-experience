@@ -129,13 +129,13 @@ h2 em { color: var(--red); font-style: normal; }
 .origin-dossier dt, .origin-dossier dd { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-transform: uppercase; }
 .origin-dossier dt { color: #62636c; font: 700 .42rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; }
 .origin-dossier dd { margin-top: .28rem; color: #c3c1bd; font-size: .52rem; font-weight: 800; letter-spacing: .05em; }
-.origin-cards { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); min-height: clamp(500px, 42vw, 590px); overflow: hidden; border-top: 1px solid #cac6bf; border-bottom: 1px solid #cac6bf; isolation: isolate; }
+.origin-cards { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); min-height: clamp(470px, 38vw, 540px); overflow: hidden; border-top: 1px solid #cac6bf; border-bottom: 1px solid #cac6bf; isolation: isolate; }
 .origin-cards::before { content: "TRAJETÓRIA DO SÍMBOLO / 01—03"; position: absolute; z-index: 3; top: 1.2rem; right: 1.5rem; color: #9a9690; font: 700 .48rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; }
-.origin-cards::after { content: ""; position: absolute; z-index: 0; top: 9rem; left: 7%; width: 88%; height: 1px; background: linear-gradient(90deg, transparent, var(--red) 9% 91%, transparent); box-shadow: 0 0 12px rgba(225,28,43,.2); transform: rotate(15deg); transform-origin: left center; }
+.origin-cards::after { content: ""; position: absolute; z-index: 0; top: 8.3rem; left: 7%; width: 88%; height: 1px; background: linear-gradient(90deg, transparent, var(--red) 9% 91%, transparent); box-shadow: 0 0 12px rgba(225,28,43,.2); transform: rotate(10.5deg); transform-origin: left center; }
 .origin-card { --step-offset: 3.8rem; position: relative; z-index: 1; min-width: 0; padding: var(--step-offset) clamp(1.2rem, 2vw, 2rem) 2rem; overflow: hidden; border-left: 1px solid rgba(120,115,108,.2); background: linear-gradient(180deg, rgba(255,255,255,.16), transparent 42%); transition: background .3s ease, box-shadow .3s ease; }
 .origin-card:first-child { border-left: 0; }
-.origin-card:nth-child(2) { --step-offset: 10.2rem; }
-.origin-card:nth-child(3) { --step-offset: 16.6rem; }
+.origin-card:nth-child(2) { --step-offset: 7.9rem; }
+.origin-card:nth-child(3) { --step-offset: 12rem; }
 .origin-card::before { content: ""; position: absolute; top: calc(var(--step-offset) - 1rem); left: clamp(1.2rem, 2vw, 2rem); width: 9px; height: 9px; border: 2px solid var(--paper); border-radius: 50%; background: var(--red); box-shadow: 0 0 0 1px var(--red), 0 0 16px rgba(225,28,43,.32); }
 .origin-card::after { content: ""; position: absolute; right: -18%; bottom: -25%; width: 70%; aspect-ratio: 1; border: 1px solid rgba(225,28,43,.07); border-radius: 50%; transition: transform .5s ease, border-color .3s ease; }
 .origin-card:hover { z-index: 2; background: rgba(255,255,255,.62); box-shadow: 0 18px 38px rgba(30,25,22,.08); }
@@ -146,6 +146,14 @@ h2 em { color: var(--red); font-style: normal; }
 .origin-card:hover h3 { color: var(--red); }
 .origin-card p { max-width: 18rem; margin: 0; color: #67635f; font-size: .88rem; line-height: 1.58; }
 .card-arrow { position: absolute; top: calc(var(--step-offset) + .1rem); right: clamp(1.2rem, 2vw, 2rem); font-size: 1.35rem; }
+.origin-card-progress { position: absolute; z-index: 2; right: clamp(1.2rem, 2vw, 2rem); bottom: 1.6rem; left: clamp(1.2rem, 2vw, 2rem); }
+.origin-card-progress > span { display: flex; justify-content: space-between; gap: .8rem; color: #8b8781; font: 700 .46rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .13em; text-transform: uppercase; }
+.origin-card-progress b { color: var(--red); font: inherit; }
+.origin-card-progress i { position: relative; display: block; height: 2px; margin-top: .65rem; overflow: hidden; background: #d5d0c9; }
+.origin-card-progress i::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 33%; background: var(--red); box-shadow: 0 0 8px rgba(225,28,43,.28); transition: width .45s ease; }
+.origin-card:nth-child(2) .origin-card-progress i::after { width: 66%; }
+.origin-card:nth-child(3) .origin-card-progress i::after { width: 100%; }
+.origin-card:hover .origin-card-progress i::after { width: 100%; }
 
 .transmissions { --transmission-intro-height: clamp(600px, 72svh, 740px); position: relative; padding-bottom: 0; overflow: clip; background: #0b0b0e; isolation: isolate; }
 .transmission-atmosphere { position: absolute; z-index: 0; top: 0; right: calc(var(--space) * -1); bottom: 0; left: calc(var(--space) * -1); overflow: hidden; pointer-events: none; }
@@ -569,13 +577,14 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .origin-dossier::after { display: none; }
   .origin-cards::before { top: .9rem; right: 1rem; }
   .origin-cards::after { display: none; }
-  .origin-card, .origin-card:nth-child(2), .origin-card:nth-child(3) { --step-offset: 0; min-height: 190px; padding: 3.8rem 1rem 1.6rem; border-left: 0; border-bottom: 1px solid #d3cfc8; }
+  .origin-card, .origin-card:nth-child(2), .origin-card:nth-child(3) { --step-offset: 0; min-height: 230px; padding: 3.8rem 1rem 4.6rem; border-left: 0; border-bottom: 1px solid #d3cfc8; }
   .origin-card::before { top: 1.2rem; left: 1rem; }
   .origin-card::after { width: 42%; }
   .card-index { margin-bottom: 1.4rem; font-size: 2.7rem; }
   .origin-card h3 { max-width: none; }
   .origin-card p { max-width: 30rem; }
   .card-arrow { top: 1.2rem; right: 1rem; }
+  .origin-card-progress { right: 1rem; bottom: 1.3rem; left: 1rem; }
   .transmissions { --transmission-intro-height: clamp(730px, 94svh, 820px); }
   .transmissions .section-heading { padding-top: 5.5rem; padding-bottom: 1.2rem; }
   .transmissions-mark { top: 1.1rem; right: .75rem; width: 86px; }

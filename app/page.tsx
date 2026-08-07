@@ -358,6 +358,10 @@ export default function Home() {
                 <p>{step.text}</p>
               </div>
               <span className="card-arrow" aria-hidden="true">↗</span>
+              <div className="origin-card-progress" aria-label={`Evolução: ${["Instinto", "Estratégia", "Propósito"][index]}`}>
+                <span>{["Instinto", "Estratégia", "Propósito"][index]}<b>{[33, 66, 100][index]}%</b></span>
+                <i aria-hidden="true" />
+              </div>
             </article>
           ))}
         </div>
