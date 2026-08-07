@@ -465,7 +465,8 @@ export default function Home() {
         <p>O amanhã pertence ao morcego.</p>
         <div className="footer-links">
           <a href="#inicio">Voltar ao topo ↑</a>
-          <a href="/fonts/license.txt">Licença da fonte</a>
+          <a href="/fonts/license.txt">Licença Batman Future</a>
+          <a href="/fonts/teko-license.txt">Licença Teko</a>
         </div>
         <small>
           Projeto conceitual não oficial para portfólio. Batman do Futuro e personagens relacionados pertencem à DC e à Warner Bros. Entertainment.

@@ -8,6 +8,14 @@
   font-weight: 400;
 }
 
+@font-face {
+  font-family: "Teko";
+  src: url("/fonts/teko-variable.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 300 700;
+}
+
 :root {
   --ink: #050507;
   --ink-soft: #0d0e12;
@@ -23,6 +31,7 @@
   --violet: #5a2a70;
   --yellow: #f0d63b;
   --display: "Batman Future", "Arial Narrow", Impact, sans-serif;
+  --display-impact: "Teko", "Arial Narrow", Impact, sans-serif;
   --body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --space: clamp(1.25rem, 4vw, 5rem);
   --section-y: clamp(6rem, 11vw, 10rem);
@@ -112,6 +121,7 @@ h2 em { color: var(--red); font-style: normal; }
 .card-arrow { font-size: 1.6rem; }
 
 .transmissions { padding-bottom: 0; overflow: clip; background: #0b0b0e; }
+.transmissions .row-heading h2 { font-family: var(--display-impact); font-weight: 700; letter-spacing: -.015em; line-height: .78; }
 .row-heading { display: flex; justify-content: space-between; gap: 3rem; align-items: end; margin-bottom: 3.8rem; }
 .row-heading > p { width: min(360px, 100%); margin: 0 0 .6rem; color: #8d8d94; line-height: 1.65; }
 .cinematic-reel { position: relative; height: 460vh; margin: clamp(4rem, 8vw, 8rem) calc(var(--space) * -1) 0; background: var(--ink); }
@@ -133,7 +143,7 @@ h2 em { color: var(--red); font-style: normal; }
 .cinematic-copy > p { display: flex; align-items: center; gap: 1rem; margin: 0 0 .55rem; color: var(--red-hot); font-size: .62rem; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
 .cinematic-panel:nth-child(even) .cinematic-copy > p { justify-content: flex-end; }
 .cinematic-copy > p span { padding-left: 1rem; border-left: 1px solid currentColor; color: rgba(255,255,255,.65); }
-.cinematic-copy h3 { margin: 0; color: var(--paper); font: 400 clamp(3.8rem, 9vw, 10rem)/.76 var(--display); letter-spacing: -.025em; text-transform: uppercase; }
+.cinematic-copy h3 { margin: 0; color: var(--paper); font: 700 clamp(3.8rem, 9vw, 10rem)/.76 var(--display-impact); letter-spacing: -.012em; text-transform: uppercase; }
 .cinematic-copy > span { display: block; max-width: 34rem; margin-top: 1rem; color: rgba(255,255,255,.7); font-size: .85rem; line-height: 1.55; }
 .cinematic-panel:nth-child(even) .cinematic-copy > span { margin-left: auto; }
 .cinematic-progress { position: absolute; z-index: 20; top: 50%; right: 1.25rem; display: flex; flex-direction: column; gap: .85rem; transform: translateY(-50%); }
