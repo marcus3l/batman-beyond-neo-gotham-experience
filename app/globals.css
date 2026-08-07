@@ -6265,7 +6265,7 @@ h2 em {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 42%;
   filter: none;
   transform: none;
 }
@@ -6344,7 +6344,7 @@ h2 em {
     clip-path: none;
   }
   .hero-opening .hero-visual > video {
-    object-position: center;
+    object-position: center 44%;
   }
   .hero-origin-bridge {
     --bridge-height: 92px;
