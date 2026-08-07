@@ -131,6 +131,57 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const panels = Array.from(document.querySelectorAll<HTMLElement>(".cinematic-panel"));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let animationFrame = 0;
+
+    const updateReveals = () => {
+      const viewportHeight = window.innerHeight;
+
+      panels.forEach((panel, index) => {
+        const frame = panel.querySelector<HTMLElement>(".cinematic-frame");
+        const video = panel.querySelector<HTMLVideoElement>(".cinematic-frame video");
+        const copy = panel.querySelector<HTMLElement>(".cinematic-copy");
+        if (!frame || !video || !copy) return;
+
+        const rect = panel.getBoundingClientRect();
+        const rawProgress = (viewportHeight - rect.top) / (viewportHeight * 0.88);
+        const progress = reduceMotion ? 1 : Math.min(1, Math.max(0, rawProgress));
+        const reverse = index % 2 === 1;
+
+        const topLeft = reverse ? 43 * (1 - progress) : 58 - 43 * progress;
+        const topRight = reverse ? 58 - 43 * progress : 43 * (1 - progress);
+        const bottomRight = reverse ? 58 + 42 * progress : 43 + 42 * progress;
+        const bottomLeft = reverse ? 43 + 42 * progress : 58 + 42 * progress;
+        frame.style.clipPath = `polygon(0 ${topLeft}%, 100% ${topRight}%, 100% ${bottomRight}%, 0 ${bottomLeft}%)`;
+
+        const videoShift = 8 - progress * 16;
+        video.style.transform = `translateY(${videoShift}%) scale(1.08)`;
+
+        const copyProgress = Math.min(1, Math.max(0, (progress - 0.52) / 0.34));
+        copy.style.opacity = copyProgress.toFixed(3);
+        copy.style.transform = `translateY(${(1 - copyProgress) * 34}px)`;
+      });
+
+      animationFrame = 0;
+    };
+
+    const requestUpdate = () => {
+      if (!animationFrame) animationFrame = window.requestAnimationFrame(updateReveals);
+    };
+
+    updateReveals();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
   function submitSignal(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSent(true);
