@@ -214,7 +214,7 @@ export default function Home() {
           entry.target.classList.toggle("is-visible", entry.isIntersecting);
         });
       },
-      { threshold: 0.05, rootMargin: "-4% 0px -10% 0px" },
+      { threshold: 0, rootMargin: "-4% 0px -10% 0px" },
     );
 
     elements.forEach((element) => observer.observe(element));
