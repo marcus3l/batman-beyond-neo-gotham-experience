@@ -356,7 +356,11 @@ export default function Home() {
             <p className="eyebrow"><span>02</span> Arquivo de transmissão</p>
             <h2 id="transmissions-title">Veja o futuro<br /><em>entrar em ação.</em></h2>
           </div>
-          <p>Registros interceptados revelam a cidade, o novo Batman e ameaças que transformaram o futuro em um campo de batalha.</p>
+          <aside className="transmissions-brief reveal-rise motion-delay-2" data-reveal aria-label="Status da transmissão">
+            <div className="brief-status"><span aria-hidden="true" />Sinal ativo <b>REC 02</b></div>
+            <p>Registros interceptados revelam a cidade, o novo Batman e ameaças que transformaram o futuro em um campo de batalha.</p>
+            <div className="brief-meta"><span>FREQ. 88.7</span><span>NEO-GOTHAM / 2099</span></div>
+          </aside>
         </div>
 
         <div className="cinematic-reel">
