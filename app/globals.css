@@ -6239,13 +6239,15 @@ h2 em {
   right: 0;
   bottom: 0;
   left: 0;
-  height: clamp(170px, 26vh, 300px);
+  height: clamp(250px, 38vh, 440px);
   pointer-events: none;
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(5, 5, 7, 0.2) 24%,
-    rgba(5, 5, 7, 0.74) 70%,
+    rgba(5, 5, 7, 0.04) 18%,
+    rgba(5, 5, 7, 0.2) 39%,
+    rgba(5, 5, 7, 0.58) 67%,
+    rgba(8, 8, 11, 0.9) 86%,
     #0b0b0e 100%
   );
 }
@@ -6364,7 +6366,7 @@ h2 em {
     min-height: max(520px, 82svh);
   }
   .hero-opening::after {
-    height: 150px;
+    height: 220px;
   }
   .hero-origin-bridge {
     --bridge-height: 72px;

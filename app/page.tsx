@@ -505,8 +505,6 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="hero-origin-bridge" data-reveal aria-hidden="true" />
-
       <section className="section origin" id="origem">
         <div className="section-intro">
           <div className="section-intro-content reveal-mask" data-reveal>
@@ -550,13 +548,6 @@ export default function Home() {
           </div>
         </aside>
       </section>
-
-      <div className="signal-strip signal-strip-transmission" aria-hidden="true">
-        <div>
-          <span>Novo herói</span><i>◆</i><span>Nova cidade</span><i>◆</i><span>Mesmo símbolo</span><i>◆</i>
-          <span>Novo herói</span><i>◆</i><span>Nova cidade</span><i>◆</i><span>Mesmo símbolo</span><i>◆</i>
-        </div>
-      </div>
 
       <section className="transmissions" id="midia" aria-labelledby="transmissions-title">
         <div className="section-heading row-heading">
