@@ -87,6 +87,13 @@ function WingTransition({ tone }: { tone: "light-dark" | "dark-red" | "red-dark"
       <span className="wing-transition-left" />
       <span className="wing-transition-right" />
       <i />
+      {tone === "light-red" && (
+        <img
+          className="wing-transition-symbol"
+          src="/assets/batman-beyond-bat.png"
+          alt=""
+        />
+      )}
     </div>
   );
 }

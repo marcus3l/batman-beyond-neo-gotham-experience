@@ -1253,6 +1253,32 @@ img {
   opacity: 0.9;
   transform: translate(-50%, -50%) scaleX(1);
 }
+.wing-transition-symbol {
+  position: absolute;
+  z-index: 6;
+  top: 58%;
+  left: 50%;
+  width: clamp(78px, 7vw, 132px);
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.62);
+  transform-origin: center;
+  transition:
+    opacity 0.48s ease 0.22s,
+    transform 0.8s cubic-bezier(0.18, 0.78, 0.18, 1) 0.16s;
+}
+.wing-transition.is-visible .wing-transition-symbol {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.wing-light-red > i,
+.wing-light-red.is-visible > i,
+.wing-light-red::after,
+.wing-light-red.is-visible::after {
+  opacity: 0;
+}
 .wing-transition::after {
   content: "";
   position: absolute;
@@ -1272,6 +1298,9 @@ img {
 .wing-transition.is-visible::after {
   opacity: 0.48;
   transform: translateX(-50%) scaleY(1);
+}
+.wing-light-red.is-visible::after {
+  opacity: 0;
 }
 .wing-transition.reveal-reverse > span {
   transition-duration: 0.72s;
