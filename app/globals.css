@@ -6244,11 +6244,11 @@ h2 em {
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(5, 5, 7, 0.04) 18%,
-    rgba(5, 5, 7, 0.2) 39%,
-    rgba(5, 5, 7, 0.58) 67%,
-    rgba(8, 8, 11, 0.9) 86%,
-    #0b0b0e 100%
+    rgba(0, 0, 0, 0.04) 18%,
+    rgba(0, 0, 0, 0.2) 39%,
+    rgba(0, 0, 0, 0.58) 67%,
+    rgba(0, 0, 0, 0.92) 86%,
+    #000 100%
   );
 }
 .hero-opening::before,
@@ -6421,11 +6421,11 @@ h2 em {
 
 /* The origin dossier continues the hero's nocturnal visual language. */
 .hero-origin-bridge {
-  background: #0b0b0e;
+  background: #000;
 }
 
 .origin {
-  background: #070709;
+  background: #000;
   background-image: none;
   background-size: auto;
   color: #f3f0e9;
@@ -6511,7 +6511,7 @@ h2 em {
 }
 
 .origin::after {
-  background: #070709;
+  background: #000;
   background-image: none;
 }
 
