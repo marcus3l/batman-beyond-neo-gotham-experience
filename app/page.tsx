@@ -395,6 +395,24 @@ export default function Home() {
 
         <div className="cinematic-reel">
           <div className="cinematic-stage">
+            <div className="cinematic-standby" aria-hidden="true">
+              <div className="standby-packet">
+                <p><span />Próximo pacote</p>
+                <strong>Transmissão 01</strong>
+                <small>Voo sobre Neo-Gotham</small>
+              </div>
+              <div className="standby-wave-wrap">
+                <span>Recebendo sinal criptografado</span>
+                <div className="standby-wave">
+                  {Array.from({ length: 28 }, (_, bar) => <i key={bar} />)}
+                </div>
+              </div>
+              <div className="standby-buffer">
+                <span>Buffer</span>
+                <strong>100%</strong>
+                <small>40.7128° N / 74.0060° W</small>
+              </div>
+            </div>
             {videoClips.map((video, index) => (
               <article className={`cinematic-panel cinematic-panel-${index + 1}`} key={video.basename}>
                 <div className="cinematic-frame">
