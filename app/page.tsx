@@ -76,8 +76,6 @@ const videoClips = [
   },
 ] as const;
 
-const transmissionVideos = [videoClips[0], videoClips[2], videoClips[3]];
-
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeVideo, setActiveVideo] = useState<(typeof videoClips)[number] | null>(null);
@@ -108,6 +106,29 @@ export default function Home() {
     };
     window.addEventListener("keydown", closeOnEscape);
     return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
+  useEffect(() => {
+    const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("[data-scroll-video]"));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            void video.play().catch(() => undefined);
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.28 },
+    );
+
+    videos.forEach((video) => observer.observe(video));
+    return () => {
+      observer.disconnect();
+      videos.forEach((video) => video.pause());
+    };
   }, []);
 
   function submitSignal(event: FormEvent<HTMLFormElement>) {
@@ -143,6 +164,7 @@ export default function Home() {
 
         <nav id="main-navigation" className={menuOpen ? "nav is-open" : "nav"} aria-label="Navegação principal">
           <a href="#origem" onClick={closeMenu}>Origem</a>
+          <a href="#midia" onClick={closeMenu}>Cenas</a>
           <a href="#cidade" onClick={closeMenu}>Neo-Gotham</a>
           <a href="#traje" onClick={closeMenu}>O traje</a>
           <a href="#personagens" onClick={closeMenu}>Personagens</a>
@@ -216,7 +238,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="transmissions" aria-labelledby="transmissions-title">
+      <section className="transmissions" id="midia" aria-labelledby="transmissions-title">
         <div className="section-heading row-heading">
           <div>
             <p className="eyebrow"><span>02</span> Arquivo de transmissão</p>
@@ -225,34 +247,36 @@ export default function Home() {
           <p>Registros interceptados revelam a cidade, o novo Batman e ameaças que transformaram o futuro em um campo de batalha.</p>
         </div>
 
-        <div className="media-grid">
-          {transmissionVideos.map((video) => (
-            <button
-              className={`media-card ${video.tone}`}
-              type="button"
-              key={video.basename}
-              onClick={() => setActiveVideo(video)}
-              aria-label={`Assistir à cena: ${video.title}`}
-            >
-              <video
-                className="media-background"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={`/videos/${video.basename}-poster.jpg`}
-                aria-hidden="true"
+        <div className="cinematic-reel">
+          {videoClips.map((video, index) => (
+            <article className={`cinematic-panel cinematic-panel-${index + 1}`} key={video.basename}>
+              <button
+                className="cinematic-frame"
+                type="button"
+                onClick={() => setActiveVideo(video)}
+                aria-label={`Ampliar cena: ${video.title}`}
               >
-                <source src={`/videos/${video.basename}.webm`} type="video/webm" />
-                <source src={`/videos/${video.basename}.mp4`} type="video/mp4" />
-              </video>
-              <span className="media-code">{video.code}</span>
-              <span className="media-play" aria-hidden="true">▶</span>
-              <span className="media-title">{video.title}</span>
-              <span className="media-duration">{video.duration}</span>
-              <span className="media-placeholder">Cena disponível</span>
-            </button>
+                <video
+                  data-scroll-video
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  poster={`/videos/${video.basename}-poster.jpg`}
+                  aria-hidden="true"
+                >
+                  <source src={`/videos/${video.basename}.webm`} type="video/webm" />
+                  <source src={`/videos/${video.basename}.mp4`} type="video/mp4" />
+                </video>
+                <span className="cinematic-scan" aria-hidden="true" />
+                <span className="cinematic-play" aria-hidden="true">▶</span>
+              </button>
+              <div className="cinematic-copy">
+                <p>{video.code}<span>{video.duration}</span></p>
+                <h3>{video.title}</h3>
+                <span>{video.description}</span>
+              </div>
+            </article>
           ))}
         </div>
       </section>
@@ -317,7 +341,7 @@ export default function Home() {
           onClick={() => setActiveVideo(videoClips[1])}
           aria-label="Assistir à cena: Batman em ação"
         >
-          <video autoPlay muted loop playsInline preload="metadata" poster="/videos/02-batman-arrival-poster.jpg" aria-hidden="true">
+          <video data-scroll-video muted loop playsInline preload="metadata" poster="/videos/02-batman-arrival-poster.jpg" aria-hidden="true">
             <source src="/videos/02-batman-arrival.webm" type="video/webm" />
             <source src="/videos/02-batman-arrival.mp4" type="video/mp4" />
           </video>
