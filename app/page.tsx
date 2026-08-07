@@ -474,25 +474,50 @@ export default function Home() {
       <section className="city" id="cidade">
         <div className="city-copy reveal-city" data-reveal>
           <p className="eyebrow light"><span>03</span> Proteja a cidade</p>
-          <h2>Bem-vindo a<br /><em>Neo-Gotham.</em></h2>
+          <h2><span>Bem-vindo a</span><em>Neo-Gotham.</em></h2>
           <p className="city-lead">
             Arranha-céus atravessam as nuvens. Veículos cortam o céu. Luzes de neon escondem becos onde tecnologia e crime caminham lado a lado.
           </p>
-          <p className="city-statement">A cidade mudou.<br />O medo continua o mesmo.</p>
+          <p className="city-statement">
+            <span>A cidade mudou.</span>
+            <strong>O medo continua o mesmo.</strong>
+          </p>
         </div>
 
         <div className="city-panels">
+          <header className="city-panels-header reveal-rise" data-reveal>
+            <div>
+              <span>Rede de vigilância</span>
+              <strong>Perímetro Neo-Gotham</strong>
+            </div>
+            <p><i aria-hidden="true" /> Sinal ativo <span>NG / 2099</span></p>
+          </header>
+
+          <div className="city-route">
           {[
-            ["Explore", "Descubra uma metrópole construída sobre as sombras da antiga Gotham."],
-            ["Patrulhe", "Cruze os céus e encontre perigos ocultos pela cidade vertical."],
-            ["Proteja", "Enfrente criminosos capazes de transformar o futuro em uma arma."],
-          ].map(([title, text], index) => (
+            ["Explore", "Descubra uma metrópole construída sobre as sombras da antiga Gotham.", "SETOR 07"],
+            ["Patrulhe", "Cruze os céus e encontre perigos ocultos pela cidade vertical.", "ROTA 12"],
+            ["Proteja", "Enfrente criminosos capazes de transformar o futuro em uma arma.", "NÍVEL V"],
+          ].map(([title, text, code], index) => (
             <article className={`reveal-rise motion-delay-${index}`} data-reveal key={title}>
-              <span>0{index + 1}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
+              <div className="city-route-index">
+                <span>0{index + 1}</span>
+                <small>Fase</small>
+              </div>
+              <div className="city-route-copy">
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+              <strong className="city-route-code">{code}</strong>
             </article>
           ))}
+          </div>
+
+          <footer className="city-panels-footer reveal-rise motion-delay-2" data-reveal>
+            <span>Altitude 418 M</span>
+            <span>Frequência 88.7</span>
+            <span>Vigilância contínua</span>
+          </footer>
         </div>
       </section>
 
