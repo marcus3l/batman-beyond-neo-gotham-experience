@@ -470,7 +470,7 @@ h2 em { color: var(--red); font-style: normal; }
 .legacy-status span:first-child { display: flex; align-items: center; gap: .5rem; color: var(--red); }
 .legacy-status i { width: 5px; height: 5px; border-radius: 50%; background: var(--red); box-shadow: 0 0 8px rgba(225,28,43,.4); animation: pulse 1.8s ease-in-out infinite; }
 .duo { min-height: clamp(800px, 60vw, 900px); display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
-.duo-card { position: relative; isolation: isolate; padding: 2rem; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+.duo-card { position: relative; isolation: isolate; padding: 2rem clamp(2rem, 2.8vw, 3rem) clamp(5rem, 6.5vw, 6.25rem); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
 .duo-card::before { content: ""; position: absolute; z-index: 2; inset: 0; background: repeating-linear-gradient(120deg, transparent 0 30px, rgba(255,255,255,.035) 30px 31px); pointer-events: none; }
 .duo-card::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, rgba(5,5,7,.04) 15%, rgba(5,5,7,.12) 48%, rgba(5,5,7,.92) 100%); pointer-events: none; }
 .duo-card.terry { background: var(--red); color: white; clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%); }
@@ -987,6 +987,7 @@ footer small { grid-column: 1 / -1; padding-top: 2rem; border-top: 1px solid var
   .legacy-author { align-items: flex-start; flex-direction: column; }
   .legacy-status { flex-wrap: wrap; justify-content: flex-start; gap: .75rem 1.4rem; }
   .duo { min-height: 780px; grid-template-columns: 1fr; }
+  .duo-card { padding: 1.5rem 1.25rem 2rem; }
   .duo-card.bruce { margin-top: 0; }
   .duo-card.terry, .duo-card.bruce { clip-path: none; }
   .suit { padding-block: 6.5rem; gap: 2.75rem; }
