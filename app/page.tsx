@@ -348,10 +348,10 @@ export default function Home() {
       </section>
 
       <section className="transmissions" id="midia" aria-labelledby="transmissions-title">
-        <div className="transmissions-mark reveal-mark" data-reveal aria-hidden="true">
-          <img src="/assets/batman-beyond-bat.png" alt="" />
-        </div>
         <div className="section-heading row-heading">
+          <div className="transmissions-mark reveal-mark" data-reveal aria-hidden="true">
+            <img src="/assets/batman-beyond-bat.png" alt="" />
+          </div>
           <div>
             <p className="eyebrow"><span>02</span> Arquivo de transmissão</p>
             <h2 id="transmissions-title">Veja o futuro<br /><em>entrar em ação.</em></h2>
