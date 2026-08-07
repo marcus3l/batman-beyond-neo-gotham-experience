@@ -565,8 +565,6 @@ export default function Home() {
         </aside>
       </section>
 
-      <WingTransition tone="light-dark" />
-
       <section className="transmissions" id="midia" aria-labelledby="transmissions-title">
         <div className="section-heading row-heading">
           <div className="transmission-atmosphere" aria-hidden="true">
