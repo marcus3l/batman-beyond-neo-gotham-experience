@@ -427,12 +427,37 @@ export default function Home() {
         </a>
       </header>
 
-      <section className="hero hero-banner" id="inicio">
-        <h1 className="sr-only">Batman do Futuro</h1>
+      <section className="hero" id="inicio">
+        <div className="hero-grid" aria-hidden="true" />
+        <div className="hero-copy">
+          <p className="eyebrow"><span>Arquivo 01</span> O futuro de Gotham começa agora</p>
+          <img className="hero-wordmark" src="/assets/batman-beyond-wordmark.svg" alt="Batman do Futuro" />
+          <h1 className="sr-only">Batman do Futuro</h1>
+          <p className="hero-lead">
+            Em uma cidade dominada pela tecnologia e por novas ameaças, um jovem rebelde assume o símbolo que marcou gerações.
+          </p>
+          <div className="hero-actions">
+            <a className="button" href="#origem">Conheça o novo Batman <span aria-hidden="true">↘</span></a>
+            <a className="text-button" href="#midia">Explorar cenas <span aria-hidden="true">↓</span></a>
+          </div>
+          <div className="hero-status" aria-label="Status da transmissão">
+            <span className="status-dot" />
+            <span>Neo-Gotham</span>
+            <span>Conexão segura</span>
+            <span>Canal 20.99</span>
+          </div>
+        </div>
+
         <div className={identityOpen ? "hero-visual identity-open" : "hero-visual"}>
+          <div className="hero-moon" aria-hidden="true" />
+          <div className="hero-number" aria-hidden="true">2099</div>
+          <div className="hero-telemetry" aria-hidden="true">
+            <span>NG–ID / VARREDURA 01</span>
+            <span>CANAL 20.99 / SEGURO</span>
+          </div>
           <img
-            src="/assets/hero-red-batman.webp"
-            alt="Batman do Futuro sobre um fundo vermelho"
+            src="/assets/hero-legacy-banner.webp"
+            alt="Terry McGinnis como Batman do Futuro diante de Bruce Wayne e Neo-Gotham"
             loading="eager"
             fetchPriority="high"
           />
