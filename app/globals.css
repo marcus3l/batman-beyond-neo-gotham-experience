@@ -6425,13 +6425,9 @@ h2 em {
 }
 
 .origin {
-  background:
-    radial-gradient(circle at 79% 16%, rgba(225, 28, 43, 0.09), transparent 28%),
-    radial-gradient(circle at 12% 72%, rgba(225, 28, 43, 0.045), transparent 25%),
-    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    #0b0b0e;
-  background-size: auto, auto, 64px 64px, 64px 64px, auto;
+  background: #070709;
+  background-image: none;
+  background-size: auto;
   color: #f3f0e9;
 }
 
@@ -6515,10 +6511,8 @@ h2 em {
 }
 
 .origin::after {
-  background-color: #0b0b0e;
-  background-image:
-    linear-gradient(180deg, transparent, #0b0b0e),
-    radial-gradient(ellipse at 64% 44%, rgba(225, 28, 43, 0.06), transparent 64%);
+  background: #070709;
+  background-image: none;
 }
 
 /* Central editorial opening for Terry's origin. */
@@ -6534,7 +6528,7 @@ h2 em {
   z-index: 6;
   top: auto;
   width: min(100%, 1560px);
-  margin: clamp(-13.5rem, -12vw, -7.5rem) auto 0;
+  margin: clamp(-12rem, -10.5vw, -6rem) auto 0;
   text-align: center;
 }
 
@@ -6649,7 +6643,7 @@ h2 em {
   }
 
   .origin .section-intro {
-    margin-top: -5.5rem;
+    margin-top: -5rem;
   }
 
   .origin .section-intro h2 {
@@ -6672,7 +6666,7 @@ h2 em {
 
 @media (max-width: 560px) {
   .origin .section-intro {
-    margin-top: -3.75rem;
+    margin-top: -3.4rem;
   }
 
   .origin .eyebrow {
