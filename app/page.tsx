@@ -129,7 +129,8 @@ export default function Home() {
       const reelProgress = Math.min(1, Math.max(0, -reelRect.top / scrollDistance));
       const sequenceProgress = reelProgress * panels.length;
       const reveals = panels.map((_, index) => {
-        const linear = Math.min(1, Math.max(0, (sequenceProgress - index) / 0.72));
+        const revealWindow = index === 0 ? 0.16 : 0.72;
+        const linear = Math.min(1, Math.max(0, (sequenceProgress - index) / revealWindow));
         return reduceMotion ? (linear > 0 ? 1 : 0) : linear * linear * (3 - 2 * linear);
       });
       let topLayer = 0;
