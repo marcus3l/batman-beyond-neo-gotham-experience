@@ -477,7 +477,7 @@ h2 em { color: var(--red); font-style: normal; }
   color: rgba(225,28,43,.025); font: 700 clamp(19rem, 35vw, 42rem)/.7 var(--display-impact); letter-spacing: -.08em;
 }
 .suit-title, .suit-console { position: relative; z-index: 2; }
-.suit-title h2 { font-size: clamp(4.2rem, 6vw, 7rem); }
+.suit-title h2 { font-family: var(--display-impact); font-size: clamp(4.2rem, 6vw, 7rem); font-weight: 700; line-height: .78; letter-spacing: -.015em; }
 .suit-title > p:not(.eyebrow) { max-width: 34rem; margin: 2.25rem 0 0; color: #a0a1a8; font-size: clamp(.95rem, 1.1vw, 1.08rem); line-height: 1.75; }
 .suit-status {
   max-width: 34rem; margin-top: 3rem; padding: 1rem 0; display: grid; grid-template-columns: 1fr auto; gap: .45rem 1rem;
